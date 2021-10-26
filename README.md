@@ -1,2 +1,2 @@
 # forfans
-This will be a cheap copy of OF xD
+Proyecto 1 de SMIR
