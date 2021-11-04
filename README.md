@@ -5,8 +5,11 @@ El proyecto consiste en crear una pagina similar a Pinterest, que soporte distin
 A continuacion se ven los requisitos para esta aplicacion:
 ##### Servidor web:
 Apache web server o servidor con soporte para .htaccess
+
 mod rewrite
+
 php 7.4
+
 php curl ext
 ##### Base de datos:
 mariaDB / mysql
