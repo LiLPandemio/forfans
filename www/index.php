@@ -43,5 +43,4 @@ if (isset($_REQUEST['page'])) {
 } else {
     // El usuario no pide ninguna pagina, mostrar landing o home si esta autenticado
 }
-
 ?>
