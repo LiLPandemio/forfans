@@ -1,7 +1,7 @@
 <?php
-$themeInfo["ThemeName"]     = "Default Theme";
+$themeInfo["ThemeName"]     = "Darkly Theme";
 $themeInfo["isDark"]        = true;
 $themeInfo["ThemeIcon"]     = "icon.png";
-$themeInfo["ThemeDescri"]   = "Diseño por defecto de ForFans (Boostrap)";
+$themeInfo["ThemeDescri"]   = "Tema oscuro discreto.";
 $themeInfo["ThemeAuthor"]   = "LiLPandemio";
 ?>
