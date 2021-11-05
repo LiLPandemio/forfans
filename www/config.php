@@ -5,6 +5,7 @@ $config["sitename"]             =   "ForFans";                      //El nombre 
 $config["fullsiteurl"]          =   "http://localhost/";            //La URL que se muestra en tu navegador.
 $config["maintainanceMode"]     =   false;                          //Pagina en mantenimiento
 $config["register_mode"]        =   "closed";                       //Permitir que se registren nuevos usuarios. closed, invite, open
+$config["theme"]                =   "default";                      //el tema que se usará, puedes verlos en WEB_ROOT/themes
 
 //Sistema economico
 $config["comision"]             =   0.1;                            //Que comision cobras, en formato decimal (1 = 100%, 0.5 = 50%); 
