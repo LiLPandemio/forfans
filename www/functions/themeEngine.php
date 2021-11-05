@@ -4,11 +4,11 @@
 
 // Comprueba si en el tema actual existe la pagina que el usuario solicita, devolvera 0 en caso de error o que no exista y 1 si existe
 function pageExists ($page) {
-    require_once(ROOT."/config.php");
+    require(ROOT."/config.php");
     //limpiamos el input para evitar posibles vulnerabilidades
     $page = preg_replace('/[^A-Za-z0-9\-]/', '', $page);    // Reemplaza por nada caracteres que no sean A-Z a-z 0-9
-    if ($page = "") {                                       //Comprueba que la pagina no este en blanco
-        return 0;                                           //Se pide la pagina "", se retorna falso
+    if ($page == "") {                                       //Comprueba que la pagina no este en blanco
+        return false;                                           //Se pide la pagina "", se retorna falso
     } else {
         //Comprueba que exista el archivo
         if (file_exists(ROOT."/themes/".$config['theme']."/$page/index.php")) {  //Si la pagina existe, 
@@ -23,9 +23,8 @@ function pageExists ($page) {
 
 //Esta funcion carga una pagina del tema actual en $config["theme"]
 function loadPage ($page, $theme = "default") {
-
-    require_once(ROOT."/themes/$theme/head/index.php"); //Carga el archivo principal del tema de la pagina que se solicitó.
-    require_once(ROOT."/themes/$theme/".$page."/index.php"); //Carga el archivo principal del tema de la pagina que se solicitó.
+    require(ROOT."/themes/$theme/head/index.php"); //Carga el archivo principal del tema de la pagina que se solicitó.
+    require(ROOT."/themes/$theme/".$page."/index.php"); //Carga el archivo principal del tema de la pagina que se solicitó.
 }
 
 // <!DOCTYPE html>

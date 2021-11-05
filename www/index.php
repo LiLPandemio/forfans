@@ -37,16 +37,13 @@ if (isset($_REQUEST['page'])) {
 
         default:
             //Cargar pagina del tema actuar, si no hay, cargar perfil de usuario, si no hay, 404
-            if (pageExists($_REQUEST['page'])) {
-                require(ROOT."/config.php");
-                loadPage($_REQUEST["page"], $config['theme']);
-                //La pagina existe en el tema actual
-            } else {
-                // if (profileExists($REQUEST['page'])){
-                //     //El perfil existe
-                // } else {
-                //     //404
-                // }
+            require(ROOT."/config.php");                    //Importa la configuracion
+            if (pageExists($_REQUEST['page'])) {                //Si la pagina existe
+                loadPage($_REQUEST["page"], $config['theme']);  //Carga la pagina
+                echo "BREAKPOINT";
+            } else {                                            //Si no existe
+                //!En el futuro aqui se cargaran perfiles
+                loadPage("404", $config["theme"]);              //Carga la pagina 404
             }
             
             break;
