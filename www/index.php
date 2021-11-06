@@ -40,7 +40,6 @@ if (isset($_REQUEST['page'])) {
             require(ROOT."/config.php");                    //Importa la configuracion
             if (pageExists($_REQUEST['page'])) {                //Si la pagina existe
                 loadPage($_REQUEST["page"], $config['theme']);  //Carga la pagina
-                echo "BREAKPOINT";
             } else {                                            //Si no existe
                 //!En el futuro aqui se cargaran perfiles
                 loadPage("404", $config["theme"]);              //Carga la pagina 404

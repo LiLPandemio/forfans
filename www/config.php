@@ -2,7 +2,7 @@
 
 //Site settings
 $config["sitename"]             =   "ForFans";                      //El nombre que se mostrara en toda la pagina web.
-$config["fullsiteurl"]          =   "http://localhost/";            //La URL que se muestra en tu navegador.
+$config["fullsiteurl"]          =   "https://forfans.societyplus.net/";            //La URL que se muestra en tu navegador.
 $config["maintainanceMode"]     =   false;                          //Pagina en mantenimiento
 $config["register_mode"]        =   "closed";                       //Permitir que se registren nuevos usuarios. closed, invite, open
 $config["theme"]                =   "default";                      //el tema que se usará, puedes verlos en WEB_ROOT/themes
