@@ -23,8 +23,8 @@ function pageExists ($page) {
 
 //Esta funcion carga una pagina del tema actual en $config["theme"]
 function loadPage ($page, $theme = "default") {
-    require(ROOT."/themes/$theme/head/index.php"); //Carga el archivo principal del tema de la pagina que se solicitó.
-    require(ROOT."/themes/$theme/".$page."/index.php"); //Carga el archivo principal del tema de la pagina que se solicitó.
+    require(ROOT."/themes/$theme/head/index.php");      //Carga el head y las primeras lineas HTML del tema.
+    require(ROOT."/themes/$theme/".$page."/index.php"); //Carga el archivo principal de la pagina en el tema que se solicitó.
 }
 
 // <!DOCTYPE html>
