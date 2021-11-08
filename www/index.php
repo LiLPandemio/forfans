@@ -41,7 +41,7 @@ if (isset($_REQUEST['page'])) {
             if (pageExists($_REQUEST['page'])) {                //Si la pagina existe
                 loadPage($_REQUEST["page"], $config['theme']);  //Carga la pagina
             } else {                                            //Si no existe
-                //!En el futuro aqui se cargaran perfiles
+                //*En el futuro aqui se cargaran perfiles
                 loadPage("404", $config["theme"]);              //Carga la pagina 404
             }
             
