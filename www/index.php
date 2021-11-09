@@ -18,7 +18,9 @@ require_once(ROOT . "/functions/themeEngine.php");
 
 if (isset($_REQUEST['page'])) {
     // El usuario esta pidiendo una pagina en especifico
-    switch ($_REQUEST['page']) {
+    $fullpage = $_REQUEST['page'];
+    $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
+    switch ($param[0]) {
             // Redirecciones especiales de la app (API, Admin)
         case 'api':
             //Redireccionar a sistema API
@@ -38,7 +40,7 @@ if (isset($_REQUEST['page'])) {
         default:
             //Cargar pagina del tema actuar, si no hay, cargar perfil de usuario, si no hay, 404
             require(ROOT."/config.php");                    //Importa la configuracion
-            if (pageExists($_REQUEST['page'])) {                //Si la pagina existe
+            if (pageExists($param[0])) {                //Si la pagina existe
                 loadPage($_REQUEST["page"], $config['theme']);  //Carga la pagina
             } else {                                            //Si no existe
                 //*En el futuro aqui se cargaran perfiles
