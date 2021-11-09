@@ -234,7 +234,7 @@ footer {
     left: 0;
     right: 0;
     text-align: center;
-    z-index: 999;
+    z-index: 899;
 }
 
 footer p {
@@ -248,4 +248,22 @@ footer i {
 footer a {
     color: #3c97bf;
     text-decoration: none;
+}
+
+.site-controllers{
+    position: absolute;
+    right: 45%;
+    bottom: 20px;
+    width: 75px;
+    height: 75px;
+    background-color: #fff;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 50px;
+    z-index: 9999!important;
+    cursor: pointer;
+}
+
+#settings-icon {
+    
 }
