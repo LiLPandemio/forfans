@@ -35,21 +35,32 @@ if (isset($_REQUEST['page'])) {
             echo "Getting adminpanel";
             break;
 
-        //Paginas del tema
+            //Paginas del tema
 
         default:
             //Cargar pagina del tema actuar, si no hay, cargar perfil de usuario, si no hay, 404
-            require(ROOT."/config.php");                    //Importa la configuracion
-            if (pageExists($param[0])) {                //Si la pagina existe
-                loadPage($_REQUEST["page"], $config['theme']);  //Carga la pagina
-            } else {                                            //Si no existe
-                //*En el futuro aqui se cargaran perfiles
-                loadPage("404", $config["theme"]);              //Carga la pagina 404
+            require(ROOT . "/config.php");                          //Importa la configuracion
+            if (pageExists($param[0])) {                            //Si la pagina existe
+                loadPage($_REQUEST["page"], $config['theme']);      //Carga la pagina
+            } else {                                                //Si no existe
+                                                            //*En el futuro aqui se cargaran perfiles
+                switch ($param[0]) {                        //Posibles redirecciones:
+
+                    case 'login':                                   //Si el usuario pide ir a login
+                        header("Location: ./auth");                 //Se redirecciona a auth
+                        break;
+                    case 'register':                                //Si el usuario pide ir a register
+                        header("Location: ./auth");                 //Se redirecciona a auth
+                        break;
+
+                    default:
+                        loadPage("404", $config["theme"]);              //Carga la pagina 404
+                        break;
+                }
             }
-            
+
             break;
     }
 } else {
     // El usuario no pide ninguna pagina, mostrar landing o home si esta autenticado
 }
-?>
