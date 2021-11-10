@@ -20,7 +20,7 @@ define('ROOT', getcwd());
 //Carga de las funciones esenciales
 require_once(ROOT . "/functions/system.php");
 require_once(ROOT . "/functions/themeEngine.php");
-
+require_once(ROOT . "/functions/db.php");
 if (isset($_REQUEST['page'])) {
     // El usuario esta pidiendo una pagina en especifico
     $fullpage = $_REQUEST['page'];
@@ -29,7 +29,7 @@ if (isset($_REQUEST['page'])) {
             // Redirecciones especiales de la app (API, Admin)
         case 'api':
             //Redireccionar a sistema API
-            echo "Getting api";
+            require(ROOT."/api.php");
             break;
         case 'webmap':
             //Obtener webmap

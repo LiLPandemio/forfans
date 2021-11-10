@@ -160,8 +160,8 @@ input {
 
 .overlay {
 	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C, #AA43A8);
+	background: linear-gradient(to right, #FF4B2B, #FF416C, #AA43A8);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -255,15 +255,48 @@ footer a {
     right: 45%;
     bottom: 20px;
     width: 75px;
-    height: 75px;
+    height: 75px; /* SET TO 350 TO SHOW MORE */
     background-color: #fff;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
     border-radius: 50px;
     z-index: 9999!important;
     cursor: pointer;
+    transition: all 2s;
+    transform: scaleY(1);
 }
 
+.site-controllers-expanded{
+    position: absolute;
+    right: 45%;
+    bottom: 20px;
+    width: 75px;
+    height: 265px; /* SET TO 350 TO SHOW MORE */
+    background-color: #fff;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 50px;
+    z-index: 9999!important;
+    transition: all 1.2s;
+    transform:scaleY(1);
+    cursor: pointer;
+}
+
+.settings-option {
+    display: inline-block;
+    font-size: 48px;
+    margin-left: 13.5;
+    margin-top: 13.5;
+}
 #settings-icon {
-    
+    display: inline-block;
+    font-size: 48px;
+    margin-left: 13.5;
+    margin-top: 13.5;
+    transform: rotate(0deg);
+}
+
+#settings-icon:hover {
+    transition: all 1s;
+    transform: rotate(180deg);
 }
