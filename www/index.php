@@ -29,7 +29,6 @@ if (isset($_REQUEST['page'])) {
             // Redirecciones especiales de la app (API, Admin)
         case 'api':
             require(ROOT."/api.php");
-            echo "Getting api"; //Redireccionar a sistema API
             break;
         case 'webmap':
             echo "Getting webmap"; //Obtener webmap
