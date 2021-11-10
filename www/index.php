@@ -28,22 +28,15 @@ if (isset($_REQUEST['page'])) {
     switch ($param[0]) {
             // Redirecciones especiales de la app (API, Admin)
         case 'api':
-            //Redireccionar a sistema API
-            echo "Getting api";
+            echo "Getting api"; //Redireccionar a sistema API
             break;
         case 'webmap':
-            //Obtener webmap
-            echo "Getting webmap";
+            echo "Getting webmap"; //Obtener webmap
             break;
         case 'adminpanel':
-            //Panel de administrador
-            echo "Getting adminpanel";
+            echo "Getting adminpanel"; //Panel de administrador
             break;
-
-            //Paginas del tema
-
-        default:
-            //Cargar pagina del tema actuar, si no hay, cargar perfil de usuario, si no hay, 404
+        default:                                            //Paginas del tema: Cargar pagina del tema actuar, si no hay, cargar perfil de usuario, si no hay, 404
             require(ROOT . "/config.php");                          //Importa la configuracion
             if (pageExists($param[0])) {                            //Si la pagina existe
                 loadPage($_REQUEST["page"], $config['theme']);      //Carga la pagina
@@ -56,6 +49,9 @@ if (isset($_REQUEST['page'])) {
                         break;
                     case 'register':                                //Si el usuario pide ir a register
                         header("Location: ./auth");                 //Se redirecciona a auth
+                        break;
+                    case 'feed':                                    //Si el usuario pide ir a feed
+                        header("Location: ./home");                 //Se redirecciona a home
                         break;
 
                     default:
