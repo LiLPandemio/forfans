@@ -31,6 +31,7 @@ if (isset($_REQUEST['page'])) {
             //Redireccionar a sistema API
             require(ROOT."/api.php");
             echo "Getting api"; //Redireccionar a sistema API
+            require(ROOT."/api.php");
             break;
         case 'webmap':
             echo "Getting webmap"; //Obtener webmap
