@@ -1,3 +1,3 @@
 <?php
-Generar el archivo config.php
+//Generar el archivo config.php
 ?>
