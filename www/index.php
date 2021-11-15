@@ -4,15 +4,24 @@
 // Marc Moreno & Bryan Medrano  *
 // ******************************
 
-//DEBUG - MUESTRA LOS ERRORES EN EL NAVEGADOR
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+$showErrors = true;         //Mostrara o no los errores en la pagina web.
+$disableCache = true;       //Desactivara el cache (Header)
 
-//NO CACHE
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+//DEBUG - MUESTRA LOS ERRORES EN EL NAVEGADOR
+if ($showErrors) {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
+}
+if ($disableCache) {
+    //NO CACHE
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+}
 
 //Establece el path absoluto a la raiz de la app web de forma dinamica
 define('ROOT', getcwd());
@@ -29,9 +38,9 @@ if (isset($_REQUEST['page'])) {
             // Redirecciones especiales de la app (API, Admin)
         case 'api':
             //Redireccionar a sistema API
-            require(ROOT."/api.php");
+            require(ROOT . "/api.php");
             echo "Getting api"; //Redireccionar a sistema API
-            require(ROOT."/api.php");
+            require(ROOT . "/api.php");
             break;
         case 'webmap':
             echo "Getting webmap"; //Obtener webmap
@@ -44,7 +53,7 @@ if (isset($_REQUEST['page'])) {
             if (pageExists($param[0])) {                            //Si la pagina existe
                 loadPage($_REQUEST["page"], $config['theme']);      //Carga la pagina
             } else {                                                //Si no existe
-                                                            //*En el futuro aqui se cargaran perfiles
+                //*En el futuro aqui se cargaran perfiles
                 switch ($param[0]) {                        //Posibles redirecciones:
 
                     case 'login':                                   //Si el usuario pide ir a login
