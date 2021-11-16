@@ -10,16 +10,26 @@ function login($username, $password)
         if ($password !== "") {                                     //Y la contraseña no esta en blanco
 
             //Comprobar login
-            $stmt = $conn->prepare("SELECT * FROM `usuarios` WHERE `correo` = ? LIMIT 1;"); //Buscar en la BD
-            $stmt->bindParam("s", $username);
+            $stmt = $conn->prepare("SELECT * FROM `usuarios` WHERE `correo` = ?");
             $stmt->execute(array($username));
-            $user = $stmt -> fetchAll();
-            
+            $count = $stmt->rowCount();
+            if ($count > 0) {
+                $user = $stmt->fetch();
+                $pass_verification = password_verify($password, $user['contraseña']);
+                if ($pass_verification == true) {
+                    //PASSWORD OK
+                    return "PASS_OK";
+                } else {
+                    return "WrongPassword";
+                }
+            } else {
+                return "UserNotFound";
+            }
         } else {
-            json_encode(array("response" => "username_password"));
+            return "MissingPassword";
         }
     } else {
-        json_encode(array("response" => "username_error"));
+        return "MissingUsername";
     }
 }
 
