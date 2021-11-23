@@ -18,25 +18,40 @@ function login($username, $password)
                 $pass_verification = password_verify($password, $user['contraseña']);
                 if ($pass_verification == true) {
                     //PASSWORD OK
-                    return "PASS_OK";
+                    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {                       //
+                        $ip = $_SERVER['HTTP_CLIENT_IP'];                           ///
+                    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {           /// Este codigo extrae la IP
+                        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];                     /// original del usuario
+                    } else {                                                        ///
+                        $ip = $_SERVER['REMOTE_ADDR'];                              //
+                    }
+                    //Se declara lo necesario para guardar el token en la base de datos
+                    $IP      = $ip;                   //ip REAL del usuario
+                    $TOKEN   = tokenGenerator();      //el token generado
+                    $UID     = $user['id_usuarios'];  //el id del usuario
+                    //Se prepara la query con placeholders que evitan inyecciones SQL
+                    $sth = $conn->prepare("INSERT INTO tokens (token_id, ip_issued, timestamp, token, user_id) VALUES (NULL, :ip, current_timestamp(), :token, :userid);");                 //Mandamos a la conexion con la base de datos a preparar la consulta
+                    // $sth->execute(array($IP, $TOKEN, $UID));    //Ejecutamos la consolta con los parametros del usuario
+                    $sth->execute(array(':ip' => $IP, ':token' => $TOKEN, ':userid' => intval($UID)));
+                    return $TOKEN;
                 } else {
-                    return "WrongPassword";
+                    return "WrongCredentials"; //WrongPassword - No se especifica al usuario el motivo por seguridad.
                 }
             } else {
-                return "UserNotFound";
+                return "WrongCredentials"; //UserNotFound - No se especifica al usuario el motivo por seguridad.
             }
         } else {
-            return "MissingPassword";
+            return "WrongCredentials"; //MissingPassword - No se especifica al usuario el motivo por seguridad.
         }
     } else {
-        return "MissingUsername";
+        return "WrongCredentials"; //MissingUsername - No se especifica al usuario el motivo por seguridad.
     }
 }
 
 //*Esta funcion genera un token aleatorio de 80 caracteres
 function tokenGenerator()
 {
-    $token = openssl_random_pseudo_bytes(80);
+    $token = openssl_random_pseudo_bytes(60);
     $token = bin2hex($token);
     return $token;
 }
