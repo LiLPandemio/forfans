@@ -31,6 +31,28 @@ if (isset($param['1'])) {                                                       
             }                                                                       //Finaliza el login
             echo json_encode($response);
             break;                                                                  //Interrumpe el switch
+        case 'checklogin':                                                          //Comprobar el estado del token
+            if (isset($_REQUEST['token'])) {                                        //Si recibimos un token
+                if ($_REQUEST['token'] !== "") {                                    //Y el token no esta vacio
+                    require(ROOT."/functions/authEngine.php");                      //Se cargan las funciones de autenticacion
+                    $tokenStatus = checkTokenStatus($_REQUEST['token']);            //Se lanza la funcion de comprobacion del token con el token provisto
+                    if ($tokenStatus == "INVALID_TOKEN") {
+                        $response = array('response' => "InvalidToken");
+                    } else {
+                        $response = array(
+                            'response' => 'TOKEN_OK',
+                            'user_id' => $tokenStatus,
+                        );
+                    }
+                    echo json_encode($response);
+                } else {
+                    return "ErrorTokenEmpty";
+                }
+                break;
+            } else {
+                # 
+            }
+            
         default:                                                                    //Si no hay coincidencias
             echo "Something went wrong";                                            //Lanzar mesnaje parametro desconocido
             break;                                                                  //Interrumpe el switch

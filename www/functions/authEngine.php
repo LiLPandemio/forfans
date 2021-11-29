@@ -1,7 +1,13 @@
 <?php
 // Este archivo contine las funciones que se usan para autenticar a un usuario, getionar las cuentas eliminar crear etc.
 
-//*Esta funcion devuelve un token o false si las credenciales no coinciden
+
+/**
+ * Esta funcion devuelve un token o false si las credenciales no coinciden
+ * Posibles respuestas:
+ * WrongCredentials: Es un error generico que puede significar: WrongPassword UserNotFound MissingPassword MissingUsername
+ * $TOKEN: Se proveera de un token en lugar de un mensaje de error cuando las credenciales coincidan.
+ */
 function login($username, $password)
 {
     require(ROOT . "/functions/db.php");                       //Importar la base de datos
@@ -48,10 +54,31 @@ function login($username, $password)
     }
 }
 
-//*Esta funcion genera un token aleatorio de 80 caracteres
+//*Esta funcion genera un token aleatorio
 function tokenGenerator()
 {
     $token = openssl_random_pseudo_bytes(60);
     $token = bin2hex($token);
     return $token;
+}
+/**
+ * ESTA FUNCION COMPRUEBA EL ESTADO DEL TOKEN. POSIBLES RESPUESTAS:
+ * ADVERTENCIA: ESTA FUNCION NO COMPRUEBA QUE EL TOKEN ESTE VACIO
+ *      INVALID_TOKEN: EL token no existe
+ *      TOKEN_EXPIRED: El token ha caducado
+ *      TOKEN_OK:      El token es correcto
+ */
+function checkTokenStatus($token){
+    require(ROOT . "/functions/db.php");            //Antes de comprobar el token se importa la base de datos para poder comprobarlo
+    $stmt = $conn -> prepare("SELECT * FROM `tokens` WHERE `token` = :token");
+    $stmt -> execute(array(':token' => $token));
+    $crows = $stmt -> rowCount();
+    if ($crows > 0) {
+        //There's rows
+        $row = $stmt -> fetch();
+        return $row['user_id'];
+    } else {
+        return "INVALID_TOKEN";
+    }
+    
 }
