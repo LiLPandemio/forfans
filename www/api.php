@@ -44,10 +44,10 @@ if (isset($param['1'])) {                                                       
                             'user_id' => $tokenStatus,
                         );
                     }
-                    echo json_encode($response);
                 } else {
-                    return "ErrorTokenEmpty";
+                    $response = array("response" => "ErrorTokenEmpty");
                 }
+                echo json_encode($response);
                 break;
             } else {
                 # 
