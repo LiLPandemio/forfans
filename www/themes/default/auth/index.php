@@ -23,10 +23,10 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");  ?>
         <div class="form-container sign-in-container">
             <form action="#">
                 <h1><?= lang("login") ?></h1>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="email" id="login_email" value="admin@societyplus.net" placeholder="Email" />
+                <input type="password" id="login_password" value="admin1234" placeholder="Password" />
                 <a href="#">Forgot your password?</a>
-                <button><?= lang("login") ?></button>
+                <button onclick="do_login()"><?= lang("login") ?></button>
             </form>
         </div>
         <div class="overlay-container">
@@ -45,4 +45,5 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");  ?>
         </div>
     </div>
 </body>
+<script>const siteURL = "<?php echo $config["fullsiteurl"]?>"</script>
 <script src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>auth/index.js"></script>

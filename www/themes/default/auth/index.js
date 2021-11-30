@@ -22,9 +22,26 @@ const toggleSettings = () => {
 		$("#sitecontrollers").addClass("site-controllers-expanded")
 		$("#sitecontrollers").removeClass("site-controllers")
 		setTimeout(() => {
-			$(".settings-option").fadeIn("slow", ).css("display","inline-block");
+			$(".settings-option").fadeIn("slow",).css("display", "inline-block");
 		}, 500)
 		isExpanded = !isExpanded;
 		console.log("Expanded")
 	}
+}
+function do_login() {
+	let email = $("#login_email").val();
+	let password = $("#login_password").val();
+	$.post("https://forfans.societyplus.net/api/login", { "username": email, "password": password },)
+		.done(function (data) {
+			let response = data.response;
+			if (response !== "WrongCredentials") {
+				//SetCookie
+			} else {
+				alert("Tus credenciales son incorrectas :c")
+			}
+		}).fail(function (xhr, status, error) {
+			//console.log(xhr);
+			//console.log(error);
+			console.log(status);
+		});
 }
