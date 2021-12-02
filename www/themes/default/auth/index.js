@@ -35,13 +35,19 @@ function do_login() {
 		.done(function (data) {
 			let response = data.response;
 			if (response !== "WrongCredentials") {
-				//SetCookie
+				document.cookie = "token=" + response;
 			} else {
 				alert("Tus credenciales son incorrectas :c")
 			}
 		}).fail(function (xhr, status, error) {
-			//console.log(xhr);
-			//console.log(error);
 			console.log(status);
 		});
+}
+function getToken () {
+	cookie = document.cookie.split('; ').reduce((prev, current) => {
+		const [name, ...value] = current.split('=');
+		prev[name] = value.join('=');
+		return prev;
+	}, {});
+	return cookie.token;
 }
