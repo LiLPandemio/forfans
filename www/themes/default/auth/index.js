@@ -31,11 +31,12 @@ const toggleSettings = () => {
 function do_login() {
 	let email = $("#login_email").val();
 	let password = $("#login_password").val();
-	$.post("https://forfans.societyplus.net/api/login", { "username": email, "password": password },)
+	$.post(siteURL+"api/login", { "username": email, "password": password },)
 		.done(function (data) {
 			let response = data.response;
 			if (response !== "WrongCredentials") {
 				document.cookie = "token=" + response;
+				window.location.replace(siteURL+"home");
 			} else {
 				alert("Tus credenciales son incorrectas :c")
 			}
