@@ -1,5 +1,16 @@
-<?php require(ROOT . "/config.php");
-require(ROOT . "/locale/" . $config['default_lang'] . ".php");  ?>
+<?php 
+require(ROOT . "/config.php");
+require(ROOT . "/functions/authEngine.php");
+require(ROOT . "/functions/utils1.php");
+if (isset($_COOKIE)) {
+    if ($_COOKIE['token'] !== "") {
+        if (checkTokenStatus($_COOKIE['token']) != "INVALID_TOKEN") {
+            redirect("home");
+        }
+    }
+}
+require(ROOT . "/locale/" . $config['default_lang'] . ".php"); 
+?>
 <link rel="stylesheet" href="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>auth/style.css">
 </head>
 
