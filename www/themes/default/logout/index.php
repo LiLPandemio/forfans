@@ -7,8 +7,9 @@ if (isset($_COOKIE['token'])) {
     require(ROOT."/functions/utils1.php");
     removeToken($token);
     redirect();
-} else {
-    //No hay sesion :v
 }
+//No hay sesion :v
+require(ROOT."/functions/utils1.php");
+redirect();
 
 ?>
