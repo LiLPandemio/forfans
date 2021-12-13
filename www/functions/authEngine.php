@@ -66,19 +66,40 @@ function tokenGenerator()
  * ADVERTENCIA: ESTA FUNCION NO COMPRUEBA QUE EL TOKEN ESTE VACIO
  *      INVALID_TOKEN: EL token no existe
  *      TOKEN_EXPIRED: El token ha caducado
- *      TOKEN_OK:      El token es correcto
+ *      INT(): El token corresponde al usuario con id INT
  */
-function checkTokenStatus($token){
+function checkTokenStatus($token)
+{
     require(ROOT . "/functions/db.php");            //Antes de comprobar el token se importa la base de datos para poder comprobarlo
-    $stmt = $conn -> prepare("SELECT * FROM `tokens` WHERE `token` = :token");
-    $stmt -> execute(array(':token' => $token));
-    $crows = $stmt -> rowCount();
+    $stmt = $conn->prepare("SELECT * FROM `tokens` WHERE `token` = :token");
+    $stmt->execute(array(':token' => $token));
+    $crows = $stmt->rowCount();
     if ($crows > 0) {
         //There's rows
-        $row = $stmt -> fetch();
+        $row = $stmt->fetch();
         return $row['user_id'];
     } else {
         return "INVALID_TOKEN";
     }
-    
+}
+/**
+ * TOMA COMO VALOR UN TOKEN, SI EL TOKEN NO ES VALIDO DEVUELVE INVALID_TOKEN, SI EL TOKEN
+ * EXISTE ELIMINARA EL TOKEN DE LA BASE DE DATOS Y DARA SUCCESS COMO RETORNO.
+ */
+function removeToken($token)
+{
+    if (checkTokenStatus($token) != "INVALID_TOKEN") {
+        require(ROOT . "/functions/db.php");
+        $stmt = $conn->prepare("DELETE FROM `tokens` WHERE `token` = :token");
+        $stmt->execute(array(':token' => $token));
+        $drows = $stmt->rowCount();
+        if ($drows > 0) {
+            //There's rows
+            return "SUCCESS";
+        } else {
+            return "SOMETHING_WENT_WRONG";
+        }
+    } else {
+        return "INVALID_TOKEN";
+    }
 }
