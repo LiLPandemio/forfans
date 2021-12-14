@@ -30,26 +30,29 @@ define('ROOT', getcwd());
 require_once(ROOT . "/functions/system.php");
 require_once(ROOT . "/functions/themeEngine.php");
 require_once(ROOT . "/functions/db.php");
-if (isset($_REQUEST['page'])) {
-    // El usuario esta pidiendo una pagina en especifico
-    $fullpage = $_REQUEST['page'];
-    $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
-    switch ($param[0]) {
-            // Redirecciones especiales de la app (API, Admin)
-        case 'api':
-            //Redireccionar a sistema API
-            require(ROOT . "/api.php");
-            //echo "Getting api"; //Redireccionar a sistema API
-            break;
-        case 'webmap':
-            echo "Getting webmap"; //Obtener webmap
-            break;
-        case 'adminpanel':
-            echo "Getting adminpanel"; //Panel de administrador
-            break;
-        default:                                            //Paginas del tema: Cargar pagina del tema actuar, si no hay, cargar perfil de usuario, si no hay, 404
-            require(ROOT . "/config.php");                          //Importa la configuracion
+
+if (isset($_REQUEST['page'])) {                                         //Si se solicita una pagina
+    $fullpage = $_REQUEST['page'];                                      //La pagina se guarda en $fullpage para dividirla luego en parametros
+    $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);    //$param[n] contiene los parametros siendo N el parametro solicitado.
+    switch ($param[0]) {                                        //Si el parametro vale...
+        case 'api':                                             //API:
+            require(ROOT . "/api.php");                         //Se importa la api y se usa.
+            break;                                              //Fin de index.php
+        case 'webmap':                                          //WEBMAP:
+            echo "Getting webmap";                              //Obtiene el webmap para buscadores web. Se pueden evadir en config
+            break;                                              //Fin de index.php
+        case 'adminpanel':                                      //ADMINPANEL
+            echo "Getting adminpanel";                          //Redirige al panel de administracion si hay uno.
+            break;                                              //Fin de index.php
+        /**
+         * Paginas del tema: Cargar pagina del tema actuar
+         * Si no hay, cargar perfil de usuario $param[0],
+         * si no hay, 404.
+         */
+        default:
+            require(ROOT . "/config.php");                          //Importa la configuracion              
             if (pageExists($param[0])) {                            //Si la pagina existe
+                require(ROOT . "/functions/utils1.php");
                 loadPage($_REQUEST["page"], $config['theme']);      //Carga la pagina
             } else {                                                //Si no existe
                 //*En el futuro aqui se cargaran perfiles
@@ -74,5 +77,11 @@ if (isset($_REQUEST['page'])) {
             break;
     }
 } else {
-    // El usuario no pide ninguna pagina, mostrar landing o home si esta autenticado
+    require(ROOT."/functions/authEngine.php");
+    require(ROOT."/functions/utils1.php");
+    if (isWebLoggedIn($_COOKIE)) {
+        redirect("home");
+    } else {
+        redirect("landing");
+    }
 }
