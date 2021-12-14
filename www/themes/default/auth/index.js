@@ -29,22 +29,24 @@ const toggleSettings = () => {
 	}
 }
 function do_login() {
-	let email = $("#login_email").val();
-	let password = $("#login_password").val();
-	$.post(siteURL+"api/login", { "username": email, "password": password },)
-		.done(function (data) {
-			let response = data.response;
-			if (response !== "WrongCredentials") {
-				document.cookie = "token=" + response;
-				window.location.replace(siteURL+"home");
-			} else {
-				alert("Tus credenciales son incorrectas :c")
-			}
-		}).fail(function (xhr, status, error) {
-			console.log(status);
-		});
+	$(document).ready(() => {
+		let email = $("#login_email").val();
+		let password = $("#login_password").val();
+		$.post(siteURL + "api/login", { "username": email, "password": password },)
+			.done(function (data) {
+				let response = data.response;
+				if (response !== "WrongCredentials") {
+					document.cookie = "token=" + response;
+					window.location.replace(siteURL + "home");
+				} else {
+					alert("Tus credenciales son incorrectas :c")
+				}
+			}).fail(function (xhr, status, error) {
+				console.log(status);
+			});
+	})
 }
-function getToken () {
+function getToken() {
 	cookie = document.cookie.split('; ').reduce((prev, current) => {
 		const [name, ...value] = current.split('=');
 		prev[name] = value.join('=');
