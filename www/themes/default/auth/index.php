@@ -1,4 +1,4 @@
-<?php 
+<?php
 require(ROOT . "/config.php");
 require(ROOT . "/functions/authEngine.php");
 require(ROOT . "/functions/utils1.php");
@@ -9,7 +9,7 @@ if (isset($_COOKIE)) {
         }
     }
 }
-require(ROOT . "/locale/" . $config['default_lang'] . ".php"); 
+require(ROOT . "/locale/" . $config['default_lang'] . ".php");
 ?>
 <link rel="stylesheet" href="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>auth/style.css">
 </head>
@@ -23,22 +23,20 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
             <i onclick="" style="position: relative; display:inline-block; right:5.5" class="fa-solid fa-scale-balanced settings-option"></i><br>
         </div>
         <div class="form-container sign-up-container">
-            <form action="#">
+            <div class="form">
                 <h1><?= lang("create_account") ?></h1>
                 <input type="text" placeholder="Name" />
                 <input type="email" placeholder="Email" />
                 <input type="password" placeholder="Password" />
                 <button><?= lang("register") ?></button>
-            </form>
+            </div>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#">
-                <h1><?= lang("login") ?></h1>
-                <input type="email" id="login_email" value="admin@societyplus.net" placeholder="Email" />
-                <input type="password" id="login_password" value="admin1234" placeholder="Password" />
-                <a href="#">Forgot your password?</a>
-                <button onclick="do_login()"><?= lang("login") ?></button>
-            </form>
+            <h1><?= lang("login") ?></h1>
+            <input type="email" id="login_email" value="admin@societyplus.net" placeholder="Email" />
+            <input type="password" id="login_password" value="admin1234" placeholder="Password" />
+            <a href="#">Forgot your password?</a>
+            <button onclick="do_login()"><?= lang("login") ?></button>
         </div>
         <div class="overlay-container">
             <div class="overlay">
@@ -56,5 +54,7 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
         </div>
     </div>
 </body>
-<script>const siteURL = "<?php echo $config["fullsiteurl"]?>"</script>
+<script>
+    const siteURL = "<?php echo $config["fullsiteurl"] ?>"
+</script>
 <script src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>auth/index.js"></script>
