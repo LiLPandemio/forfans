@@ -16,7 +16,6 @@ if (isset($param['1'])) {                                                       
             echo json_encode($response);                                            //Entregamos la respuesta
             break;                                                                  //Interrumpe el switch
         case 'login':                                                               //Si la ruta es login
-            require_once(ROOT . "/functions/authEngine.php");                       //Cargamos las funciones de login
             if (isset($_REQUEST['username']) and isset($_REQUEST['password'])) {    //Si nos envia usuario y contraseña
                 $response = array("response" => login($_REQUEST['username'], $_REQUEST['password']));    //Devuelveme el resultado
             } else {                                                                //Si no se enviaron usuario y contraseña
@@ -27,7 +26,6 @@ if (isset($param['1'])) {                                                       
         case 'checklogin':                                                          //Comprobar el estado del token
             if (isset($_REQUEST['token'])) {                                        //Si recibimos un token
                 if ($_REQUEST['token'] !== "") {                                    //Y el token no esta vacio
-                    require(ROOT."/functions/authEngine.php");                      //Se cargan las funciones de autenticacion
                     $tokenStatus = checkTokenStatus($_REQUEST['token']);            //Se lanza la funcion de comprobacion del token con el token provisto
                     if ($tokenStatus == "INVALID_TOKEN") {
                         $response = array('response' => "InvalidToken");

@@ -1,14 +1,11 @@
 <?php
 //Simplemente elimina cookies y sesiones y redirige a login
-require(ROOT."/functions/utils1.php");
 if (isset($_COOKIE['token'])) {
-    //Eliminar el token de la DB
-    $token = $_COOKIE['token'];
-    require(ROOT."/functions/authEngine.php");
-    removeToken($token);
-    redirect();
+    $token = $_COOKIE['token']; //$token vale ahora el token
+    removeToken($token);        //Eliminar el token de la base de datos
+    redirect();                 //El token pasa a ser invalido y eres redirigido a auth.
 }
-//No hay sesion :v
-redirect();
+//No hay sesion. Redirigir a landing
+redirect("landing");
 
 ?>

@@ -1,12 +1,7 @@
 <?php
-//Auth required!
-require(ROOT . "/config.php");                                      //Añadir la configuracion
 require(ROOT . "/locale/" . $config["default_lang"] . ".php");      //Cargar idioma
-require(ROOT."/functions/utils1.php");
-
 if (isset($_COOKIE['token'])) {                                     //SI EXISTE LA COOKIE CON TOKEN
     $token = $_COOKIE['token'];                                     //GUARDALA EN $token
-    require ROOT . "/functions/authEngine.php";                     //IMPORTA LAS FUNCIONES DE AUTENTICACION
     if (checkTokenStatus($token) != "INVALID_TOKEN") {              //Si el estado del token no es invalido
         //Mostrar la pagina
         ?>

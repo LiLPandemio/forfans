@@ -1,8 +1,5 @@
 <?php
-require(ROOT . "/config.php");
-require(ROOT . "/functions/authEngine.php");
-require(ROOT . "/functions/utils1.php");
-if (isset($_COOKIE)) {
+if (isset($_COOKIE['token'])) {
     if ($_COOKIE['token'] !== "") {
         if (checkTokenStatus($_COOKIE['token']) != "INVALID_TOKEN") {
             redirect("home");
@@ -11,10 +8,10 @@ if (isset($_COOKIE)) {
 }
 require(ROOT . "/locale/" . $config['default_lang'] . ".php");
 ?>
-<link rel="stylesheet" href="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>auth/style.css">
-</head>
 
+</head>
 <body>
+    <link rel="stylesheet" href="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>auth/style.css">
     <div class="container" id="container">
         <div class="site-controllers" id="sitecontrollers">
             <i onclick="toggleSettings()" id="settings-icon" class="settings-icon fa-solid fa-gear"></i><br>
@@ -32,11 +29,13 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
             </div>
         </div>
         <div class="form-container sign-in-container">
-            <h1><?= lang("login") ?></h1>
-            <input type="email" id="login_email" value="admin@societyplus.net" placeholder="Email" />
-            <input type="password" id="login_password" value="admin1234" placeholder="Password" />
-            <a href="#">Forgot your password?</a>
-            <button onclick="do_login()"><?= lang("login") ?></button>
+            <div class="form">
+                <h1><?= lang("login") ?></h1>
+                <input type="email" id="login_email" value="admin@societyplus.net" placeholder="Email" />
+                <input type="password" id="login_password" value="admin1234" placeholder="Password" />
+                <a href="#">Forgot your password?</a>
+                <button onclick="do_login()"><?= lang("login") ?></button>
+            </div>
         </div>
         <div class="overlay-container">
             <div class="overlay">

@@ -33,7 +33,6 @@ require_once(ROOT . "/functions/db.php");
 require_once(ROOT . "/functions/authEngine.php");
 require_once(ROOT . "/config.php");
 require_once(ROOT . "/functions/utils1.php");
-
 if (isset($_REQUEST['page'])) {                                         //Si se solicita una pagina
     $fullpage = $_REQUEST['page'];                                      //La pagina se guarda en $fullpage para dividirla luego en parametros
     $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);    //$param[n] contiene los parametros siendo N el parametro solicitado.
