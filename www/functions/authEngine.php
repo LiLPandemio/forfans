@@ -103,3 +103,17 @@ function removeToken($token)
         return "INVALID_TOKEN";
     }
 }
+/**
+ * Recibe la cookie y da true o false si esta o no con una sesion valida.
+ * $sesdata = $_COOKIE
+ */
+function isWebLoggedIn($sesdata){
+    if (isset($sesdata['token'])) {
+        if ($sesdata['token'] !== "") {
+            if (checkTokenStatus($_COOKIE['token']) != "INVALID_TOKEN") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
