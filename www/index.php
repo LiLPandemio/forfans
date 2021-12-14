@@ -30,6 +30,9 @@ define('ROOT', getcwd());
 require_once(ROOT . "/functions/system.php");
 require_once(ROOT . "/functions/themeEngine.php");
 require_once(ROOT . "/functions/db.php");
+require_once(ROOT . "/functions/authEngine.php");
+require_once(ROOT . "/config.php");
+require_once(ROOT . "/functions/utils1.php");
 
 if (isset($_REQUEST['page'])) {                                         //Si se solicita una pagina
     $fullpage = $_REQUEST['page'];                                      //La pagina se guarda en $fullpage para dividirla luego en parametros
@@ -50,9 +53,8 @@ if (isset($_REQUEST['page'])) {                                         //Si se 
          * si no hay, 404.
          */
         default:
-            require(ROOT . "/config.php");                          //Importa la configuracion              
             if (pageExists($param[0])) {                            //Si la pagina existe
-                require(ROOT . "/functions/utils1.php");
+                
                 loadPage($_REQUEST["page"], $config['theme']);      //Carga la pagina
             } else {                                                //Si no existe
                 //*En el futuro aqui se cargaran perfiles
@@ -77,8 +79,6 @@ if (isset($_REQUEST['page'])) {                                         //Si se 
             break;
     }
 } else {
-    require(ROOT."/functions/authEngine.php");
-    require(ROOT."/functions/utils1.php");
     if (isWebLoggedIn($_COOKIE)) {
         redirect("home");
     } else {
