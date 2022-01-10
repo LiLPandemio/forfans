@@ -54,7 +54,7 @@ if (isset($_REQUEST['page'])) {                                         //Si se 
         default:
             if (pageExists($param[0])) {                            //Si la pagina existe
                 
-                loadPage($_REQUEST["page"], $config['theme']);      //Carga la pagina
+                loadPage($param[0], $config['theme']);      //Carga la pagina
             } else {                                                //Si no existe
                 //*En el futuro aqui se cargaran perfiles
                 switch ($param[0]) {                        //Posibles redirecciones:
