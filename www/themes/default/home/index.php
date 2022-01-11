@@ -6,9 +6,9 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
         //Mostrar la pagina
 ?>
         <!-- Aqui puedes añadir contenido exta a head -->
+        <link rel="stylesheet" href="<?=$config["fullsiteurl"]."themes/".$config["theme"]."/home/"."index"?>.css">
 
         <!-- Hasta aqui el contenido head -->
-        <link rel="stylesheet" href="<?=$config["fullsiteurl"]."themes/".$config["theme"]."/home/"."index"?>.css">
         </head>
 
         <body>
