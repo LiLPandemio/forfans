@@ -8,6 +8,7 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
         <!-- Aqui puedes añadir contenido exta a head -->
 
         <!-- Hasta aqui el contenido head -->
+        <link rel="stylesheet" href="<?=$config["fullsiteurl"]."themes/".$config["theme"]."/home/"."index"?>.css">
         </head>
 
         <body>
@@ -38,58 +39,6 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                         </a>
                     <?php } ?>
                 </div>
-                <style>
-                    .dynFLexHH {
-                        display: flex;
-                        flex-direction: column;
-                    }
-
-                    .dynFLexVH {
-                        display: flex;
-                        flex-direction: row;
-                    }
-
-                    .post-body {
-                        margin-bottom: 10px;
-                        margin-left: 10px;
-                        margin-right: 10px;
-                        display: flex;
-                        flex-direction: column-reverse;
-                    }
-
-                    .Subs {
-                        /* S */
-                        position: fixed;
-                        bottom: 0;
-                        right: 0;
-                        left: 0;
-                        z-index: 1030;
-                        background-color: #f8f9fa;
-                        padding: 10;
-
-                    }
-
-                    @media(min-width: 1000px) {
-                        .post-body {
-                            flex-direction: row;
-                        }
-
-                        .dynFLexHH {
-                            display: flex;
-                            flex-direction: column;
-                        }
-
-                        .Subs {
-                            /* S */
-                            position: unset;
-                            z-index: 1030;
-                            background-color: #f8f9fa;
-                            padding: 10;
-
-                        }
-
-                    }
-                </style>
                 <div class="col-sm-8" style="overflow:scroll ">
                     <?php for ($i = 0; $i < 4; $i++) { ?>
 

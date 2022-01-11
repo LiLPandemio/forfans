@@ -1,0 +1,52 @@
+/* CUSTOM CSS FOR HOME */
+
+.dynFLexHH {
+    display: flex;
+    flex-direction: column;
+}
+
+.dynFLexVH {
+    display: flex;
+    flex-direction: row;
+}
+
+.post-body {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.Subs {
+    /* S */
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    background-color: #f8f9fa;
+    padding: 10;
+
+}
+
+@media(min-width: 1000px) {
+    .post-body {
+        flex-direction: row;
+    }
+
+    .dynFLexHH {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Subs {
+        /* S */
+        position: unset;
+        z-index: 1030;
+        background-color: #f8f9fa;
+        padding: 10;
+
+    }
+
+}
