@@ -19,15 +19,19 @@
 }
 
 .Subs {
-    /* S */
+    /* VERSION MOVIL */
     position: fixed;
+    padding-top: 10px;
     bottom: 0;
     right: 0;
     left: 0;
     z-index: 1030;
     background-color: #f8f9fa;
-    padding: 10;
 
+}
+
+.sub-item {
+    margin: 5px;
 }
 
 @media(min-width: 1000px) {
@@ -45,8 +49,11 @@
         position: unset;
         z-index: 1030;
         background-color: #f8f9fa;
-        padding: 10;
 
+    }
+
+    .sub-item {
+        margin: 5px;
     }
 
 }
