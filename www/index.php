@@ -55,8 +55,7 @@ if (isset($_REQUEST['page'])) {                                         //Si se 
             if (pageExists($param[0])) {                            //Si la pagina existe
                 
                 loadPage($param[0], $config['theme']);      //Carga la pagina
-            } else {                                                //Si no existe
-                //*En el futuro aqui se cargaran perfiles
+            } else {                                                //Si no existe                
                 switch ($param[0]) {                        //Posibles redirecciones:
 
                     case 'login':                                   //Si el usuario pide ir a login

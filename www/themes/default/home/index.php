@@ -91,7 +91,7 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                         <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion-subs">
                             <div class="card-body" style="padding-top: 0px;">
                                 <?php for ($i = 0; $i < 4; $i++) { ?>
-                                    <img class="avatar sub-item" style="margin-left: 10px; border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat" alt="">
+                                    <img class="avatar sub-item" style="margin-left: 10px; border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat/says/<?php echo rand(1, 5000)?>" alt="">
                                 <?php } ?>
                             </div>
                         </div>
