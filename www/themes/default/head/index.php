@@ -1,7 +1,7 @@
 <?php
 require(ROOT . "/config.php");
 ?>
-
+<!DOCTYPE html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="description" content="<?php echo $config["description"]?>">

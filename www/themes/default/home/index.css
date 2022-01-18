@@ -54,6 +54,8 @@
 
     .sub-item {
         margin: 5px;
+        width: 300px;
+        height: 300px;
     }
 
 }
