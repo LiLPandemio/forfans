@@ -1,1 +1,90 @@
-<?php echo "landing"; ?>
+<?php
+require(ROOT . "/config.php");
+require(ROOT . "/locale/" . $config["default_lang"] . ".php");
+// require(ROOT . "/themes/" . $config["theme"] . "/head/index.php");
+?>
+
+<!-- Hasta aqui el contenido head -->
+</head>
+
+<body>
+    <!-- Aqui va el contenido principal de la pagina -->
+    <!-- Load navbar -->
+    <?php require(ROOT . "/themes/" . $config["theme"] . "/components/navbar-no-session.phtml"); ?>
+
+    <!-- Page Content-->
+    <div class="container px-4 px-lg-5">
+        <!-- Heading Row-->
+        <div class="row gx-4 gx-lg-5 align-items-center my-5">
+            <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="<?=$config["fullsiteurl"] . "/themes/" . $config["theme"] . "/assets/img/logo-900x400.png"?>" alt="..." /></div>
+            <div class="col-lg-5">
+                <h1 class="font-weight-light">ForFans, For creators.</h1>
+                <p>Enjoy and create your favorite content no matter what.</p>
+                <a class="btn btn-primary" href="/auth">Join/Login now!</a>
+            </div>
+        </div>
+        <!-- Content Row-->
+        <h1 class="font-weight-light">Meet our creators!</h1>
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">LiLPandemio</h2>
+                        <h2 class="card-subtitle mb-2 text-muted">@admin</h2>
+                        <p class="card-text">Mi biografia estará aquí!!!</p>
+                    </div>
+                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">Ver perfil</a></div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">LiLPandemio</h2>
+                        <h2 class="card-subtitle mb-2 text-muted">@admin</h2>
+                        <p class="card-text">Mi biografia estará aquí!!!</p>
+                    </div>
+                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">Ver perfil</a></div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">LiLPandemio</h2>
+                        <h2 class="card-subtitle mb-2 text-muted">@admin</h2>
+                        <p class="card-text">Mi biografia estará aquí!!!</p>
+                    </div>
+                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">Ver perfil</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container px-4 px-lg-5">
+            <p class="m-0 text-center text-white">Copyright &copy; <?= $config["sitename"] ?> 2022</p>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+</head>
+
+<body>
+
+    </html>
