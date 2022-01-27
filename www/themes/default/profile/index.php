@@ -26,17 +26,23 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
     <!-- Aqui va el contenido principal de la pagina -->
     <!-- Load navbar -->
     <?php require(ROOT . "/themes/" . $config["theme"] . "/components/navbar.phtml"); ?>
-    <div class="row">
+    <div class="row" style="margin-top: 60px;">
     </div>
     <div class="row">
-        <div style="background-color: #ff8888;" class="col-sm-3">
-            Menu template
+        <div class="col-sm-3" style="paddign-top: 10px">
+            <?php include(ROOT . "/themes/" . $config["theme"] . "/components/left-profile-suggestions.phtml")?>
         </div>
-        <div style="background-color: #88ff88;" class="col-sm-6">
-            Main content template
+        <div class="col-sm-6" style="padding-top: 10px">
+            <div class="card text-left" style="padding: 10px">
+                <img class="card-img-top" style="border-radius: 20px" src="https://dummyimage.com/600x200/000/fff&text=Profile+heading" alt="">
+              <div class="card-body">
+                <h4 class="card-title">@admin</h4>
+                <p class="card-text">ASD</p>
+              </div>
+            </div>
         </div>
-        <div style="background-color: #8888ff;" class="col-sm-3">
-            Menu template
+        <div class="col-sm-3">
+            
         </div>
     </div>
 </body>

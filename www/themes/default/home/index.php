@@ -20,37 +20,9 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
             <div class="row" style="margin-top: 60px; width:100%">
                 <div class="col-sm-3">
 
-                    <div id="accordion">
-                        <div data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="title-wrapper" style="padding:10px">
-                            <ul style="cursor:pointer" class="breadcrumb">
-                                <li>Perfiles sugeridos</li>
-                            </ul>
-                        </div>
+                    <!-- Include suggestions at left -->
+                    <?php include(ROOT . "/themes/" . $config["theme"] . "/components/left-profile-suggestions.phtml") ?>
 
-                        <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body" style="padding-top: 0px;">
-                                <?php for ($i = 0; $i < 4; $i++) { ?>
-                                    <a href="#">
-                                        <div class="card text-left" style="margin-bottom: 10px; margin-left: 10px; margin-right: 10px;">
-                                            <div class="card-body" style="display: flex; flex-direction: row;">
-                                                <img class="avatar" style="border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat" alt="">
-                                                <div style="display:flex; flex-direction:column; margin-left:10px">
-                                                    <div style="height: 50%;">
-                                                        <p class="card-text">@admin</p>
-                                                    </div>
-                                                    <div style="height: 50%;">
-                                                        <a style="margin:2px" class="badge badge-primary" href="#">12 Posts</a>
-                                                        <a style="margin:2px" class="badge badge-success" href="#">Suscribirse</a>
-                                                        <a style="margin:2px" class="badge badge-accent" href="#">Seguir</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-sm-8" style="overflow:scroll ">
                     <div class="title-wrapper" style="padding:10px">
@@ -91,7 +63,7 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                         <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion-subs">
                             <div class="card-body" style="padding-top: 0px;">
                                 <?php for ($i = 0; $i < 4; $i++) { ?>
-                                    <img class="avatar sub-item" style="margin-left: 10px; border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat/says/<?php echo rand(1, 5000)?>" alt="">
+                                    <img class="avatar sub-item" style="margin-left: 10px; border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
                                 <?php } ?>
                             </div>
                         </div>
