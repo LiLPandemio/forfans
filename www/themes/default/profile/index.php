@@ -5,14 +5,17 @@ require(ROOT . "/locale/" . $config["default_lang"] . ".php");
 if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CON TOKEN
     $token = $_COOKIE['token'];                         //GUARDALA EN $token
     require_once ROOT . "/functions/authEngine.php";         //IMPORTA LAS FUNCIONES DE AUTENTICACION
+    require_once ROOT . "/functions/userEngine.php";         //IMPORTA LAS FUNCIONES DE AUTENTICACION
     if (checkTokenStatus($token) != "INVALID_TOKEN") {  //Si el estado del token no es invalido
         //Cargar informacion del perfil
         $fullpage = $_REQUEST['page'];                                      //La pagina se guarda en $fullpage para dividirla luego en parametros
         $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);    //$param[n] contiene los parametros siendo N el parametro solicitado.
         if (isset($param[1])) {
             $isMyProfile = false;
+            $username = $param[1];
         } else {
             $isMyProfile = true;
+            $username = whoami();
         }
 
         //Mostrar la pagina
@@ -40,8 +43,10 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">@admin</h4>
-                            <p class="card-text">Name: El puto admin</p>
-                            <p class="card-text">Gender: <?= lang("war_helicopter") ?></p>
+                            <p class="card-text">
+                                Name: El puto admin <br>
+                                Gender: <?= lang("war_helicopter") ?>
+                            </p>
                         </div>
                     </div>
                 </div>
