@@ -16,6 +16,21 @@ function lang($langkey)
     $lang['join_site']
         = "Join {sitename}";
 
+    $lang['join_site']
+        = "Join {sitename}";
+
+    $lang['create_account']
+        = "Create account";
+    
+    $lang['male']
+        = "Male";
+
+    $lang['woman']
+        = "Woman";
+
+    $lang['war_helicopter']
+        = "War helicopter";
+
     var_dump($lang);
 
     $text = str_replace("{sitename}", $config['sitename'], $lang[$langkey]);

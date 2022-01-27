@@ -28,6 +28,15 @@ function lang($phrase)
 
     $lang['create_account']
         = "Crear cuenta";
+    
+    $lang['male']
+        = "Hombre";
+
+    $lang['woman']
+        = "Mujer";
+
+    $lang['war_helicopter']
+        = "Helicoptero de guerra";
 
     $str = str_replace("{sitename}", $config["sitename"], $lang[$phrase]);
     return $str;
