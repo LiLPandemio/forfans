@@ -29,7 +29,7 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
     <div class="row" style="margin-top: 60px;">
     </div>
     <div class="row">
-        <div class="col-sm-3" style="paddign-top: 10px">
+        <div class="col-sm-3">
             <?php include(ROOT . "/themes/" . $config["theme"] . "/components/left-profile-suggestions.phtml")?>
         </div>
         <div class="col-sm-6" style="padding-top: 10px">
@@ -37,7 +37,8 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                 <img class="card-img-top" style="border-radius: 20px" src="https://dummyimage.com/600x200/000/fff&text=Profile+heading" alt="">
               <div class="card-body">
                 <h4 class="card-title">@admin</h4>
-                <p class="card-text">ASD</p>
+                <p class="card-text">Name: El puto admin</p>
+                <p class="card-text">Gender: <?= lang("war_helicopter") ?></p>
               </div>
             </div>
         </div>
