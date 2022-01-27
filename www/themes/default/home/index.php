@@ -1,9 +1,11 @@
 <?php
+require_once(ROOT . "/functions/contentEngine.php");
 require(ROOT . "/locale/" . $config["default_lang"] . ".php");      //Cargar idioma
 if (isset($_COOKIE['token'])) {                                     //SI EXISTE LA COOKIE CON TOKEN
     $token = $_COOKIE['token'];                                     //GUARDALA EN $token
     if (checkTokenStatus($token) != "INVALID_TOKEN") {              //Si el estado del token no es invalido
         //Mostrar la pagina
+
 ?>
         <!-- Aqui puedes añadir contenido exta a head -->
         <link rel="stylesheet" href="<?= $config["fullsiteurl"] . "themes/" . $config["theme"] . "/home/" . "index" ?>.css">
@@ -30,12 +32,22 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                             <li>Noticias!</li>
                         </ul>
                     </div>
-                    <?php 
-                    for ($i = 0; $i < 4; $i++) { ?>
+                    <?php
+                    $posts = getPublicPosts();
+                    for ($i = 0; $i < count($posts); $i++) {
+                        $post = $posts[$i];
+                        $img_array = json_decode($post["post_img_array"]);
+                    ?>
 
                         <div style="padding: 0;" class="card text-left post-body">
                             <div style="flex:5" class="card-body">
-                                <img style="object-fit:cover; margin: 10px; margin-top:0px; border-radius: 5px; width:95%" src="https://cataas.com/cat/says/Post!<?php echo rand(1, 5000) ?>" alt="POST">
+                            <?php
+                            for ($j=0; $j < count($img_array); $j++) { 
+                                ?>
+                                <img style="object-fit:cover; margin: 10px; margin-top:10px; border-radius: 5px; width:95%" src="<?php echo $img_array[$j] ?>" alt="POST">
+                                <?php
+                            }
+                            ?>
                             </div>
                             <div class="card-body" style="display:flex; flex-direction:row; flex:9">
                                 <img class="avatar" style="border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat/says/Profile!" alt="">
@@ -47,6 +59,9 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                         <a class="badge badge-primary" href="#">12 Posts</a>
                                         <a class="badge badge-success" href="#">Suscribirse</a>
                                         <a class="badge badge-accent" href="#">Seguir</a>
+                                    </div>
+                                    <div style="margin-top:25px; margin-left:-60px">
+                                        <?= $post["post_text"] ?>
                                     </div>
                                 </div>
                             </div>
