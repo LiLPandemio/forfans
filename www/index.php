@@ -24,7 +24,7 @@ if ($disableCache) {
 }
 
 //Establece el path absoluto a la raiz de la app web de forma dinamica
-define('ROOT', getcwd());
+define('ROOT', getcwd()); //No tiene trailing dashline ////
 
 //Carga de las funciones esenciales
 require_once(ROOT . "/functions/system.php");
