@@ -34,7 +34,7 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
         </div>
         <div class="col-sm-6" style="padding-top: 10px">
             <div class="card text-left" style="padding: 10px">
-                <img class="card-img-top" style="border-radius: 20px" src="https://dummyimage.com/600x200/000/fff&text=Profile+heading" alt="">
+                <img class="card-img-top" style="border-radius: 20px" src="https://www.societyplus.net/upload/photos/d-cover.jpg" alt="">
               <div class="card-body">
                 <h4 class="card-title">@admin</h4>
                 <p class="card-text">Name: El puto admin</p>

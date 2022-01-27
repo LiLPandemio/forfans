@@ -30,7 +30,8 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                             <li>Noticias!</li>
                         </ul>
                     </div>
-                    <?php for ($i = 0; $i < 4; $i++) { ?>
+                    <?php 
+                    for ($i = 0; $i < 4; $i++) { ?>
 
                         <div style="padding: 0;" class="card text-left post-body">
                             <div style="flex:5" class="card-body">
@@ -63,7 +64,7 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                         <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion-subs">
                             <div class="card-body" style="padding-top: 0px;">
                                 <?php for ($i = 0; $i < 4; $i++) { ?>
-                                    <img class="avatar sub-item" style="margin-left: 10px; border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
+                                    <img class="avatar sub-item" style="border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
                                 <?php } ?>
                             </div>
                         </div>

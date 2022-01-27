@@ -27,7 +27,6 @@
     left: 0;
     z-index: 1030;
     background-color: #f8f9fa;
-
 }
 
 .sub-item {
@@ -38,24 +37,22 @@
     .post-body {
         flex-direction: row;
     }
-
     .dynFLexHH {
         display: flex;
         flex-direction: column;
     }
-
     .Subs {
         /* S */
         position: unset;
         z-index: 1030;
         background-color: #f8f9fa;
-
     }
-
     .sub-item {
-        margin: 5px;
+        margin-left: -3.5px;
+        margin-top: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
         width: 300px;
         height: 300px;
     }
-
 }
