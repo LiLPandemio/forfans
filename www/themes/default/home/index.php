@@ -31,8 +31,8 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                         <div id="accordion-newpost">
 
                             <div data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" class="title-wrapper" style="padding:10px; padding-top: 0px;">
-                                <ul style="cursor:pointer" class="breadcrumb">
-                                    <li>¿Inspirado? ¡Publica algo!</li>
+                                <ul style="cursor:pointer; text-align: center; width: 100%" class="breadcrumb">
+                                    <li style="text-align: center; width: 100%">¿Inspirado? ¡Publica algo!</li>
                                 </ul>
                             </div>
 
@@ -51,35 +51,57 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                     ?>
 
                         <div style="padding: 0; min-height: 160px" class="card text-left post-body">
-                            <div style="flex:5" class="card-body">
-                                <?php
-                                if ($img_array != "") {
-                                    for ($j = 0; $j < count($img_array); $j++) {
-                                ?>
-                                        <img style="object-fit:cover; margin: 10px; margin-top:10px; border-radius: 5px; width:95%" src="<?php echo $img_array[$j] ?>" alt="POST">
-                                <?php
-                                    }
-                                }
+                            <?php
+                            if ($img_array != "") {
+                            ?>
+                                <div style="flex:5" class="card-body">
+                                    <?php
 
+                                    for ($j = 0; $j < count($img_array); $j++) {
+                                    ?>
+                                        <img style="object-fit:cover; margin: 10px; margin-top:10px; border-radius: 5px; width:95%" src="<?php echo $img_array[$j] ?>" alt="POST">
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+
+                            <?php
+
+                            } else {
+                            
                                 ?>
-                            </div>
-                            <div class="card-body" style="display:flex; flex-direction:row; flex:9">
+                                <div style="flex:3" class=""></div>
+                                <?php
+                            
+                            }
+
+                            ?>
+                            <div class="card-body" style="display:flex; flex-direction:row; flex:6">
                                 <img class="avatar" style="border-radius: 50px; height: 50px; width: 50px" src="<?= $config["fullsiteurl"] . $post["profile_picture_rpath"] ?>" alt="">
-                                <div style="display:flex; flex-direction:column; margin-left:10px; max-height: 40px">
-                                    <div style="height: 50%;">
-                                        <p class="card-text">@<?= $post["username"] ?></p>
+                                <div style="flex-wrap: wrap;">
+                                    <div class="post-info-about" style="max-height: 40px">
+                                        <div style="height: 50%;">
+                                            <p class="card-text">@<?= $post["username"] ?></p>
+                                        </div>
+                                        <div style="height: 50%;">
+                                            <a class="badge badge-primary" href="#"><?php echo howManyPostsHasUsername($post['username']) ?> Posts</a>
+                                            <a class="badge badge-danger" href="#">Suscribirse</a>
+                                            <a class="badge badge-success" href="#">Donado $<?= $post["post_donations"] ?></a>
+                                            <a class="badge badge-accent" href="#">Seguir</a>
+                                        </div>
                                     </div>
-                                    <div style="height: 50%;">
-                                        <a class="badge badge-primary" href="#"><?php echo howManyPostsHasUsername($post['username']) ?> Posts</a>
-                                        <a class="badge badge-danger" href="#">Suscribirse</a>
-                                        <a class="badge badge-success" href="#">Donado $<?= $post["post_donations"] ?></a>
-                                        <a class="badge badge-accent" href="#">Seguir</a>
-                                    </div>
-                                    <div style="margin-top:25px; margin-left:-60px">
+                                    <div style="flex: 1 1 250px; margin-top:40px; margin-left:-50px">
                                         <?= $post["post_text"] ?>
                                     </div>
                                 </div>
                             </div>
+                            <?php
+                            if ($img_array !== "") {
+                                ?>
+                                <div style="flex:3" class=""></div>
+                                <?php        
+                            }                
+                            ?>
                         </div>
                     <?php } ?>
                 </div>
@@ -87,11 +109,11 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                     <div class="dynFlexHV Subs" id="accordion-subs">
                         <div data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="title-wrapper" style="padding:10px; padding-top: 0px;">
                             <ul style="cursor:pointer" class="breadcrumb">
-                                <li>Subs</li>
+                                <li style="text-align: center; width: 100%">Subs</li>
                             </ul>
                         </div>
 
-                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion-subs">
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-subs">
                             <div class="card-body subs ccard" style="padding-top: 0px;">
                                 <?php for ($i = 0; $i < 4; $i++) { ?>
                                     <img class="avatar sub-item" style="border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
