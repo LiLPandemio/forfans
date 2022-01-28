@@ -12,6 +12,41 @@ require(ROOT . "/config.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/jquery/jquery.min.js"></script>
 	<script src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<?php /*LOADING DEFAULT CSS BOOTSRAP*/ ?>
 	<link rel="stylesheet" href="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/bootstrap/css/bootstrap.min.css">
+	
+	<?php /*LOADING B4 MODS*/ ?>
+	<?php require(ROOT."/themes/".$config['theme'] . "/" . "themeCustomization.php");
+	
+	if ($useCyborgTheme) {
+		?>
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl']."themes/".$config['theme'] . "/" ?>assets/cyborg/cyborg.css">
+		<?php
+	}
+	if ($useDarklyTheme) {
+		?>
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl']."themes/".$config['theme'] . "/" ?>assets/darkly/darkly.css">
+		<?php
+	}
+	if ($useLiteraTheme) {
+		?>
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl']."themes/".$config['theme'] . "/" ?>assets/litera/litera.css">
+		<?php
+	}
+	if ($useMintyXTheme) {
+		?>
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl']."themes/".$config['theme'] . "/" ?>assets/minty/minty.css">
+		<?php
+	}
+	if ($useQuartzTheme) {
+		?>
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl']."themes/".$config['theme'] . "/" ?>assets/quartz/quartz.css">
+		<?php
+	}
+	
+	?>
+	
+	
+	
 	<title><?php echo $config["sitename"] . " - " . $_REQUEST["page"]; ?></title>
 	<!-- <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0"/> -->

@@ -16,3 +16,11 @@ function getPublicPosts($amount = 5){
     }
     
 }
+
+function howManyPostsHasUsername($username){
+    require(ROOT . "/functions/db.php");
+    $stmt = $conn->prepare("SELECT `posts`.*, `usuarios`.* FROM `posts` LEFT JOIN `usuarios` ON `posts`.`user_id` = `usuarios`.`id_usuarios` WHERE `username` = ?");
+    $stmt->execute(array($username));
+    $drows = $stmt->rowCount();
+    return $drows;
+}
