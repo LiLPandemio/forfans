@@ -77,7 +77,7 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
 
                             ?>
                             <div class="card-body" style="display:flex; flex-direction:row; flex:6">
-                                <img class="avatar" style="border-radius: 50px; height: 50px; width: 50px" src="<?= $config["fullsiteurl"] . $post["profile_picture_rpath"] ?>" alt="">
+                                <img class="avatar" style="border-radius: 50px; height: 50px; width: 50px; margin-right:10px;" src="<?= $config["fullsiteurl"] . $post["profile_picture_rpath"] ?>" alt="">
                                 <div style="flex-wrap: wrap;">
                                     <div class="post-info-about" style="max-height: 40px">
                                         <div style="height: 50%;">

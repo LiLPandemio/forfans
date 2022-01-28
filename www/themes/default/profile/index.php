@@ -29,7 +29,7 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
             <!-- Aqui va el contenido principal de la pagina -->
             <!-- Load navbar -->
             <?php require(ROOT . "/themes/" . $config["theme"] . "/components/navbar.phtml"); ?>
-            <div class="row" style="margin-top: 60px;">
+            <div class="row" style="margin-top: 80px;">
             </div>
             <div class="row">
                 <div class="col-sm-3">
