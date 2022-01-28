@@ -30,7 +30,7 @@ function getUserData($username){
     $drows = $stmt->rowCount();
     if ($drows > 0) {
         //There's rows
-        return $result;
+        return $result[0];
     } else {
         return "SOMETHING_WENT_WRONG";
     }
