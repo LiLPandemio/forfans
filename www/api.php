@@ -43,7 +43,35 @@ if (isset($param['1'])) {                                                       
             } else {
                 # 
             }
-        break;
+            break;
+        case "update":
+            //REQUIRE LOGIN
+            require_once(ROOT . "/functions/userEngine.php");
+            if (isWebLoggedIn($_COOKIE) || isset($_REQUEST['token'])) {
+                switch ($param[2]) {
+                    case 'theme_variable':
+                        if (isset($_REQUEST['newTheme'])) {
+                            if ($_REQUEST['newTheme'] == "cyborg" || $_REQUEST['newTheme'] == "darkly" || $_REQUEST['newTheme'] == "minty" || $_REQUEST['newTheme'] == "litera" || $_REQUEST['newTheme'] == "quartz") {
+                                //Update theme
+                                var_dump(setUser__default_theme_variable(whoami("TOKEN_MANUAL"), $_REQUEST['newTheme']));
+                            } else {
+                                $response = array('Error' => "Your theme is not valid");
+                                echo json_encode($response);
+                            }
+                        } else {
+                            $response = array('Error' => "Provide a theme via POST JSON");
+                            echo json_encode($response);
+                        }
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+            } else {
+                $response = array('Error' => "Not logged in");
+                echo json_encode($response);
+            }
+
         case "test":
             break;
         default:                                                                    //Si no hay coincidencias

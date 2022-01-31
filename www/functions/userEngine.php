@@ -22,7 +22,8 @@ function getSuggestedUsers($amount = 5)
 /**
  * Returns array from database with user relevant data (SENSITIVE DATA ON.)
  */
-function getUserData($username){
+function getUserData($username)
+{
     require(ROOT . "/functions/db.php");
     $stmt = $conn->prepare("SELECT * FROM `usuarios` WHERE `username` = ?;");
     $stmt->execute(array($username));
@@ -36,14 +37,15 @@ function getUserData($username){
     }
 }
 
-function whoami($tkp = "") {
+function whoami($tkp = "")
+{
     require(ROOT . "/functions/db.php");
     if ($tkp == "") {
         $token = $_COOKIE['token'];
     } else {
         $token = $tkp;
     }
-    
+
     $stmt = $conn->prepare("SELECT `tokens`.*, `usuarios`.* FROM `tokens` LEFT JOIN `usuarios` ON `tokens`.`user_id` = `usuarios`.`id_usuarios` WHERE `tokens`.`token` = ?;");
     $stmt->execute(array($token));
     $result = $stmt->fetchAll();
@@ -51,7 +53,19 @@ function whoami($tkp = "") {
     if ($drows > 0) {
         return $result[0]["username"];
     } else {
-        return "NOT_FOUND";
+        return "USERNAME_NOT_FOUND";
     }
-    
+}
+
+function setUser__default_theme_variable($username, $newValue)
+{
+    require(ROOT . "/functions/db.php");
+    $stmt = $conn->prepare("UPDATE `usuarios` SET `default_theme_variable` = ? WHERE `usuarios`.`username` = ?; ");
+    $stmt->execute(array($newValue, $username));
+    $drows = $stmt->rowCount();
+    if ($drows > 0) {
+        return "OK";
+    } else {
+        return $stmt->fetchAll();
+    }
 }
