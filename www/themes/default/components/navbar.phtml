@@ -1,6 +1,6 @@
 <?php
-$fullpage = $_REQUEST['page'];                                   
-$param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY); 
+$fullpage = $_REQUEST['page'];
+$param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; top: 0; right: 0; left: 0; z-index: 1030;">
   <a class="navbar-brand" href="#"><?php echo $config["sitename"] ?></a>
@@ -10,10 +10,14 @@ $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav" style="margin-right: auto !important;">
-      <li class="nav-item <?php if ($param[0] == "home") {echo "active"; }?>">
+      <li class="nav-item <?php if ($param[0] == "home") {
+                            echo "active";
+                          } ?>">
         <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item <?php if ($param[0] == "profile") {echo "active"; }?>">
+      <li class="nav-item <?php if ($param[0] == "profile") {
+                            echo "active";
+                          } ?>">
         <a class="nav-link" href="/profile">Profile</a>
       </li>
       <li class="nav-item dropdown">
@@ -44,3 +48,67 @@ $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
     </div>
   </div>
 </nav>
+<style>
+  .pick_theme_preview {
+    flex: 1 1 10px;
+    margin: 10px;
+  }
+
+  .overlay_menu {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    background-color: var(--bs-body-bg);
+    border: 4px solid gold;
+    border-radius: 10px;
+    padding: 10px;
+    width: 90%;
+    z-index: 10;
+    flex-wrap: wrap;
+    overflow: auto;
+    max-height: 70%
+  }
+
+  .selected-item {
+    border: 5px solid gold;
+  }
+
+  .menu-selection {
+    flex-wrap: wrap;
+  }
+
+  @media(min-width: 1000px) {
+
+    /* ESCRITORIO */
+    .overlay_menu {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 20%;
+      background-color: var(--bs-body-bg);
+      border: 4px solid gold;
+      border-radius: 10px;
+      width: 60%;
+      z-index: 10;
+      flex-wrap: wrap;
+      overflow: auto;
+      max-height: 70%
+    }
+  }
+</style>
+<script>
+  function setTheme(theme) {
+
+  }
+</script>
+<div class="overlay_menu">
+  <div class="menu_selection">
+    <img class="pick_theme_preview" onclick="setTheme('cyborg')" src="https://dummyimage.com/100x150/000/fff" alt="Darkly">
+    <img class="pick_theme_preview" onclick="setTheme('darkly')" src="https://dummyimage.com/100x150/000/fff" alt="Darkly">
+    <img class="pick_theme_preview" onclick="setTheme('litera')" src="https://dummyimage.com/100x150/000/fff" alt="Darkly">
+    <img class="pick_theme_preview" onclick="setTheme('minty')" src="https://dummyimage.com/100x150/000/fff" alt="Darkly">
+    <img class="pick_theme_preview" onclick="setTheme('quartz')" src="https://dummyimage.com/100x150/000/fff" alt="Darkly">
+  </div>
+  <button type="button" class="btn btn-success">Cerrar</button>
+</div>
