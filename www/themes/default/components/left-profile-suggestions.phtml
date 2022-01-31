@@ -21,7 +21,7 @@
                                     <p class="card-text"><?= $users[$i]["username"] ?></p>
                                 </div>
                                 <div style="height: 50%;">
-                                    <a style="margin:2px" class="badge badge-primary" href="#">12 Posts</a>
+                                    <a style="margin:2px" class="badge badge-primary" href="#"><?=howManyPostsHasUsername($users[$i]["username"])?> Posts</a>
                                     <a style="margin:2px" class="badge badge-success" href="#">Suscribirse</a>
                                     <a style="margin:2px" class="badge badge-accent" href="#">Seguir</a>
                                 </div>
