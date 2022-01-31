@@ -5,14 +5,14 @@ const container = document.getElementById('container');
 
 var loginPasswordVisible = false;
 const ToggleLoginVisiblePassword = () => {
-    if (!loginPasswordVisible) {
+    if (loginPasswordVisible) {
         $("#VisiblePasswordIndicator").removeClass("fa-eye-slash")
         $("#VisiblePasswordIndicator").addClass("fa-eye")
-        $("#login_password").attr("type", "text");
+        $("#login_password").attr("type", "password");
     } else {
         $("#VisiblePasswordIndicator").removeClass("fa-eye")
         $("#VisiblePasswordIndicator").addClass("fa-eye-slash")
-        $("#login_password").attr("type", "password");
+        $("#login_password").attr("type", "text");
     }
     loginPasswordVisible = !loginPasswordVisible;
 }
