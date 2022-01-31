@@ -17,6 +17,9 @@ function getPublicPosts($amount = 5){
     
 }
 
+/**
+ * Indica la cantidad de publicaciones que tiene un usuario (INT)
+ */
 function howManyPostsHasUsername($username){
     require(ROOT . "/functions/db.php");
     $stmt = $conn->prepare("SELECT `posts`.*, `usuarios`.* FROM `posts` LEFT JOIN `usuarios` ON `posts`.`user_id` = `usuarios`.`id_usuarios` WHERE `username` = ?");
