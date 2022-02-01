@@ -37,6 +37,9 @@ function getUserData($username)
     }
 }
 
+/**
+ * Toma el token que le des y te devuelve el nomrbe de usuario, por defecto el token es el del usuario que hace la peticion.
+ */
 function whoami($tkp = "")
 {
     require(ROOT . "/functions/db.php");

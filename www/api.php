@@ -4,6 +4,14 @@
 $response = array('hash' => $hash);
 echo json_encode($response);
 */
+// $json = file_get_contents('php://input');
+// if ($json == "") {
+//     //Do not replace with json, its web post
+// } else {
+//     //Request comes in json
+//     $data = json_decode($json, true);
+//     $_REQUEST = $data;
+// }
 header('Content-Type: application/json');                                           //La api debe retornar todo en JSON
 if (isset($param['1'])) {                                                           //Si existe un segundo parametro para la api (Necesario)
     switch ($param['1']) {                                                          //Haz x si el parametro vale y
@@ -47,30 +55,32 @@ if (isset($param['1'])) {                                                       
         case "update":
             //REQUIRE LOGIN
             require_once(ROOT . "/functions/userEngine.php");
-            if (isWebLoggedIn($_COOKIE) || isset($_REQUEST['token'])) {
-                switch ($param[2]) {
-                    case 'theme_variable':
-                        if (isset($_REQUEST['newTheme'])) {
-                            if ($_REQUEST['newTheme'] == "cyborg" || $_REQUEST['newTheme'] == "darkly" || $_REQUEST['newTheme'] == "minty" || $_REQUEST['newTheme'] == "litera" || $_REQUEST['newTheme'] == "quartz") {
-                                //Update theme
-                                var_dump(setUser__default_theme_variable(whoami("TOKEN_MANUAL"), $_REQUEST['newTheme']));
+            switch ($param[2]) {
+                case 'theme_variable':
+                    if (isset($_REQUEST['newTheme']) and isset($_REQUEST['token'])) {
+                        if ($_REQUEST['newTheme'] == "cyborg" || $_REQUEST['newTheme'] == "darkly" || $_REQUEST['newTheme'] == "minty" || $_REQUEST['newTheme'] == "litera" || $_REQUEST['newTheme'] == "quartz") {
+                            if (checkTokenStatus($_REQUEST['token'] != "INVALID_TOKEN" and $_REQUEST['token'] !=  "TOKEN_EXPIRED")) {
+                                setUser__default_theme_variable(whoami($_REQUEST['token']), $_REQUEST['newTheme']);
+                                $response = array('OK' => "Theme updated successfully");
+                                echo json_encode($response);
                             } else {
-                                $response = array('Error' => "Your theme is not valid");
+                                $response = array('error' => "Token provided invalid");
                                 echo json_encode($response);
                             }
                         } else {
-                            $response = array('Error' => "Provide a theme via POST JSON");
+                            $response = array('error' => "Theme provided invalid");
                             echo json_encode($response);
                         }
-                        break;
-                    default:
-                        # code...
-                        break;
-                }
-            } else {
-                $response = array('Error' => "Not logged in");
-                echo json_encode($response);
+                    } else {
+                        $response = array('error' => "Missing theme and/or token");
+                        echo json_encode($response);
+                    }
+                    break;
+                default:
+                    # code...
+                    break;
             }
+
 
         case "test":
             break;
