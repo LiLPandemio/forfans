@@ -1,7 +1,7 @@
 <div id="accordion">
     <div data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="title-wrapper" style="padding:10px">
         <ul style="cursor:pointer" class="breadcrumb">
-            <li>Perfiles sugeridos</li>
+            <li style="text-align: center; width: 100%">Perfiles sugeridos</li>
         </ul>
     </div>
 
@@ -9,6 +9,7 @@
         <div class="card-body" style="padding-top: 0px;">
             <?php
             require_once(ROOT . "/functions/userEngine.php");
+            require_once(ROOT . "/functions/contentEngine.php");
             $users = getSuggestedUsers(5);
             for ($i = 0; $i < count($users); $i++) {
             ?>
