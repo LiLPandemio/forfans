@@ -28,27 +28,27 @@ require(ROOT . "/config.php");
 
 	if ($useCyborgTheme) {
 	?>
-		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/cyborg/cyborg.css">
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/cyborg/cyborg.min.css">
 	<?php
 	}
 	if ($useDarklyTheme) {
 	?>
-		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/darkly/darkly.css">
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/darkly/darkly.min.css">
 	<?php
 	}
 	if ($useLiteraTheme) {
 	?>
-		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/litera/litera.css">
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/litera/litera.min.css">
 	<?php
 	}
 	if ($useMintyXTheme) {
 	?>
-		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/minty/minty.css">
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/minty/minty.min.css">
 	<?php
 	}
 	if ($useQuartzTheme) {
 	?>
-		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/quartz/quartz.css">
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/quartz/quartz.min.css">
 	<?php
 	}
 

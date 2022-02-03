@@ -68,11 +68,11 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                             <?php
 
                             } else {
-                            
-                                ?>
+
+                            ?>
                                 <div style="flex:3" class=""></div>
-                                <?php
-                            
+                            <?php
+
                             }
 
                             ?>
@@ -97,10 +97,10 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                             </div>
                             <?php
                             if ($img_array !== "") {
-                                ?>
+                            ?>
                                 <div style="flex:3" class=""></div>
-                                <?php        
-                            }                
+                            <?php
+                            }
                             ?>
                         </div>
                     <?php } ?>
@@ -114,10 +114,12 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                         </div>
 
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-subs">
-                            <div class="card-body subs ccard" style="padding-top: 0px;">
-                                <?php for ($i = 0; $i < 4; $i++) { ?>
-                                    <img class="avatar sub-item" style="border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
-                                <?php } ?>
+                            <div class="card">
+                                <div class="card-body subs ccard" style="padding-top: 0px;">
+                                    <?php for ($i = 0; $i < 4; $i++) { ?>
+                                        <img class="avatar sub-item" style="border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
                     </div>
