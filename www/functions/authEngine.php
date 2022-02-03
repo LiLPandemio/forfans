@@ -61,6 +61,7 @@ function tokenGenerator()
     $token = bin2hex($token);
     return $token;
 }
+
 /**
  * ESTA FUNCION COMPRUEBA EL ESTADO DEL TOKEN. POSIBLES RESPUESTAS:
  * ADVERTENCIA: ESTA FUNCION NO COMPRUEBA QUE EL TOKEN ESTE VACIO
@@ -70,16 +71,15 @@ function tokenGenerator()
  */
 function checkTokenStatus($token)
 {
-    require(ROOT . "/functions/db.php");            //Antes de comprobar el token se importa la base de datos para poder comprobarlo
-    $stmt = $conn->prepare("SELECT * FROM `tokens` WHERE `token` = :token");
-    $stmt->execute(array(':token' => $token));
-    $crows = $stmt->rowCount();
-    if ($crows > 0) {
-        //There's rows
-        $row = $stmt->fetch();
-        return $row['user_id'];
-    } else {
-        return "INVALID_TOKEN";
+    require(ROOT . "/functions/db.php");                                        //Antes de comprobar el token se importa la base de datos para poder comprobarlo
+    $stmt = $conn->prepare("SELECT * FROM `tokens` WHERE `token` = :token");    //Se prepara una consulta reservando espacio para el token
+    $stmt->execute(array(':token' => $token));                                  //Se indica que el token es $token
+    $crows = $stmt->rowCount();                                                 //Cuenta cuantos registros afectados hay
+    if ($crows > 0) {                                                           //Si hay mas de 0 filas afectadas
+        $row = $stmt->fetch();                                                  //Se coge la primera fila
+        return $row['user_id'];                                                 //Extraes el nombre de usuario
+    } else {                                                                    //Si no hay filas
+        return "INVALID_TOKEN";                                                 //El token no es valido
     }
 }
 /**
@@ -88,32 +88,32 @@ function checkTokenStatus($token)
  */
 function removeToken($token)
 {
-    if (checkTokenStatus($token) != "INVALID_TOKEN") {
-        require(ROOT . "/functions/db.php");
-        $stmt = $conn->prepare("DELETE FROM `tokens` WHERE `token` = :token");
-        $stmt->execute(array(':token' => $token));
-        $drows = $stmt->rowCount();
-        if ($drows > 0) {
-            //There's rows
-            return "SUCCESS";
-        } else {
-            return "SOMETHING_WENT_WRONG";
+    if (checkTokenStatus($token) != "INVALID_TOKEN") {                          //Si el token no es invalido (Es valido)
+        require(ROOT . "/functions/db.php");                                    //Se importa la base de datos a la funcion
+        $stmt = $conn->prepare("DELETE FROM `tokens` WHERE `token` = :token");  //Se prepara la consulta SQL para eliminar el token
+        $stmt->execute(array(':token' => $token));                              //Se ejecuta el token reemplazando :token por "$token" de forma segura
+        $drows = $stmt->rowCount();                                             //Se cuenta cuantas filas han sido afectadas (Deberia ser solo 1)
+        if ($drows > 0) {                                                       //Si hay mas de 0 filas afectadas
+            return "SUCCESS";                                                   //Retornamos un mensaje de SUCCESS conforme ha ido todo bien
+        } else {                                                                //Si no han habido filas afectadas
+            return "SOMETHING_WENT_WRONG";                                      //Algo ha ido mal con la consulta.
         }
-    } else {
-        return "INVALID_TOKEN";
+    } else {                                                                    //Si el token es invalido
+        return "INVALID_TOKEN";                                                 //Se retorna INVALID_TOKEN
     }
 }
 /**
  * Recibe la cookie y da true o false si esta o no con una sesion valida.
  * $sesdata = $_COOKIE
  */
-function isWebLoggedIn($sesdata){
-    if (isset($sesdata['token'])) {
-        if ($sesdata['token'] !== "") {
-            if (checkTokenStatus($_COOKIE['token']) != "INVALID_TOKEN") {
-                return true;
+function isWebLoggedIn($sesdata)
+{
+    if (isset($sesdata['token'])) {                                             //Se provee la cookie o la informacion de la sesion, si tiene un token
+        if ($sesdata['token'] !== "") {                                         //Y si el token no vale ""
+            if (checkTokenStatus($_COOKIE['token']) != "INVALID_TOKEN") {       //Y el token existe
+                return true;                                                    //Se devuelve TRUE
             }
         }
     }
-    return false;
+    return false;                                                               //Si alguna de las condiciones de arriba no se cumple se retorna false.
 }
