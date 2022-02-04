@@ -36,9 +36,20 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                 </ul>
                             </div>
 
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-newpost">
-                                <div class="card card-body" style="padding-top: 0px;">
-                                    Menu para posts pronto
+                            <div id="collapseThree" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion-newpost">
+                                <div class="card card-body" style="padding:20px;">
+                                    <label for="exampleFormControlTextarea1">Texto de la publicacion</label>
+                                    <textarea placeholder="Publica lo que quieras! #Anime #Hentai #xXx" class="form-control" id="exampleFormControlTextarea1" rows="3" style="background-color: var(--bs-body-bg); color: var(--bs-body-color)"></textarea>
+                                    <span style="margin-top: 10px; display:flex; flex-direction:row">
+                                        <span style="position: relative; top:5px">
+                                            <p>NSFW Content&nbsp;&nbsp;&nbsp;</p>
+                                        </span>
+                                        <label class="form-check-label switch">
+                                            <input class="form-check-input" name="newPostIsNSFW" id="newPostIsNSFW" value="checkedValue" type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </span>
+                                    <button type="button" style="margin-top: 5px; width:60%; margin-left:20%" class="btn btn-primary">Publicar</button>
                                 </div>
                             </div>
                         </div>
