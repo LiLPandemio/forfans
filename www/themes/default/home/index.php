@@ -36,11 +36,11 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                 </ul>
                             </div>
 
-                            <div id="collapseThree" class="collapse show" aria-labelledby="headingTwo" style="margin-bottom: 10px;" data-parent="#accordion-newpost">
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" style="margin-bottom: 10px;" data-parent="#accordion-newpost">
                                 <div class="card card-body" style="padding:20px;">
                                     <div style="text-align: center;">
                                         <label for="postTextTextarea">Texto de la publicacion</label>
-                                        <p class="text-danger">El texto es demasiado largo. Limite de 1200 caracteres.</p>
+                                        <p id="tooLongTextWarn" style="display:none" class="text-danger">El texto es demasiado largo. Limite de 1200 caracteres.</p>
                                         <textarea onkeydown="controlInput()" onkeyup="controlInput()" onchange="controlInput()" placeholder="Publica lo que quieras! #Anime #Hentai #xXx" class="form-control" id="postTextTextarea" rows="3" style="background-color: var(--bs-body-bg); color: var(--bs-body-color)"></textarea>
                                     </div>
                                     <script>
@@ -50,17 +50,18 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                                 $("#chars-left-btn").addClass("btn-outline-danger");
                                                 $("#chars-left-btn").removeClass("btn-outline-warning");
                                                 $("#chars-left-btn").removeClass("btn-outline-success");
+                                                $("#tooLongTextWarn").show();
                                             } else {
+                                                $("#tooLongTextWarn").hide();
+                                                $("#chars-left-btn").removeClass("btn-outline-danger");
                                                 if (text.length > 1000) {
                                                     // WARN
                                                     $("#chars-left-btn").addClass("btn-outline-warning");
                                                     $("#chars-left-btn").removeClass("btn-outline-success");
-                                                    $("#chars-left-btn").removeClass("btn-outline-danger");
                                                 } else {
                                                     // OK
                                                     $("#chars-left-btn").addClass("btn-outline-success");
                                                     $("#chars-left-btn").removeClass("btn-outline-warning");
-                                                    $("#chars-left-btn").removeClass("btn-outline-danger");
                                                     console.log("OK");
                                                 }
                                             }
@@ -156,28 +157,31 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                             </div>
                         <?php } ?>
                     </div>
-                    <div class="col-sm-1">
-                        <div class="dynFlexHV Subs" id="accordion-subs">
-                            <div data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="title-wrapper" style="padding:10px; padding-top: 0px;">
-                                <ul style="cursor:pointer" class="breadcrumb">
-                                    <li style="text-align: center; width: 100%">Subs</li>
-                                </ul>
-                            </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="dynFlexHV Subs" id="accordion-subs">
+                        <div data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="title-wrapper" style="padding:10px; padding-top: 0px;">
+                            <ul style="cursor:pointer" class="breadcrumb">
+                                <li style="text-align: center; width: 100%">Subs</li>
+                            </ul>
+                        </div>
 
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-subs">
-                                <div class="card">
-                                    <div class="card-body subs ccard" style="padding-top: 0px;">
-                                        <?php for ($i = 0; $i < 4; $i++) { ?>
-                                            <img class="avatar sub-item" style="border-radius: 50px; height: 50px; width: 50px" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
-                                        <?php } ?>
-                                    </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-subs">
+                            <div class="card">
+                                <div class="card-body subs ccard" style="padding-top: 0px; text-align: center;">
+                                    <img class="avatar sub-item" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
+                                    <img class="avatar sub-item" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
+                                    <img class="avatar sub-item" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
+                                    <img class="avatar sub-item" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
+                                    <img class="avatar sub-item" src="https://cataas.com/cat/says/<?php echo rand(1, 5000) ?>" alt="">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Espacio necesario para que en la version movil no se solapen los menus -->
-                <div class="separator" style="margin-top: 80px;"></div>
+            </div>
+            <!-- Espacio necesario para que en la version movil no se solapen los menus -->
+            <div class="separator" style="margin-top: 80px;"></div>
         </body>
 <?php
     } else {

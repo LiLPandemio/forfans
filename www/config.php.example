@@ -21,6 +21,9 @@ $paypal["currency"] =   "EUR";      //Moneda usada (USD, EUR...)
 $coinbase["enabled"]=   false;      //Habilitar sistema de pago por criptomonedas (Monero XMR, Bitcoin BTC, Ethercash ECH, Bitcash BCH y Etherum ETH)
 $coinbase["apikey"] =   "";         //Clave de api para usar coinbase como gateway de pago.
 
+//Giphy API
+$giphy['apikey']    =   "TyISCA2EiSEH6dgSharXRPzFqTtzjPV2"; //Clave de acceso a la API de giphy
+
 //Palabras clave para google o otros buscadores (SEO KeyWords)
 $config["metakeywords"] =   "patreon, onlyfans, instagram, social";
 $config["default_lang"] =   "es";                           //La URL que se muestra en tu navegador.

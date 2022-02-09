@@ -42,9 +42,9 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                             <img src="<?php echo $config['fullsiteurl'].$user['profile_picture_rpath']?>" style="height:100px; margin-left: 5px; margin-top: 5px; width:100px; border-radius: 50px" alt="">
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">@admin</h4>
+                            <h4 class="card-title">@<?=$user['username']?></h4>
                             <p class="card-text">
-                                Name: El puto admin <br>
+                                Name: <?=$user['displayName']?> <br>
                                 Gender: <?= lang("war_helicopter") ?>
                             </p>
                         </div>

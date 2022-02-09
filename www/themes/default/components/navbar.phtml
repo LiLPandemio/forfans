@@ -2,7 +2,9 @@
 $fullpage = $_REQUEST['page'];
 $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
 ?>
-<nav class="navbar navbar-expand-lg navbar-light <?php if(!$useQuartzTheme){echo "bg-light";}?>" style="position: fixed; top: 0; right: 0; left: 0; z-index: 1030;">
+<nav class="navbar navbar-expand-lg navbar-light <?php if (!$useQuartzTheme) {
+                                                    echo "bg-light";
+                                                  } ?>" style="position: fixed; top: 0; right: 0; left: 0; z-index: 1030;">
   <a class="navbar-brand" href="#"><?php echo $config["sitename"] ?></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -26,9 +28,9 @@ $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <button class="dropdown-item" onclick="toggleThemePicker()" href="#">Cambiar tema</button>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Algo mas</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Algo mas</a>
         </div>
       </li>
       <li class="nav-item">
