@@ -98,7 +98,74 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
             console.log("Expanded")
         }
     }
+    $(".settings-option").hide()
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+    var loginPasswordVisible = false;
+    const ToggleLoginVisiblePassword = () => {
+        if (loginPasswordVisible) {
+            $("#VisiblePasswordIndicator").removeClass("fa-eye-slash")
+            $("#VisiblePasswordIndicator").addClass("fa-eye")
+            $("#login_password").attr("type", "password");
+        } else {
+            $("#VisiblePasswordIndicator").removeClass("fa-eye")
+            $("#VisiblePasswordIndicator").addClass("fa-eye-slash")
+            $("#login_password").attr("type", "text");
+        }
+        loginPasswordVisible = !loginPasswordVisible;
+    }
+
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });
+
+
+    function do_login() {
+        $(document).ready(() => {
+            let email = $("#login_email").val();
+            let password = $("#login_password").val();
+            $.post(siteURL + "api/login", {
+                    "username": email,
+                    "password": password
+                }, )
+                .done(function(data) {
+                    let response = data.response;
+                    if (response !== "WrongCredentials") {
+                        document.cookie = "token=" + response;
+                        window.location.replace(siteURL + "home");
+                    } else {
+                        alert("Tus credenciales son incorrectas :c")
+                    }
+                }).fail(function(xhr, status, error) {
+                    console.log(status);
+                });
+        })
+    }
+
+    $(document).keydown(
+        function(event) {
+            if (event.which == 13) {
+                do_login();
+            }
+        }
+    );
+
+    function getToken() {
+        cookie = document.cookie.split('; ').reduce((prev, current) => {
+            const [name, ...value] = current.split('=');
+            prev[name] = value.join('=');
+            return prev;
+        }, {});
+        return cookie.token;
+    }
 </script>
+<script src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>auth/index.js"></script>
 
 <body style="overflow: hidden ">
     <div class="row">
@@ -162,4 +229,3 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
         </div>
     </div>
 </body>
-<script src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>auth/index.js"></script>

@@ -37,20 +37,20 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                 </div>
                 <div class="col-sm-6" style="padding-top: 10px">
                     <div class="card text-left" style="padding: 10px; margin:10px">
-                        <img class="card-img-top" style="border-radius: 20px" src="<?php echo $config['fullsiteurl'].$user['cover_picture_rpath']?>" alt="">
-                        <div style="margin-top: -50px; height:110px; width:110px; object-fit: cover; margin-left: 50px; border-radius: 100px; background-color:white">
-                            <img src="<?php echo $config['fullsiteurl'].$user['profile_picture_rpath']?>" style="height:100px; margin-left: 5px; margin-top: 5px; width:100px; border-radius: 50px" alt="">
+                        <img class="card-img-top" style="border-radius: 20px" src="<?php echo $config['fullsiteurl'] . $user['cover_picture_rpath'] ?>" alt="">
+                        <div style="margin-top: -50px; height:110px; width:110px; object-fit: cover; margin-left: 50px; border-radius: 100px; background: conic-gradient(pink, yellow, cyan, pink);">
+                            <img src="<?php echo $config['fullsiteurl'] . $user['profile_picture_rpath'] ?>" style="height:100px; margin-left: 5px; margin-top: 5px; width:100px; border-radius: 50px" alt="">
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">@<?=$user['username']?></h4>
+                            <h4 class="card-title">@<?= $user['username'] ?></h4>
                             <p class="card-text">
-                                Name: <?=$user['displayName']?> <br>
+                                Name: <?= $user['displayName'] ?> <br>
                                 Gender: <?= lang("war_helicopter") ?>
                             </p>
                         </div>
                     </div>
 
-                    <?php $posts = getUserPublicPosts(10, $username);?>
+                    <?php $posts = getUserPublicPosts(10, $username); ?>
 
                     <?php
                     if ($posts == "NO_POSTS_FOUND") {

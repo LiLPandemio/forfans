@@ -1,13 +1,13 @@
 <?php
 //Aqui se almacenan las claves con las cadenas de texto para el idioma ESPAÑOL
 
-function lang($phrase)
+function lang($langkey)
 {
-    require(ROOT."/config.php");
-    
+    require(ROOT . "/config.php");
+
     $lang['welcome_to']
         = "Bienvenido a {sitename}!";
-    
+
     $lang['welcome_back']
         = "Bienvenido de nuevo!";
 
@@ -28,7 +28,7 @@ function lang($phrase)
 
     $lang['create_account']
         = "Crear cuenta";
-    
+
     $lang['male']
         = "Hombre";
 
@@ -38,6 +38,51 @@ function lang($phrase)
     $lang['war_helicopter']
         = "Helicoptero de guerra";
 
-    $str = str_replace("{sitename}", $config["sitename"], $lang[$phrase]);
+    $lang['name']
+        = "Nombre";
+
+    $lang['posts']
+        = "Publicaciones";
+
+    $lang['donated']
+        = "Donado";
+
+    $lang['donate']
+        = "Donation";
+
+    $lang['search']
+        = "Buscar";
+
+    $lang['more']
+        = "Mas";
+
+    $lang['others']
+        = "Otros";
+
+    $lang['change_theme']
+        = "Change theme";
+
+    $lang['feed']
+        = "Noticias";
+
+    $lang['heterosexual']
+        = "Heterosexual";
+
+    $lang['homosexual']
+        = "Homosexual";
+
+    $lang['bisexual']
+        = "Bisexual";
+
+    $lang['pansexual']
+        = "Pansexual";
+
+    $lang['demisexual']
+        = "Demisexual";
+
+    $str = str_replace("{sitename}", $config["sitename"], $lang[$langkey]);
+    // Para añadir mas variables copia la linea de abajo y reemplaza $config['sitename'] con lo que quieras y {sitename} por tu placeholder.
+    // $text = str_replace("{sitename}", $config['sitename'], $lang[$langkey]);
+
     return $str;
 }

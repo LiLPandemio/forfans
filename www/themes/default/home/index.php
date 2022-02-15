@@ -36,43 +36,21 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                 </ul>
                             </div>
 
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" style="margin-bottom: 10px;" data-parent="#accordion-newpost">
+                            <div id="collapseThree" class="collapse show" aria-labelledby="headingTwo" style="margin-bottom: 10px;" data-parent="#accordion-newpost">
                                 <div class="card card-body" style="padding:20px;">
                                     <div style="text-align: center;">
                                         <label for="postTextTextarea">Texto de la publicacion</label>
                                         <p id="tooLongTextWarn" style="display:none" class="text-danger">El texto es demasiado largo. Limite de 1200 caracteres.</p>
                                         <textarea onkeydown="controlInput()" onkeyup="controlInput()" onchange="controlInput()" placeholder="Publica lo que quieras! #Anime #Hentai #xXx" class="form-control" id="postTextTextarea" rows="3" style="background-color: var(--bs-body-bg); color: var(--bs-body-color)"></textarea>
                                     </div>
-                                    <script>
-                                        function controlInput() {
-                                            let text = $("#postTextTextarea").val();
-                                            if (text.length > 1200) {
-                                                $("#chars-left-btn").addClass("btn-outline-danger");
-                                                $("#chars-left-btn").removeClass("btn-outline-warning");
-                                                $("#chars-left-btn").removeClass("btn-outline-success");
-                                                $("#tooLongTextWarn").show();
-                                            } else {
-                                                $("#tooLongTextWarn").hide();
-                                                $("#chars-left-btn").removeClass("btn-outline-danger");
-                                                if (text.length > 1000) {
-                                                    // WARN
-                                                    $("#chars-left-btn").addClass("btn-outline-warning");
-                                                    $("#chars-left-btn").removeClass("btn-outline-success");
-                                                } else {
-                                                    // OK
-                                                    $("#chars-left-btn").addClass("btn-outline-success");
-                                                    $("#chars-left-btn").removeClass("btn-outline-warning");
-                                                    console.log("OK");
-                                                }
-                                            }
-                                            $("#chars-left").html(text.length);
-                                        }
-                                    </script>
+                                    <div id="previews">
+                                    </div>
                                     <div style="margin-top: 10px; text-align:center">
-                                        <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-camera" aria-hidden="true"></i> Add Content</button>
+                                        <button onclick="$('#postImagesInput').click()" type="button" class="btn btn-sm btn-primary"><i class="fa fa-camera" aria-hidden="true"></i> Add Content</button>
                                         <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-sticky-note" aria-hidden="true"></i> Add Gif</button>
                                         <button type="button" id="chars-left-btn" disabled class="btn btn-sm btn-outline-success"><i class="fa fa-font" aria-hidden="true"></i> <span id="chars-left">0</span></button>
                                     </div>
+                                    <input style="display: none;" id="postImagesInput" accept=".jpg,.png,.webp,.giff,.tiff" type="file" name="my_file[]" multiple>
                                     <span style="margin-top: 10px; display:flex; flex-direction:row">
                                         <span style="position: relative; top:5px">
                                             <p>NSFW Content&nbsp;&nbsp;&nbsp;</p>
@@ -91,7 +69,16 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                             <span class="slider round"></span>
                                         </label>
                                     </span>
-                                    <button type="button" style="margin-top: 5px; width:60%; margin-left:20%" class="btn btn-primary">Publicar</button>
+                                    <button type="button" onclick="createPost()" style="margin-top: 5px; width:60%; margin-left:20%" id="submitNewPost" class="btn btn-primary">Publicar</button>
+                                    <script>
+                                        const createPost = () => {
+                                            var postdata = {
+                                                postText: $("#postTextTextarea").val(),
+                                                postImages: document.getElementById("postImagesInput").files
+                                            }
+                                            console.log(postdata);
+                                        }
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -182,6 +169,48 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
             </div>
             <!-- Espacio necesario para que en la version movil no se solapen los menus -->
             <div class="separator" style="margin-top: 80px;"></div>
+            <script>
+                $('#postImagesInput').change(function() {
+                    $("#previews").html('');
+                    for (var i = 0; i < $(this)[0].files.length; i++) {
+                        $("#previews").append('<img src="' + window.URL.createObjectURL(this.files[i]) + '" class="preview"/>');
+                    }
+                });
+
+                function controlMaxFiles() {
+                    $("#submitNewPost").click(function() {
+                        var $fileUpload = $("input[type='file']");
+                        if (parseInt($fileUpload.get(0).files.length) > 6) {
+                            alert("You can only upload a maximum of 6 files");
+                            return false;
+                        }
+                        return true;
+                    });
+                }
+
+                function controlInput() {
+                    let text = $("#postTextTextarea").val();
+                    if (text.length > 1200) {
+                        $("#chars-left-btn").addClass("btn-outline-danger");
+                        $("#chars-left-btn").removeClass("btn-outline-warning");
+                        $("#chars-left-btn").removeClass("btn-outline-success");
+                        $("#tooLongTextWarn").show();
+                    } else {
+                        $("#tooLongTextWarn").hide();
+                        $("#chars-left-btn").removeClass("btn-outline-danger");
+                        if (text.length > 1000) {
+                            // WARN
+                            $("#chars-left-btn").addClass("btn-outline-warning");
+                            $("#chars-left-btn").removeClass("btn-outline-success");
+                        } else {
+                            // OK
+                            $("#chars-left-btn").addClass("btn-outline-success");
+                            $("#chars-left-btn").removeClass("btn-outline-warning");
+                        }
+                    }
+                    $("#chars-left").html(text.length);
+                }
+            </script>
         </body>
 <?php
     } else {

@@ -1,13 +1,20 @@
 /* CUSTOM CSS FOR HOME */
 
+.preview {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    margin: 5px;
+}
+
 .dynFLexHH {
     display: flex;
-    flex-direction: column!important;
+    flex-direction: column !important;
 }
 
 .dynFLexVH {
     display: flex;
-    flex-direction: row!important;
+    flex-direction: row !important;
 }
 
 .post-body {
@@ -15,7 +22,7 @@
     margin-left: 10px;
     margin-right: 10px;
     display: flex;
-    flex-direction: column-reverse!important;
+    flex-direction: column-reverse !important;
 }
 
 .Subs {
@@ -27,7 +34,7 @@
     left: 0;
     z-index: 1030;
     background-color: #0000;
-    flex-direction: row!important;
+    flex-direction: row !important;
 }
 
 .sub-item {
@@ -38,13 +45,13 @@
     width: 50px;
 }
 
-@media(min-width: 1000px) {
+@media (min-width: 1000px) {
     .post-body {
-        flex-direction: row!important;
+        flex-direction: row !important;
     }
     .dynFLexHH {
         display: flex;
-        flex-direction: column!important;
+        flex-direction: column !important;
     }
     .Subs {
         /* S */

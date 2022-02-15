@@ -52,6 +52,14 @@ if (isset($param['1'])) {                                                       
                 # 
             }
             break;
+        case "post":
+            //Create a post;
+            if (isset($_REQUEST[''])) {
+                # code...
+            } else {
+                # code...
+            }
+
         case "update":
             //REQUIRE LOGIN
             require_once(ROOT . "/functions/userEngine.php");
