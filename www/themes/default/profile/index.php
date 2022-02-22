@@ -22,6 +22,41 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
 ?>
         <!-- Aqui puedes añadir contenido exta a head -->
         <link rel="stylesheet" href="<?= $config["fullsiteurl"] . "themes/" . $config["theme"] . "/home/" . "index" ?>.css">
+        <style>
+            .cust_spinner {
+                animation-name: spin;
+                animation-duration: 2500ms;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+            }
+
+            .cust_rspinner {
+                animation-name: rspin;
+                animation-duration: 2500ms;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+            }
+
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes rspin {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(-360deg);
+                }
+            }
+        </style>
         <!-- Hasta aqui el contenido head -->
         </head>
 
@@ -38,14 +73,26 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                 <div class="col-sm-6" style="padding-top: 10px">
                     <div class="card text-left" style="padding: 10px; margin:10px">
                         <img class="card-img-top" style="border-radius: 20px" src="<?php echo $config['fullsiteurl'] . $user['cover_picture_rpath'] ?>" alt="">
-                        <div style="margin-top: -50px; height:110px; width:110px; object-fit: cover; margin-left: 50px; border-radius: 100px; background: conic-gradient(pink, yellow, cyan, pink);">
-                            <img src="<?php echo $config['fullsiteurl'] . $user['profile_picture_rpath'] ?>" style="height:100px; margin-left: 5px; margin-top: 5px; width:100px; border-radius: 50px" alt="">
+                        <div class="cust_spinner" style="margin-top: -50px; height:110px; width:110px; object-fit: cover; margin-left: 50px; border-radius: 100px; background: <?= $user['css-cone-flag'] ?>">
+                            <img class="cust_rspinner" src="<?php echo $config['fullsiteurl'] . $user['profile_picture_rpath'] ?>" style="height:100px; margin-left: 5px; margin-top: 5px; width:100px; border-radius: 50px" alt="">
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">@<?= $user['username'] ?></h4>
+                            <div style="display:flex; flex:1; flex-direction:row">
+
+                                <?php if ($isMyProfile) {
+                                ?>
+                                    <span style="margin-bottom: 10px;">
+                                        <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl']."editprofile"?>" role="button">Editar perfil</a>
+                                        <!-- <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl']."editprofile"?>" role="button">Earnings</a> -->
+                                        <!-- <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl']."editprofile"?>" role="button">Stats</a> -->
+                                    </span>
+                                <?php
+                                } ?>
+                            </div>
                             <p class="card-text">
                                 Name: <?= $user['displayName'] ?> <br>
-                                Gender: <?= lang("war_helicopter") ?>
+                                Identified as: <?= lang("war_helicopter") ?>
                             </p>
                         </div>
                     </div>
@@ -62,16 +109,34 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                             $img_array = json_decode($post["post_img_array"]);
                     ?>
 
-                            <div style="padding: 0; min-height: 160px; margin: 10px;" class="card text-left post-body">
+                            <div style="padding: 0; min-height: 160px" class="card text-left post-body">
                                 <?php
                                 if ($img_array != "") {
                                 ?>
+                                    <script>
+                                        function next_picture(elem) {
+                                            var ids = $(elem).attr("id");
+                                            var ids_array = ids.split("_");
+                                            next = parseInt(ids_array[1]) + 1;
+                                            if ($("#" + ids_array[0] + "_" + next).length) {
+                                                $("#" + ids_array[0] + "_" + next).show();
+                                                //Exists
+                                            } else {
+                                                //Not exists
+                                                $("#" + ids_array[0] + "_" + 0).show();
+                                            }
+                                            $("#" + ids).hide();
+                                        }
+                                    </script>
                                     <div style="flex:5" class="card-body">
+                                        <p class="text-muted text-center" style="font-size: 70%;">Haz click en la imagen para ver mas</p>
                                         <?php
 
                                         for ($j = 0; $j < count($img_array); $j++) {
                                         ?>
-                                            <img style="object-fit:cover; margin: 10px; margin-top:10px; border-radius: 5px; width:95%" src="<?php echo $img_array[$j] ?>" alt="POST">
+                                            <img onclick="next_picture(this)" id="<?php echo $post["post_id"] . "_" . $j  ?>" style="object-fit:cover; margin: 10px; margin-top:10px; border-radius: 5px; width:95%;<?php if ($j > 0) {
+                                                                                                                                                                                                                        echo " display:none";
+                                                                                                                                                                                                                    } ?>" src="<?php echo $img_array[$j] ?>" alt="POST">
                                         <?php
                                         }
                                         ?>

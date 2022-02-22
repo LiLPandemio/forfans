@@ -8,13 +8,13 @@ function getSuggestedUsers($amount = 5)
 {
     //TODO: SANITIZE AMOUNT VALUE
     require(ROOT . "/functions/db.php");        //Comprueba que exista el archivo
-                                                //Prepara la consulta SQL
-    $stmt = $conn->prepare("SELECT `username`,`gender_langkey`,`nombre`,`apellidos`,`profile_picture_rpath` FROM `usuarios` ORDER BY RAND () LIMIT $amount;");
+    //Prepara la consulta SQL
+    $stmt = $conn->prepare("SELECT * FROM `usuarios` ORDER BY RAND () LIMIT $amount;");
     $stmt->execute();                           //Se ejecuta la consulta SQL
     $result = $stmt->fetchAll();                //Se sacan todas las filas a $result
     $drows = $stmt->rowCount();                 //Se cuenta cuantas filas hay
     if ($drows > 0) {                           //Si hay mas de 1 fila
-        return $result;                         //Se devuelve el arreglo bidimensional con las publicaciones
+        return $result;                         //Se devuelve el arreglo bidimensional con los perfiles
     } else {                                    //Si no hay filas (menos de 1; o 0)
         return "NO_USERS_FOUND";                //Se devuelve que no hay
     }
@@ -26,7 +26,7 @@ function getSuggestedUsers($amount = 5)
 function getUserData($username)
 {
     require(ROOT . "/functions/db.php");                                        //Comprueba que exista el archivo
-    $stmt = $conn->prepare("SELECT * FROM `usuarios` WHERE `username` = ?;");   //Se prepara una consulta con nombre de usuario
+    $stmt = $conn->prepare("SELECT `usuarios`.*, `sexual_orientations`.* FROM `usuarios` LEFT JOIN `sexual_orientations` ON `usuarios`.`sexual_orientations_id` = `sexual_orientations`.`id` WHERE `username` = ?;");   //Se prepara una consulta con nombre de usuario
     $stmt->execute(array($username));                                           //Se ejecuta la consulta con el nombre de usuario
     $result = $stmt->fetchAll();                                                //Se extraen los datos de la consulta
     $drows = $stmt->rowCount();                                                 //Se comprueba que haya algun resultado
@@ -55,6 +55,29 @@ function whoami($tkp = "")
     $drows = $stmt->rowCount();             //Contamos las filas que tenemos por si no ha llegado ninguna (El token no existe)
     if ($drows > 0) {                       //Si hay una fila o mas
         return $result[0]["username"];      //Devolvemos de la primera fila el token pertinente
+    } else {                                //Si no hay filas
+        return "TOKEN_NOT_FOUND";           //Devolvemos que no se encuentra nada con el token especificado
+    }
+}
+
+/**
+ * Toma el token opcionalmente que le des y te devuelve el id de usuario, por defecto el token es el del usuario que hace la peticion.
+ */
+function myid($tkp = "")
+{
+    require(ROOT . "/functions/db.php");    //Importo la base de datos
+    if ($tkp == "") {                       //Si no se me da un token
+        $token = $_COOKIE['token'];         //Uso el token de la cookie
+    } else {                                //Si me dan un token
+        $token = $tkp;                      //Uso ese token
+    }
+    //Preparado de la consulta SQL con placeholder para token
+    $stmt = $conn->prepare("SELECT `tokens`.*, `usuarios`.* FROM `tokens` LEFT JOIN `usuarios` ON `tokens`.`user_id` = `usuarios`.`id_usuarios` WHERE `tokens`.`token` = ?;");
+    $stmt->execute(array($token));          //Ejecucion de la consulta SQL con el $token
+    $result = $stmt->fetchAll();            //Extraemos la informacion del usuario de la consulta ejecutada
+    $drows = $stmt->rowCount();             //Contamos las filas que tenemos por si no ha llegado ninguna (El token no existe)
+    if ($drows > 0) {                       //Si hay una fila o mas
+        return $result[0]["id_usuarios"];      //Devolvemos de la primera fila el token pertinente
     } else {                                //Si no hay filas
         return "TOKEN_NOT_FOUND";           //Devolvemos que no se encuentra nada con el token especificado
     }

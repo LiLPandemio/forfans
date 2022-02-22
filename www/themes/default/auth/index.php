@@ -148,14 +148,6 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
         })
     }
 
-    $(document).keydown(
-        function(event) {
-            if (event.which == 13) {
-                do_login();
-            }
-        }
-    );
-
     function getToken() {
         cookie = document.cookie.split('; ').reduce((prev, current) => {
             const [name, ...value] = current.split('=');
@@ -228,4 +220,13 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
         <div class="col-sm-3">
         </div>
     </div>
+    <script>
+        $(document).keydown(
+            function(event) {
+                if (event.which == 13) {
+                    do_login();
+                }
+            }
+        );
+    </script>
 </body>

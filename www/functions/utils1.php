@@ -9,4 +9,14 @@ function redirect($page = "auth"){
     $nexturl = $config['fullsiteurl'].$page;
     header("location:$nexturl");
 }
-?>
+
+function is_image($path)
+{
+	$type = mime_content_type($path);
+	if ($type == "image/gif" or $type == "image/png" or $type == "image/jpg" or $type == "image/jpeg" or $type == "image/webp") {
+		return true;
+	} else {
+		return false;
+	}
+	
+}
