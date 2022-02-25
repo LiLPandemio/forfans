@@ -182,7 +182,7 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-at"></i></span>
                                             </div>
-                                            <input id="login_email" placeholder="e-Mail" type="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                            <input id="login_email" value="admin@societyplus.net" placeholder="e-Mail" type="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                                         </div>
                                         <!-- /Username -->
                                         <!-- Password -->
@@ -191,7 +191,7 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-lock"></i></span>
                                             </div>
-                                            <input id="login_password" type="password" class="form-control" placeholder="Password" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                            <input id="login_password" value="admin1234" type="password" class="form-control" placeholder="Password" aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             <div class="input-group-append">
                                                 <button onclick="ToggleLoginVisiblePassword()" class="btn btn-outline-secondary" type="button"><i id="VisiblePasswordIndicator" class="fa-solid fa-eye"></i></button>
                                             </div>

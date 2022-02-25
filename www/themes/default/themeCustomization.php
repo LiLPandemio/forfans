@@ -7,7 +7,8 @@ $useDarklyTheme = false;     //WARNING: MUST BE true OR false
 $useLiteraTheme = false;    //WARNING: MUST BE true OR false
 $useMintyXTheme = false;    //WARNING: MUST BE true OR false
 $useQuartzTheme = false;    //WARNING: MUST BE true OR false
-
+$useMorphTheme = false;
+$useVaporTheme = false;
 //Allow users to override the variable b4 version?
 $user_override_killswitch = true;
 
@@ -37,6 +38,12 @@ if ($user_override_killswitch) {
                     break;
                 case 'quartz':
                     $useQuartzTheme = true;    //WARNING: MUST BE true OR false
+                    break;
+                case 'morph':
+                    $useMorphTheme = true;    //WARNING: MUST BE true OR false
+                    break;
+                case 'vapor':
+                    $useVaporTheme = true;    //WARNING: MUST BE true OR false
                     break;
                 default:
                     // Don't override nothing

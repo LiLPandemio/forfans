@@ -80,6 +80,51 @@ function lang($langkey)
     $lang['demisexual']
         = "Demisexual";
 
+    $lang['lithsexual']
+        = "Lithsexual";
+
+    $lang['autosexual']
+        = "Autosexual";
+
+    $lang['antrosexual']
+        = "Antrosexual";
+
+    $lang['na']
+        = "na";
+
+    $lang['male']
+        = "male";
+
+    $lang['female']
+        = "female";
+
+    $lang['transgender']
+        = "transgender";
+
+    $lang['transexual']
+        = "transexual";
+
+    $lang['transgender_mtf']
+        = "Transgenero hombre a mujer";
+
+    $lang['transsexual_mtf']
+        = "Transexual hombre a mujer";
+
+    $lang['transgender_ftm']
+        = "Transgenero mujer a hombre";
+
+    $lang['transsexual_ftm']
+        = "Transexual mujer a hombre";
+
+    $lang['fluid']
+        = "Fluido";
+
+    $lang['fluid_cis_f']
+        = "Fluido (CIS Mujer)";
+
+    $lang['fluid_cis_m']
+        = "Fluido (CIS Hombre)";
+
     $str = str_replace("{sitename}", $config["sitename"], $lang[$langkey]);
     // Para añadir mas variables copia la linea de abajo y reemplaza $config['sitename'] con lo que quieras y {sitename} por tu placeholder.
     // $text = str_replace("{sitename}", $config['sitename'], $lang[$langkey]);

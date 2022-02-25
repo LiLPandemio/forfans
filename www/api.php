@@ -137,13 +137,69 @@ if (isset($param['1'])) {                                                       
             file_put_contents("dump.txt", ob_get_flush());  //El otput se guarda en dump.txt
             echo json_encode($response);                    //Se saca la respuesta en JSON
             break;
+        case "editUser":
+            require_once(ROOT . "/functions/db.php");                               //INCLUYENDO FUNCIONES NECESARIAS
+            require_once(ROOT . "/functions/userEngine.php");                       //INCLUYENDO FUNCIONES NECESARIAS
+            require_once(ROOT . "/functions/utils1.php");                           //INCLUYENDO FUNCIONES NECESARIAS
+            $response = array();                                                    //Prepara un arreglo para el JSON Que se le enviara al cliente
+            ob_flush();                                                             //Limpia todo el output
+            ob_start();                                                             //Graba el output
+            if (isset($_REQUEST['token'])) {
+                if (isset($_REQUEST['token']) !== "") {
+                    $ts = checkTokenStatus($_REQUEST['token']);
+                    if ($ts !== "INVALID_TOKEN" or $ts !== "TOKEN_EXPIRED") {
+                        if (isset($_REQUEST['param']) and isset($_REQUEST['newValue'])) {
+                            $uname = whoami($_REQUEST['token']);
+                            $param_clean = strip_tags($_REQUEST['param']);
+                            $newValue = $_REQUEST['newValue'];
+                            switch ($param_clean) {
+                                case 'username':
+                                    $outp = setUser__username($uname, $newValue);
+                                    break;
+                                
+                                case 'nombre':
+                                    $outp = setUser__name($uname, $newValue);
+                                    break;
+                                
+                                case 'apellidos':
+                                    $outp = setUser__surname($uname, $newValue);
+                                    break;
+                                
+                                case 'gender_id':
+                                    $outp = setUser__genderID($uname, $newValue);
+                                    break;
+                                
+                                case 'sexual_orientations_id':
+                                    $outp = setUser__sexOrientID($uname, $newValue);
+                                    break;
+                                
+                                default:
+                                    # code...
+                                    break;
+                            }
+                            array_push($response, array('STATUS' => $outp));               //Se envia el SQLSTATE al usuario (DEBUG)
+                        } else {
+                            array_push($response, array('ERROR' => "INVALID PARAMS, param and newValue EXPECTED"));
+                        }
+                    } else {
+                        array_push($response, array('ERROR' => "INVALID TOKEN"));
+                    }
+                } else {
+                    array_push($response, array('ERROR' => "INVALID TOKEN"));
+                }
+            } else {
+                array_push($response, array('ERROR' => "INVALID TOKEN"));
+            }
+            echo json_encode($response);                    //Se saca la respuesta en JSON
+            file_put_contents("dump.txt", ob_get_flush());  //El otput se guarda en dump.txt
+            break;
         case "update":
             //REQUIRE LOGIN
             require_once(ROOT . "/functions/userEngine.php");
             switch ($param[2]) {
                 case 'theme_variable':
                     if (isset($_REQUEST['newTheme']) and isset($_REQUEST['token'])) {
-                        if ($_REQUEST['newTheme'] == "cyborg" || $_REQUEST['newTheme'] == "darkly" || $_REQUEST['newTheme'] == "minty" || $_REQUEST['newTheme'] == "litera" || $_REQUEST['newTheme'] == "quartz") {
+                        if ($_REQUEST['newTheme'] == "cyborg" || $_REQUEST['newTheme'] == "darkly" || $_REQUEST['newTheme'] == "morph" || $_REQUEST['newTheme'] == "vapor" || $_REQUEST['newTheme'] == "minty" || $_REQUEST['newTheme'] == "litera" || $_REQUEST['newTheme'] == "quartz") {
                             if (checkTokenStatus($_REQUEST['token'] != "INVALID_TOKEN" and $_REQUEST['token'] !=  "TOKEN_EXPIRED")) {
                                 setUser__default_theme_variable(whoami($_REQUEST['token']), $_REQUEST['newTheme']);
                                 $response = array('OK' => "Theme updated successfully");

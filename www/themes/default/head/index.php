@@ -51,6 +51,16 @@ require(ROOT . "/config.php");
 		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/quartz/quartz.min.css">
 	<?php
 	}
+	if ($useMorphTheme) {
+	?>
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/morph/morph.min.css">
+	<?php
+	}
+	if ($useVaporTheme) {
+	?>
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/vapor/vapor.min.css">
+	<?php
+	}
 
 	?>
 

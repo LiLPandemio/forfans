@@ -42,7 +42,8 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                         <div style="text-align: center;">
                                             <label for="postTextTextarea">Texto de la publicacion</label>
                                             <p id="tooLongTextWarn" style="display:none" class="text-danger">El texto es demasiado largo. Limite de 1200 caracteres.</p>
-                                            <textarea onkeydown="controlInput()" onkeyup="controlInput()" onchange="controlInput()" placeholder="Publica lo que quieras! #Anime #Hentai #xXx" class="form-control" id="postTextTextarea" rows="3" style="background-color: var(--bs-body-bg); color: var(--bs-body-color)"></textarea>
+                                            <textarea onkeydown="controlInput()" onkeyup="controlInput()" onchange="controlInput()" placeholder="Publica lo que quieras! #Anime #Hentai #xXx" class="form-control" id="postTextTextarea" rows="3"></textarea>
+                                            <!-- style="background-color: var(--bs-body-bg); color: var(--bs-body-color)" -->
                                         </div>
                                         <div id="previews">
                                         </div>

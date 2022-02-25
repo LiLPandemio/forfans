@@ -83,6 +83,9 @@ function myid($tkp = "")
     }
 }
 
+/**
+ * Esta funcion pertenece al grupo de funciones setUser__ que se encargan de establecer distintos parametros.
+ */
 function setUser__default_theme_variable($username, $newValue)
 {
     require(ROOT . "/functions/db.php");
@@ -94,4 +97,106 @@ function setUser__default_theme_variable($username, $newValue)
     } else {
         return $stmt->fetchAll();
     }
+}
+
+/**
+ * Esta funcion pertenece al grupo de funciones setUser__ que se encargan de establecer distintos parametros.
+ */
+function setUser__username($username, $newValue)
+{
+    require(ROOT . "/functions/db.php");
+    $stmt = $conn->prepare("UPDATE `usuarios` SET `username` = ? WHERE `usuarios`.`username` = ?; ");
+    $stmt->execute(array($newValue, $username));
+    $drows = $stmt->rowCount();
+    if ($drows > 0) {
+        return "OK";
+    } else {
+        return $stmt->fetchAll();
+    }
+}
+
+/**
+ * Esta funcion pertenece al grupo de funciones setUser__ que se encargan de establecer distintos parametros.
+ */
+function setUser__name($username, $newValue)
+{
+    require(ROOT . "/functions/db.php");
+    $stmt = $conn->prepare("UPDATE `usuarios` SET `nombre` = ? WHERE `usuarios`.`username` = ?; ");
+    $stmt->execute(array($newValue, $username));
+    $drows = $stmt->rowCount();
+    if ($drows > 0) {
+        return "OK";
+    } else {
+        return $stmt->fetchAll();
+    }
+}
+
+/**
+ * Esta funcion pertenece al grupo de funciones setUser__ que se encargan de establecer distintos parametros.
+ */
+function setUser__surname($username, $newValue)
+{
+    require(ROOT . "/functions/db.php");
+    $stmt = $conn->prepare("UPDATE `usuarios` SET `apellidos` = ? WHERE `usuarios`.`username` = ?; ");
+    $stmt->execute(array($newValue, $username));
+    $drows = $stmt->rowCount();
+    if ($drows > 0) {
+        return "OK";
+    } else {
+        return $stmt->fetchAll();
+    }
+}
+
+/**
+ * Esta funcion pertenece al grupo de funciones setUser__ que se encargan de establecer distintos parametros.
+ */
+function setUser__genderID($username, $newValue)
+{
+    require(ROOT . "/functions/db.php");
+    $stmt = $conn->prepare("UPDATE `usuarios` SET `gender_id` = ? WHERE `usuarios`.`username` = ?; ");
+    $stmt->execute(array($newValue, $username));
+    $drows = $stmt->rowCount();
+    if ($drows > 0) {
+        return "OK";
+    } else {
+        return $stmt->fetchAll();
+    }
+}
+
+/**
+ * Esta funcion pertenece al grupo de funciones setUser__ que se encargan de establecer distintos parametros.
+ */
+function setUser__sexOrientID($username, $newValue)
+{
+    require(ROOT . "/functions/db.php");
+    $stmt = $conn->prepare("UPDATE `usuarios` SET `sexual_orientations_id` = ? WHERE `usuarios`.`username` = ?; ");
+    $stmt->execute(array($newValue, $username));
+    $drows = $stmt->rowCount();
+    if ($drows > 0) {
+        return "OK";
+    } else {
+        return $stmt->fetchAll();
+    }
+}
+
+/**
+ * Devuelve un array de todos los generos y sus ids
+ */
+function getGendersList() {
+    require(ROOT . "/functions/db.php");
+    $stmt = $conn->prepare("SELECT * FROM `genders` ORDER BY `gender_id` ASC");
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
+}
+
+/**
+ * Devuelve un array de todos los generos y sus ids
+ */
+function getSexualOrientationsList() {
+    require(ROOT . "/functions/db.php");
+    $stmt = $conn->prepare("SELECT * FROM `sexual_orientations` ORDER BY `sexual_orientations`.`id` ASC");
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
 }

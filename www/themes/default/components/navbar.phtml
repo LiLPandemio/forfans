@@ -124,6 +124,9 @@ $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
       max-height: 70%
     }
   }
+  html{
+    height: 100%;
+  }
 </style>
 <script>
   function myToken() {
@@ -180,6 +183,8 @@ $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
       <img class="pick_theme_preview" onclick="setTheme('litera');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/litera.png" alt="litera">
       <img class="pick_theme_preview" onclick="setTheme('minty');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/minty.png" alt="minty">
       <img class="pick_theme_preview" onclick="setTheme('quartz');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/quartz.png" alt="quartz">
+      <img class="pick_theme_preview" onclick="setTheme('morph');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/morph.png" alt="morph">
+      <img class="pick_theme_preview" onclick="setTheme('vapor');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/vapor.png" alt="vapor">
     </div>
     <button type="button" onclick="toggleThemePicker()" class="btn btn-success">Cerrar</button>
   </div>
