@@ -124,6 +124,9 @@ function lang($langkey)
 
     $lang['fluid_cis_m']
         = "Fluido (CIS Hombre)";
+        
+    $lang['suggested_profiles']
+    = "Perfiles sugeridos";
 
     $str = str_replace("{sitename}", $config["sitename"], $lang[$langkey]);
     // Para añadir mas variables copia la linea de abajo y reemplaza $config['sitename'] con lo que quieras y {sitename} por tu placeholder.

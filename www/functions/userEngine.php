@@ -200,3 +200,23 @@ function getSexualOrientationsList() {
     $result = $stmt->fetchAll();
     return $result;
 }
+
+function getMyInvites() {
+    require(ROOT . "/functions/db.php");
+    $sql = "SELECT * FROM `invitation_codes` WHERE `invitation_creator` = ?";
+    $id = myid();
+    $stmt = $conn -> prepare($sql);
+    $stmt -> execute(array(intval($id)));
+    $result = $stmt -> fetchAll();
+    return $result;
+}
+
+function getMyUsedInvites() {
+    require(ROOT . "/functions/db.php");
+    $sql = "SELECT `invitation_codes`.*, `usuarios`.* FROM `invitation_codes` LEFT JOIN `usuarios` ON `invitation_codes`.`invitation_creator` = `usuarios`.`invite_used` WHERE `invitation_codes`.`invitation_creator` = ?;";
+    $id = myid();
+    $stmt = $conn -> prepare($sql);
+    $stmt -> execute(array(intval($id)));
+    $result = $stmt -> fetchAll();
+    return $result;
+}

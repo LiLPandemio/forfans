@@ -203,17 +203,44 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header" style="cursor: pointer" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <h4 style="margin-bottom: 0;" class="card-title">New over here? Register</h4>
-                        </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                            <div class="card-body">
-                                Register form here
-                                <button type="button" id="signUp" class="btn btn-primary">SignUp</button>
+                    <?php
+                    if ($config["register_mode"] == "open") {
+                    ?>
+                        <div class="card">
+                            <div class="card-header" style="cursor: pointer" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <h4 style="margin-bottom: 0;" class="card-title">New over here? Register</h4>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body">
+                                    Register form here
+                                    <button type="button" id="signUp" class="btn btn-primary">SignUp</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    if ($config["register_mode"] == "invite") {
+                    ?>
+                        <div class="card">
+                            <div class="card-header" style="cursor: pointer" id="headingTwo" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <h4 style="margin-bottom: 0;" class="card-title">Having an invite code? Over here sir/miss</h4>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Your invitation here :)">
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-primary">Go!</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
