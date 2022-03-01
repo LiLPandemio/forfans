@@ -178,6 +178,7 @@ $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
   <div class="themePickerWrapper">
 
     <div class="menu_selection">
+      <img class="pick_theme_preview" onclick="setTheme('default');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/default_theme.png" alt="default">
       <img class="pick_theme_preview" onclick="setTheme('cyborg');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/cyborg.png" alt="cyborg">
       <img class="pick_theme_preview" onclick="setTheme('darkly');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/darkly.png" alt="darkly">
       <img class="pick_theme_preview" onclick="setTheme('litera');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/litera.png" alt="litera">
@@ -185,6 +186,8 @@ $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
       <img class="pick_theme_preview" onclick="setTheme('quartz');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/quartz.png" alt="quartz">
       <img class="pick_theme_preview" onclick="setTheme('morph');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/morph.png" alt="morph">
       <img class="pick_theme_preview" onclick="setTheme('vapor');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/vapor.png" alt="vapor">
+      <img class="pick_theme_preview" onclick="setTheme('lux');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/lux.png" alt="lux">
+      <img class="pick_theme_preview" onclick="setTheme('journal');" src="<?php echo $config["fullsiteurl"] . "themes/" . $config['theme'] . "/" ?>assets/img/journal.png" alt="journal">
     </div>
     <button type="button" onclick="toggleThemePicker()" class="btn btn-success">Cerrar</button>
   </div>

@@ -42,7 +42,7 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                     <?php include(ROOT . "/themes/" . $config["theme"] . "/components/left-profile-suggestions.phtml") ?>
 
                 </div>
-                <div class="col-sm-8" style="overflow:scroll ">
+                <div class="col-sm-8" style="overflow:hidden ">
                     <div class="title-wrapper" style="padding:10px">
                         <div id="accordion-newpost">
 

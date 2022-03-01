@@ -215,7 +215,7 @@ if (isset($param['1'])) {                                                       
             switch ($param[2]) {
                 case 'theme_variable':
                     if (isset($_REQUEST['newTheme']) and isset($_REQUEST['token'])) {
-                        if ($_REQUEST['newTheme'] == "cyborg" || $_REQUEST['newTheme'] == "darkly" || $_REQUEST['newTheme'] == "morph" || $_REQUEST['newTheme'] == "vapor" || $_REQUEST['newTheme'] == "minty" || $_REQUEST['newTheme'] == "litera" || $_REQUEST['newTheme'] == "quartz") {
+                        if ($_REQUEST['newTheme'] == "cyborg" || $_REQUEST['newTheme'] == "darkly" || $_REQUEST['newTheme'] == "default" || $_REQUEST['newTheme'] == "morph" || $_REQUEST['newTheme'] == "vapor" || $_REQUEST['newTheme'] == "minty" || $_REQUEST['newTheme'] == "litera" || $_REQUEST['newTheme'] == "quartz" || $_REQUEST['newTheme'] == "lux" || $_REQUEST['newTheme'] == "journal") {
                             if (checkTokenStatus($_REQUEST['token'] != "INVALID_TOKEN" and $_REQUEST['token'] !=  "TOKEN_EXPIRED")) {
                                 setUser__default_theme_variable(whoami($_REQUEST['token']), $_REQUEST['newTheme']);
                                 $response = array('OK' => "Theme updated successfully");

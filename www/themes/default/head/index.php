@@ -61,6 +61,16 @@ require(ROOT . "/config.php");
 		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/vapor/vapor.min.css">
 	<?php
 	}
+	if ($useLuxTheme) {
+	?>
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/lux/lux.min.css">
+	<?php
+	}
+	if ($useJournalTheme) {
+	?>
+		<link rel="stylesheet" href="<?php echo $config['fullsiteurl'] . "themes/" . $config['theme'] . "/" ?>assets/journal/journal.min.css">
+	<?php
+	}
 
 	?>
 

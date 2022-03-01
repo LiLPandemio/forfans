@@ -7,8 +7,10 @@ $useDarklyTheme = false;     //WARNING: MUST BE true OR false
 $useLiteraTheme = false;    //WARNING: MUST BE true OR false
 $useMintyXTheme = false;    //WARNING: MUST BE true OR false
 $useQuartzTheme = false;    //WARNING: MUST BE true OR false
-$useMorphTheme = false;
-$useVaporTheme = false;
+$useMorphTheme =  false;
+$useVaporTheme =  false;
+$useLuxTheme   =  false;
+$useJournalTheme =  false;
 //Allow users to override the variable b4 version?
 $user_override_killswitch = true;
 
@@ -44,6 +46,12 @@ if ($user_override_killswitch) {
                     break;
                 case 'vapor':
                     $useVaporTheme = true;    //WARNING: MUST BE true OR false
+                    break;
+                case 'lux':
+                    $useLuxTheme = true;    //WARNING: MUST BE true OR false
+                    break;
+                case 'journal':
+                    $useJournalTheme = true;    //WARNING: MUST BE true OR false
                     break;
                 default:
                     // Don't override nothing

@@ -28,6 +28,8 @@
     --danger: #dc3545;
     --light: #f8f9fa;
     --dark: #343a40;
+    --bs-primary: var(--primary);
+    --bs-dark: var(--dark);
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
@@ -9207,8 +9209,8 @@ a.text-dark:hover {
 
 @media print {
     *,
-    ::after,
-    ::before {
+     ::after,
+     ::before {
         text-shadow: none!important;
         box-shadow: none!important
     }

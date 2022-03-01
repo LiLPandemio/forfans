@@ -89,6 +89,10 @@ function myid($tkp = "")
 function setUser__default_theme_variable($username, $newValue)
 {
     require(ROOT . "/functions/db.php");
+    if ($newValue == "default") {
+        $newValue = NULL;
+    }
+    
     $stmt = $conn->prepare("UPDATE `usuarios` SET `default_theme_variable` = ? WHERE `usuarios`.`username` = ?; ");
     $stmt->execute(array($newValue, $username));
     $drows = $stmt->rowCount();
