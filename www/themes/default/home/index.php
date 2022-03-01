@@ -52,7 +52,7 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                 </ul>
                             </div>
 
-                            <div id="collapseThree" class="collapse show" aria-labelledby="headingTwo" style="margin-bottom: 10px;" data-parent="#accordion-newpost">
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" style="margin-bottom: 10px;" data-parent="#accordion-newpost">
                                 <form id="newPostForm">
                                     <div class="card card-body" style="padding:20px;">
                                         <div style="text-align: center;">
