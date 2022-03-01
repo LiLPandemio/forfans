@@ -1,5 +1,12 @@
 <?php
 require(ROOT . "/config.php");
+if (isset($_COOKIE["token"])) {
+    $tokenStatus = checkTokenStatus($_COOKIE["token"]);
+    if ($tokenStatus !== "INVALID_TOKEN" and $tokenStatus !== "TOKEN_EXPIRED") {
+        $udata = getUserData(whoami($_COOKIE["token"]));
+        $config["default_lang"] = $udata["lang"];
+    }
+}
 require(ROOT . "/locale/" . $config["default_lang"] . ".php");
 
 if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CON TOKEN
@@ -83,9 +90,9 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                                 <?php if ($isMyProfile) {
                                 ?>
                                     <span style="margin-bottom: 10px;">
-                                        <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl']."editprofile"?>" role="button">Editar perfil</a>
-                                        <!-- <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl']."editprofile"?>" role="button">Earnings</a> -->
-                                        <!-- <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl']."editprofile"?>" role="button">Stats</a> -->
+                                        <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl'] . "editprofile" ?>" role="button">Editar perfil</a>
+                                        <!-- <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl'] . "editprofile" ?>" role="button">Earnings</a> -->
+                                        <!-- <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl'] . "editprofile" ?>" role="button">Stats</a> -->
                                     </span>
                                 <?php
                                 } ?>
@@ -119,27 +126,37 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                                             var ids_array = ids.split("_");
                                             next = parseInt(ids_array[1]) + 1;
                                             if ($("#" + ids_array[0] + "_" + next).length) {
-                                                $("#" + ids_array[0] + "_" + next).show();
                                                 //Exists
+                                                $("#" + ids).hide();
+                                                $("#" + ids_array[0] + "_" + next).show();
+                                                $("#currentImages_" + ids_array[0]).html(next + 1)
                                             } else {
                                                 //Not exists
+                                                $("#" + ids).hide();
                                                 $("#" + ids_array[0] + "_" + 0).show();
+                                                $("#currentImages_" + ids_array[0]).html(1)
                                             }
-                                            $("#" + ids).hide();
                                         }
                                     </script>
                                     <div style="flex:5" class="card-body">
-                                        <p class="text-muted text-center" style="font-size: 70%;">Haz click en la imagen para ver mas</p>
                                         <?php
-
-                                        for ($j = 0; $j < count($img_array); $j++) {
+                                        if (count($img_array) > 1) {
                                         ?>
-                                            <img onclick="next_picture(this)" id="<?php echo $post["post_id"] . "_" . $j  ?>" style="object-fit:cover; margin: 10px; margin-top:10px; border-radius: 5px; width:95%;<?php if ($j > 0) {
-                                                                                                                                                                                                                        echo " display:none";
-                                                                                                                                                                                                                    } ?>" src="<?php echo $img_array[$j] ?>" alt="POST">
-                                        <?php
-                                        }
+                                            <p class="text-muted text-center" style="font-size: 70%;">Haz click en la imagen para ver mas<br><span id="currentImages_<?= $post["post_id"] ?>">1</span>/<?= count($img_array) ?></p>
+                                        <?php }
                                         ?>
+                                        <div id="images_<?= $post["post_id"] ?>">
+                                            <?php
+                                            for ($j = 0; $j < count($img_array); $j++) {
+                                                $img_array = str_replace("{fullsiteurl}", $config["fullsiteurl"], $img_array) //remplaza {fullsiteurl} por cfg fullsiteurl
+                                            ?>
+                                                <img onclick="next_picture(this)" id="<?php echo $post["post_id"] . "_" . $j  ?>" style="object-fit:cover; margin: 10px; margin-top:10px; border-radius: 5px; width:95%;<?php if ($j > 0) {
+                                                                                                                                                                                                                            echo " display:none";
+                                                                                                                                                                                                                        } ?>" src="<?php echo $img_array[$j] ?>" alt="POST">
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
                                     </div>
 
                                 <?php
@@ -157,8 +174,17 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                                     <img class="avatar" style="border-radius: 50px; height: 50px; width: 50px; margin-right:10px;" src="<?= $config["fullsiteurl"] . $post["profile_picture_rpath"] ?>" alt="">
                                     <div style="flex-wrap: wrap;">
                                         <div class="post-info-about" style="max-height: 40px">
-                                            <div style="height: 50%;">
-                                                <p class="card-text">@<?= $post["username"] ?></p>
+                                            <div class="row" style="height: 50%;">
+                                                <div class="col-sm-6">
+                                                    <p class="card-text">@<?= $post["username"] ?></p>
+                                                </div>
+                                                <div style="text-align: right;" class="col-sm-6">
+                                                    <small class="text-muted"><?php
+                                                                                //2022-02-22 16:49:39
+                                                                                $ptarr = explode("_", str_replace(array("-", ":", " "), "_", $post["post_time"]));
+                                                                                echo $ptarr[2] . "/" . $ptarr[1] . "/" . $ptarr[0];
+                                                                                ?></small>
+                                                </div>
                                             </div>
                                             <div style="height: 50%;">
                                                 <a class="badge badge-primary" href="#"><?php echo howManyPostsHasUsername($post['username']) ?> Posts</a>

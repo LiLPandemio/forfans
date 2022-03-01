@@ -62,8 +62,20 @@ if (isset($param['1'])) {                                                       
 
             $response = array();                                                    //Prepara un arreglo para el JSON Que se le enviara al cliente
             $post_text = $_REQUEST["postTextTextarea"];                             //Se almacena el valor en una variable
+
             $post_nsfw = $_REQUEST["newPostIsNSFW"];                                //Se almacena el valor en una variable
             $post_free = $_REQUEST["newPostIsPublic"];                              //Se almacena el valor en una variable
+            if ($post_nsfw) {
+                $post_nsfw = 1;
+            } else {
+                $post_nsfw = 0;
+            }
+            if ($post_free) {
+                $post_free = 1;
+            } else {
+                $post_free = 0;
+            }
+
             $images = [];                                                           //Arreglo de fotos para luego añadir los paths y exportarlos a la BDD
             if (isset($_FILES[0])) {                                                //Si hay archivos subidos
                 if (($_FILES[0]['name'] != "")) {                                   //Y los archivos no tienen el nombre en blanco
@@ -97,6 +109,10 @@ if (isset($param['1'])) {                                                       
             $post_text = htmlspecialchars($post_text);                              //Se codifican los simbolos especiales HTML en codigo HTML (& => &amp;)
             $post_text = stripslashes($post_text);                                  //Se eliminan caracteres "'//\\'"
             $post_text = trim($post_text);                                          //Se eliminan los dobles espacios en blanco y al principio y final
+
+            array_push($response, array('PARAMETERS: ' => "post_text: " . $post_text));    //SE INFORMA DE SI HAY ARCHIVOS
+            array_push($response, array('PARAMETERS: ' => "post_nsfw: " . $post_nsfw));    //SE INFORMA DE SI HAY ARCHIVOS
+            array_push($response, array('PARAMETERS: ' => "post_free: " . $post_free));    //SE INFORMA DE SI HAY ARCHIVOS
 
             array_push($response, array('FILES_INCLUDED' => count($images) > 0));    //SE INFORMA DE SI HAY ARCHIVOS
             array_push($response, array('TEXT_INCLUDED' => $post_text != ""));      //SE INFORMA DE SI HAY TEXTO
@@ -156,23 +172,23 @@ if (isset($param['1'])) {                                                       
                                 case 'username':
                                     $outp = setUser__username($uname, $newValue);
                                     break;
-                                
+
                                 case 'nombre':
                                     $outp = setUser__name($uname, $newValue);
                                     break;
-                                
+
                                 case 'apellidos':
                                     $outp = setUser__surname($uname, $newValue);
                                     break;
-                                
+
                                 case 'gender_id':
                                     $outp = setUser__genderID($uname, $newValue);
                                     break;
-                                
+
                                 case 'sexual_orientations_id':
                                     $outp = setUser__sexOrientID($uname, $newValue);
                                     break;
-                                
+
                                 default:
                                     # code...
                                     break;

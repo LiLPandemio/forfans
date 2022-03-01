@@ -1,5 +1,21 @@
 <?php
 require_once(ROOT . "/functions/contentEngine.php");
+require_once(ROOT . "/functions/userEngine.php");
+require_once(ROOT . "/functions/authEngine.php");
+if (isset($_COOKIE["token"])) {
+    $tokenStatus = checkTokenStatus($_COOKIE["token"]);
+    if ($tokenStatus !== "INVALID_TOKEN" and $tokenStatus !== "TOKEN_EXPIRED") {
+        $udata = getUserData(whoami($_COOKIE["token"]));
+        $config["default_lang"] = $udata["lang"];
+    }
+}
+if (isset($_COOKIE["token"])) {
+    $tokenStatus = checkTokenStatus($_COOKIE["token"]);
+    if ($tokenStatus !== "INVALID_TOKEN" and $tokenStatus !== "TOKEN_EXPIRED") {
+        $udata = getUserData(whoami($_COOKIE["token"]));
+        $config["default_lang"] = $udata["lang"];
+    }
+}
 require(ROOT . "/locale/" . $config["default_lang"] . ".php");      //Cargar idioma
 if (isset($_COOKIE['token'])) {                                     //SI EXISTE LA COOKIE CON TOKEN
     $token = $_COOKIE['token'];                                     //GUARDALA EN $token
@@ -32,7 +48,7 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
 
                             <div id="title_suggestion_new_post" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" class="title-wrapper" style="padding:10px; padding-top: 0px;">
                                 <ul style="cursor:pointer; text-align: center; width: 100%" class="breadcrumb">
-                                    <li style="text-align: center; width: 100%">¿Inspirado? ¡Publica algo!</li>
+                                    <li style="text-align: center; width: 100%"><?= lang("inspired_publish_something") ?></li>
                                 </ul>
                             </div>
 
@@ -48,14 +64,14 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                         <div id="previews">
                                         </div>
                                         <div style="margin-top: 10px; text-align:center">
-                                            <button onclick="$('#postImagesInput').click()" type="button" class="btn btn-sm btn-primary"><i class="fa fa-camera" aria-hidden="true"></i> Add Content</button>
-                                            <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-sticky-note" aria-hidden="true"></i> Add Gif</button>
+                                            <button onclick="$('#postImagesInput').click()" type="button" class="btn btn-sm btn-primary"><i class="fa fa-camera" aria-hidden="true"></i> <?= lang("add_content") ?> </button>
+                                            <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-sticky-note" aria-hidden="true"></i> <?= lang("add_gif") ?> </button>
                                             <button type="button" id="chars-left-btn" disabled class="btn btn-sm btn-outline-success"><i class="fa fa-font" aria-hidden="true"></i> <span id="chars-left">0</span></button>
                                         </div>
                                         <input style="display: none;" id="postImagesInput" accept=".jpg,.png,.webp,.giff,.tiff" type="file" name="my_file[]" multiple>
                                         <span style="margin-top: 10px; display:flex; flex-direction:row">
                                             <span style="position: relative; top:5px">
-                                                <p>NSFW Content&nbsp;&nbsp;&nbsp;</p>
+                                                <p><?= lang("adult_content") ?>&nbsp;&nbsp;&nbsp;</p>
                                             </span>
                                             <label class="form-check-label switch">
                                                 <input class="form-check-input" name="newPostIsNSFW" id="newPostIsNSFW" value="checkedValue" type="checkbox">
@@ -165,12 +181,12 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                                 //Exists
                                                 $("#" + ids).hide();
                                                 $("#" + ids_array[0] + "_" + next).show();
-                                                $("#currentImages_"+ids_array[0]).html(next+1)
+                                                $("#currentImages_" + ids_array[0]).html(next + 1)
                                             } else {
                                                 //Not exists
                                                 $("#" + ids).hide();
                                                 $("#" + ids_array[0] + "_" + 0).show();
-                                                $("#currentImages_"+ids_array[0]).html(1)
+                                                $("#currentImages_" + ids_array[0]).html(1)
                                             }
                                         }
                                     </script>
@@ -178,10 +194,10 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                         <?php
                                         if (count($img_array) > 1) {
                                         ?>
-                                            <p class="text-muted text-center" style="font-size: 70%;">Haz click en la imagen para ver mas<br><span id="currentImages_<?= $post["post_id"] ?>">1</span>/<?=count($img_array)?></p>
+                                            <p class="text-muted text-center" style="font-size: 70%;">Haz click en la imagen para ver mas<br><span id="currentImages_<?= $post["post_id"] ?>">1</span>/<?= count($img_array) ?></p>
                                         <?php }
                                         ?>
-                                        <div id="images_<?=$post["post_id"]?>">
+                                        <div id="images_<?= $post["post_id"] ?>">
                                             <?php
                                             for ($j = 0; $j < count($img_array); $j++) {
                                                 $img_array = str_replace("{fullsiteurl}", $config["fullsiteurl"], $img_array) //remplaza {fullsiteurl} por cfg fullsiteurl
@@ -210,8 +226,17 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                     <img class="avatar" style="border-radius: 50px; height: 50px; width: 50px; margin-right:10px;" src="<?= $config["fullsiteurl"] . $post["profile_picture_rpath"] ?>" alt="">
                                     <div style="flex-wrap: wrap;">
                                         <div class="post-info-about" style="max-height: 40px">
-                                            <div style="height: 50%;">
-                                                <p class="card-text">@<?= $post["username"] ?></p>
+                                            <div class="row" style="height: 50%;">
+                                                <div class="col-sm-6">
+                                                    <p class="card-text">@<?= $post["username"] ?></p>
+                                                </div>
+                                                <div style="text-align: right;" class="col-sm-6">
+                                                    <small class="text-muted"><?php
+                                                                                //2022-02-22 16:49:39
+                                                                                $ptarr = explode("_", str_replace(array("-", ":", " "), "_", $post["post_time"]));
+                                                                                echo $ptarr[2] . "/" . $ptarr[1] . "/" . $ptarr[0];
+                                                                                ?></small>
+                                                </div>
                                             </div>
                                             <div style="height: 50%;">
                                                 <a class="badge badge-primary" href="#"><?php echo howManyPostsHasUsername($post['username']) ?> Posts</a>
@@ -231,6 +256,22 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                     <div style="flex:3" class=""></div>
                                 <?php
                                 }
+
+                                if ($post["is_nsfw"] == "1") {
+                                ?>
+                                    <div class="nsfwnotice" id="nsfwnotice-post-<?= $post["post_id"] ?>">
+
+                                        <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:9;filter: blur(4px);background: repeating-linear-gradient(45deg,#FFFF00,#FFFF00 25px,#000 25px,#000 50px);"></div>
+                                        <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:9;">
+                                            <div style="position:absolute; width:60%;margin-top:10px;margin-left:20%;text-align:center; background-color:#000C; border-radius:5px; padding: 10px">
+                                                <p style="color: white">El contenido esta marcado como inapropiado</p> <br>
+                                                <button type="button" onclick="$('#nsfwnotice-post-<?= $post["post_id"] ?>').fadeOut()" class="btn btn-primary">SHOW POST</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+
                                 ?>
                             </div>
                         <?php } ?>

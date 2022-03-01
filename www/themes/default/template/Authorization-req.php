@@ -1,6 +1,13 @@
 <?php
 //Auth required!
 require(ROOT . "/config.php");
+if (isset($_COOKIE["token"])) {
+    $tokenStatus = checkTokenStatus($_COOKIE["token"]);
+    if ($tokenStatus !== "INVALID_TOKEN" and $tokenStatus !== "TOKEN_EXPIRED") {
+        $udata = getUserData(whoami($_COOKIE["token"]));
+        $config["default_lang"] = $udata["lang"];
+    }
+}
 require(ROOT . "/locale/" . $config["default_lang"] . ".php");
 
 if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CON TOKEN

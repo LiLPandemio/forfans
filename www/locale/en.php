@@ -128,6 +128,21 @@ function lang($langkey)
     $lang['suggested_profiles']
         = "Suggested profiles";
 
+    $lang['inspired_publish_something']
+        = "Inspired? Post something!";
+
+    $lang['new_post_placeholder_text']
+        = "Post something! #Anime #Hentai #xXx";
+
+    $lang['add_content']
+        = "Add content";
+
+    $lang['add_gif']
+        = "Add gif";
+
+    $lang['adult_content']
+        = "NSFW Content";
+
 
     $str = str_replace("{sitename}", $config['sitename'], $lang[$langkey]);
     // Para añadir mas variables copia la linea de abajo y reemplaza $config['sitename'] con lo que quieras y {sitename} por tu placeholder.
