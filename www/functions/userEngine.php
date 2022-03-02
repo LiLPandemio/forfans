@@ -92,7 +92,7 @@ function setUser__default_theme_variable($username, $newValue)
     if ($newValue == "default") {
         $newValue = NULL;
     }
-    
+
     $stmt = $conn->prepare("UPDATE `usuarios` SET `default_theme_variable` = ? WHERE `usuarios`.`username` = ?; ");
     $stmt->execute(array($newValue, $username));
     $drows = $stmt->rowCount();
@@ -186,7 +186,8 @@ function setUser__sexOrientID($username, $newValue)
 /**
  * Devuelve un array de todos los generos y sus ids
  */
-function getGendersList() {
+function getGendersList()
+{
     require(ROOT . "/functions/db.php");
     $stmt = $conn->prepare("SELECT * FROM `genders` ORDER BY `gender_id` ASC");
     $stmt->execute();
@@ -197,7 +198,8 @@ function getGendersList() {
 /**
  * Devuelve un array de todos los generos y sus ids
  */
-function getSexualOrientationsList() {
+function getSexualOrientationsList()
+{
     require(ROOT . "/functions/db.php");
     $stmt = $conn->prepare("SELECT * FROM `sexual_orientations` ORDER BY `sexual_orientations`.`id` ASC");
     $stmt->execute();
@@ -205,22 +207,46 @@ function getSexualOrientationsList() {
     return $result;
 }
 
-function getMyInvites() {
+function getMyInvites()
+{
     require(ROOT . "/functions/db.php");
     $sql = "SELECT * FROM `invitation_codes` WHERE `invitation_creator` = ?";
     $id = myid();
-    $stmt = $conn -> prepare($sql);
-    $stmt -> execute(array(intval($id)));
-    $result = $stmt -> fetchAll();
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array(intval($id)));
+    $result = $stmt->fetchAll();
     return $result;
 }
 
-function getMyUsedInvites() {
+function getMyUsedInvites()
+{
     require(ROOT . "/functions/db.php");
     $sql = "SELECT `invitation_codes`.*, `usuarios`.* FROM `invitation_codes` LEFT JOIN `usuarios` ON `invitation_codes`.`invitation_creator` = `usuarios`.`invite_used` WHERE `invitation_codes`.`invitation_creator` = ?;";
     $id = myid();
-    $stmt = $conn -> prepare($sql);
-    $stmt -> execute(array(intval($id)));
-    $result = $stmt -> fetchAll();
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array(intval($id)));
+    $result = $stmt->fetchAll();
     return $result;
+}
+
+function howManyUsedInvites()
+{
+    require(ROOT . "/functions/db.php");
+    $id = myid();
+    //UNUSED
+    $sql = "SELECT * FROM `invitation_codes` WHERE `invitation_creator` = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array(intval($id)));
+    $unused = $stmt->fetchAll();
+    $totalUnused = 0;
+    for ($i=0; $i < count($unused); $i++) { 
+        $totalUnused += intval($unused[$i]["uses_left"]);
+    }
+    //USED
+    $sql2 = "SELECT `usuarios`.*, `invitation_codes`.* FROM `usuarios` LEFT JOIN `invitation_codes` ON `invitation_codes`.`invitation_id` = `usuarios`.`invite_used` WHERE `invitation_codes`.`invitation_creator` = ?;";
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2->execute(array(intval($id)));
+    $used = $stmt2->fetchAll();
+    $total = $totalUnused + count($used);
+    return $total;
 }

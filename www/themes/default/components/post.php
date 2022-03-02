@@ -77,7 +77,7 @@ if (isset($post)) {
                         <a class="badge badge-primary" href="#"><?php echo howManyPostsHasUsername($post['username']) ?> Posts</a>
                         <a class="badge badge-danger" href="#">Suscribirse</a>
                         <a class="badge badge-success" href="#">Donado $<?= $post["post_donations"] ?></a>
-                        <a class="badge badge-accent" style="color:var(--bs-primary-rgb)" href="#">Seguir</a>
+                        <a class="badge badge-accent" style="color:var(--bs-primary-rgb);border:1px solid gray" href="#">Seguir</a>
                     </div>
                 </div>
                 <div style="flex: 1 1 250px; margin-top:40px; margin-left:-50px">

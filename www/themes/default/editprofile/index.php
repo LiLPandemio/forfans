@@ -223,7 +223,7 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                                         <div class="card-body">
                                             <h2 class="card-title">Invitaciones</h2>
                                             <div class="form-group">
-                                                <h4 class="card-title">Invitaciones creadas: <span class="aviableInvitations">20/<?php echo $userdata['aviable_invites']; ?></span></h4>
+                                                <h4 class="card-title">Invitaciones creadas: <span class="aviableInvitations"><?= howManyUsedInvites() ?>/<?php echo $userdata['aviable_invites']; ?></span></h4>
                                                 <table class="table" style="width: 100%;">
                                                     <thead>
                                                         <tr>
@@ -274,7 +274,7 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                                                         ?>
                                                             <tr>
                                                                 <th scope="row"><?= $myUsedInvites[$i]["invitation_code"] ?></th>
-                                                                <td><?= $myUsedInvites[$i]["username"] ?></td>
+                                                                <td>@<?= $myUsedInvites[$i]["username"] ?></td>
                                                                 <td>
                                                                     <a class="btn btn-primary" href="<?= $config["fullsiteurl"] . "profile/" . $myUsedInvites[$i]["username"] ?>" role="button">Visit profile</a>
                                                                 </td>

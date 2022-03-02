@@ -108,7 +108,9 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
 
                     <?php
                     if ($posts == "NO_POSTS_FOUND") {
-                        echo "NO POSTS FOUND";
+                    ?>
+                        <p style="width: 100%;text-align:center">This user has no posts yet!</p>
+                    <?php
                     } else {
 
                         for ($i = 0; $i < count($posts); $i++) {
