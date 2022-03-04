@@ -71,10 +71,10 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                         <input style="display: none;" id="postImagesInput" accept=".jpg,.png,.webp,.giff,.tiff" type="file" name="my_file[]" multiple>
                                         <span style="margin-top: 10px; display:flex; flex-direction:row">
                                             <span style="position: relative; top:5px">
-                                                <p><?= lang("adult_content") ?>&nbsp;&nbsp;&nbsp;</p>
+                                                <p>[-DISABLED-]<?= lang("adult_content") ?>&nbsp;&nbsp;&nbsp;</p>
                                             </span>
                                             <label class="form-check-label switch">
-                                                <input class="form-check-input" name="newPostIsNSFW" id="newPostIsNSFW" value="checkedValue" type="checkbox">
+                                                <input class="form-check-input" name="newPostIsNSFW" disabled id="newPostIsNSFW" value="checkedValue" type="checkbox">
                                                 <span class="slider round"></span>
                                             </label>
                                         </span>
@@ -147,6 +147,18 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                                         $("#newPostForm").trigger("reset")
                                                         $("#previews").html("");
                                                         console.log(r);
+
+                                                        let pos = r.length - 2 //r[pos].POST_ID
+                                                        let token = getToken()
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: '<?php echo $config["fullsiteurl"] . "api/getAjaxPost?JSON_RESPONSE=NO&token="; ?>' + token + "&postid=" + r[pos].POST_ID,
+                                                            dataType: 'html',
+                                                            cache: false,
+                                                            success: function(html) {
+                                                                $("#posts-append").prepend(html)
+                                                            }
+                                                        });
                                                     })
                                                     .fail(function(status, xhr, error) {
                                                         console.log("---------------ER---------------");
@@ -161,13 +173,16 @@ if (isset($_COOKIE['token'])) {                                     //SI EXISTE 
                                 </form>
                             </div>
                         </div>
-                        <?php
-                        $posts = getPublicPosts();
-                        for ($i = 0; $i < count($posts); $i++) {
-                            $post = $posts[$i];
-                            $img_array = json_decode($post["post_img_array"]);
-                            include(ROOT . "/themes/" . $config['theme'] . "/components/post.php");
-                        } ?>
+                        <div id="posts-append">
+
+                            <?php
+                            $posts = getPublicPosts();
+                            for ($i = 0; $i < count($posts); $i++) {
+                                $post = $posts[$i];
+                                $img_array = json_decode($post["post_img_array"]);
+                                include(ROOT . "/themes/" . $config['theme'] . "/components/post.php");
+                            } ?>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-1">

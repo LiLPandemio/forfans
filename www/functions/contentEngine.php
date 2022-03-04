@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Obtiene la cantidad de posts publicos que quieras, amount no esta filtrado y HA DE SER INT
  */
@@ -74,14 +73,4 @@ function createPost($user_id, $for_id = NULL, $post_text = NULL, $isNSFW = false
         ':forfans' => $for_fans,
         ':for_everyone' => $for_everyone,
     ));
-}
-
-/**
- * Indica la cantidad de publicaciones que tiene un usuario (INT)
- */
-function displayPostByID($pid)
-{
-?>
-    <!-- SPAWN A POST -->
-<?php
 }

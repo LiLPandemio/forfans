@@ -29,15 +29,6 @@ function lang($langkey)
     $lang['create_account']
         = "Create account";
 
-    $lang['male']
-        = "Male";
-
-    $lang['woman']
-        = "Woman";
-
-    $lang['war_helicopter']
-        = "War helicopter";
-
     $lang['name']
         = "Nombre";
 
@@ -96,7 +87,10 @@ function lang($langkey)
         = "Male";
 
     $lang['female']
-        = "Female";
+        = "Woman";
+
+    $lang['war_helicopter']
+        = "War helicopter";
 
     $lang['transgender']
         = "Transgender";

@@ -91,8 +91,17 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                                 ?>
                                     <span style="margin-bottom: 10px;">
                                         <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl'] . "editprofile" ?>" role="button">Editar perfil</a>
-                                        <!-- <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl'] . "editprofile" ?>" role="button">Earnings</a> -->
-                                        <!-- <a name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl'] . "editprofile" ?>" role="button">Stats</a> -->
+                                        <a disabled name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl'] . "editprofile" ?>" role="button">Earnings</a>
+                                        <a disabled name="" id="" class="btn btn-sm btn-primary" href="<?php echo $config['fullsiteurl'] . "editprofile" ?>" role="button">Stats</a>
+                                    </span>
+                                <?php
+                                } else {
+                                ?>
+                                    <span style="margin-bottom: 10px;">
+                                        <button class="btn btn-sm btn-primary">Seguir</button>
+                                        <button class="btn btn-sm btn-primary">Suscribirme</button>
+                                        <button class="btn btn-sm btn-primary">Bloquear</button>
+                                        <button class="btn btn-sm btn-primary">Chat</button>
                                     </span>
                                 <?php
                                 } ?>

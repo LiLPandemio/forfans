@@ -29,15 +29,6 @@ function lang($langkey)
     $lang['create_account']
         = "Crear cuenta";
 
-    $lang['male']
-        = "Hombre";
-
-    $lang['woman']
-        = "Mujer";
-
-    $lang['war_helicopter']
-        = "Helicoptero de guerra";
-
     $lang['name']
         = "Nombre";
 
@@ -93,10 +84,13 @@ function lang($langkey)
         = "na";
 
     $lang['male']
-        = "male";
+        = "Hombre";
 
     $lang['female']
-        = "female";
+        = "Mujer";
+
+    $lang['war_helicopter']
+        = "Helicoptero de guerra";
 
     $lang['transgender']
         = "transgender";
@@ -124,12 +118,12 @@ function lang($langkey)
 
     $lang['fluid_cis_m']
         = "Fluido (CIS Hombre)";
-        
+
     $lang['suggested_profiles']
-    = "Perfiles sugeridos";
-        
+        = "Perfiles sugeridos";
+
     $lang['inspired_publish_something']
-    = "¿Inspirado? ¡Publica algo!";
+        = "¿Inspirado? ¡Publica algo!";
 
     $lang['new_post_placeholder_text']
         = "Publica lo que quieras! #Anime #Hentai #xXx";

@@ -105,7 +105,7 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                     } ?>
                 </div>
                 <div class="col-sm-8">
-                    <div style="display: none;" id="basicInfo">
+                    <div id="basicInfo">
                         <div class="card text-left post-body">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -136,7 +136,7 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                                                 ?>
                                                     <option value="<?= $g[0] ?>" style="color:var(--bs-primary)" <?php if ($userdata["gender_id"] == $g[0]) {
                                                                                                                         echo 'selected="selected"';
-                                                                                                                    } ?> class="form-select"><?= lang($g[1]) ?></option>
+                                                                                                                    } ?> class="form-select"><?= ucfirst(lang($g[1])) ?></option>
                                                 <?php
                                                 }
                                                 ?>
@@ -152,7 +152,7 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                                                 ?>
                                                     <option value="<?= $s[0] ?>" style="color:var(--bs-primary)" <?php if ($userdata["sexual_orientations_id"] == $s[0]) {
                                                                                                                         echo 'selected="selected"';
-                                                                                                                    } ?> class="form-select"><?= lang($s[1]) ?></option>
+                                                                                                                    } ?> class="form-select"><?= ucfirst(lang($s[1])) ?></option>
                                                 <?php
                                                 }
                                                 ?>
@@ -171,10 +171,10 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                                         <h4 class="card-title">Datos de la cuenta</h4>
                                         <div class="form-group">
                                             <label for="user_password">Contraseña (cambiar)</label>
-                                            <input type="password" class="form-control" name="user_password" id="user_password" aria-describedby="helpId" placeholder="__*Y0uR_P@$Sw0rD***">
+                                            <input disabled type="password" class="form-control" name="user_password" id="user_password" aria-describedby="helpId" placeholder="__*Y0uR_P@$Sw0rD***">
                                             <label for="user_password">Contraseña (cambiar)</label>
-                                            <input type="password" class="form-control" name="user_password_repeat" id="user_password_repeat" aria-describedby="helpId" placeholder="__*Y0uR_P@$Sw0rD***">
-                                            <button style="margin-top: 10px; width:100%" type="button" onclick="chpasswd()" class="btn btn-sm btn-primary">Change password</button>
+                                            <input disabled type="password" class="form-control" name="user_password_repeat" id="user_password_repeat" aria-describedby="helpId" placeholder="__*Y0uR_P@$Sw0rD***">
+                                            <button disabled style="margin-top: 10px; width:100%" type="button" onclick="chpasswd()" class="btn btn-sm btn-primary">Change password</button>
                                             <small id="outputTextPasswordUpdate" class="form-text text-muted"></small>
                                         </div>
                                     </div>
@@ -216,7 +216,7 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                     if ($config["register_mode"] == "invite") {
                     ?>
 
-                        <div id="invis">
+                        <div id="invis" style="display: none;">
                             <div class="card text-left post-body">
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -241,7 +241,7 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                                                                 <th scope="row"><?= $myInvites[$i]["uses_left"] ?></th>
                                                                 <td><?= $myInvites[$i]["invitation_code"] ?></td>
                                                                 <td>
-                                                                    <button type="button" class="btn btn-primary">Copy link</button>
+                                                                    <button type="button" onclick="navigator.clipboard.writeText('<?php echo $config['fullsiteurl'] . '/invited/' . $myInvites[$i]['invitation_code'] ?>');" class="btn btn-primary">Copy link</button>
                                                                     <button type="button" class="btn btn-danger">Delete</button>
                                                                 </td>
                                                             </tr>

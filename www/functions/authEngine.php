@@ -117,3 +117,20 @@ function isWebLoggedIn($sesdata)
     }
     return false;                                                               //Si alguna de las condiciones de arriba no se cumple se retorna false.
 }
+
+/**
+ * Devuelve true o false si la invitacion es valida o no respectivamente.
+ */
+function isInviteValid($invite)
+{
+    require(ROOT . "/functions/db.php");                                    //Se importa la base de datos a la funcion
+    $sql = "SELECT * FROM `invitation_codes` WHERE invitation_code = ? AND `uses_left`>0;";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array($invite));
+    $r = $stmt->fetchAll();
+    if (count($r) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}

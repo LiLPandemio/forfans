@@ -12,7 +12,15 @@ echo json_encode($response);
 //     $data = json_decode($json, true);
 //     $_REQUEST = $data;
 // }
-header('Content-Type: application/json');                                           //La api debe retornar todo en JSON
+if (isset($_REQUEST["JSON_RESPONSE"])) {
+    if ($_REQUEST["JSON_RESPONSE"] == "NO") {
+    } else {
+        header('Content-Type: application/json');                                           //La api debe retornar todo en JSON
+    }
+} else {
+    header('Content-Type: application/json');                                           //La api debe retornar todo en JSON
+}
+
 if (isset($param['1'])) {                                                           //Si existe un segundo parametro para la api (Necesario)
     switch ($param['1']) {                                                          //Haz x si el parametro vale y
         case 'hash':                                                                //Si se solicita la seccion hash de api
@@ -46,12 +54,64 @@ if (isset($param['1'])) {                                                       
                 } else {
                     $response = array("response" => "ErrorTokenEmpty");
                 }
-                echo json_encode($response);
                 break;
             } else {
-                # 
+                $response = array("response" => "Token not provided");
+            }
+            echo json_encode($response);
+            break;
+        case "getAjaxPost":
+            require(ROOT . "/functions/db.php");                                        //Antes de comprobar el token se importa la base de datos para poder comprobarlo
+            $response = array();
+            $r = $_REQUEST;
+            if (isset($r["postid"], $r["token"])) {
+                if ($r["postid"] !== "") {
+                    //check if post exists
+                    $stmt = $conn->prepare("SELECT `posts`.*, `usuarios`.* FROM `posts` LEFT JOIN `usuarios` ON `posts`.`user_id` = `usuarios`.`id_usuarios` WHERE `posts`.`post_id` = :post");
+                    $stmt->execute(array(':post' => intval($r["postid"])));
+                    $post = $stmt->fetchAll();
+                    $crows = $stmt->rowCount();
+                    if ($crows > 0) {
+                        $post = $post[0];
+                        require_once(ROOT . "/functions/contentEngine.php");
+                        $img_array = $post["post_img_array"];
+                        include(ROOT . "/themes/" . $config["theme"] . "/components/post.php");
+                    } else {
+                        array_push($response, array('INFO' => "MISSING DATA"));
+                        echo json_encode($response);
+                    }
+                } else {
+                    array_push($response, array('INFO' => "MISSING DATA"));
+                    echo json_encode($response);
+                }
+            } else {
+                array_push($response, array('INFO' => "MISSING DATA"));
+                echo json_encode($response);
             }
             break;
+        case 'register':
+            // $r = $_REQUEST;
+            // switch ($config["register_mode"]) { //Se usa un switch ya que hay 3 posibilidades
+            //     case 'closed':
+            //         $response = array("response" => "Registrations are closed.");
+            //         echo json_encode($response);
+            //         break;
+
+            //     case 'invite':
+            //         if (isset($r["invite"], $r["birthdate"], $r["username"], $r["email"], $r["gender_id"], $r["publicname"], $r["rname"], $r["rsurname"], $r["pwd"], $r["rpwd"])) {
+            //             $sql = "INSERT INTO `usuarios` (`id_usuarios`, `username`, `correo`, `profile_picture_rpath`, `cover_picture_rpath`, `contraseña`, `gender_id`, `sexual_orientations_id`, `fecha_de_inicio`, `fecha_de_la_ultima_conexion`, `nombre`, `apellidos`, `displayName`, `balance`, `points`, `aviable_invites`, `cumple`, `invite_used`, `default_theme_variable`, `lang`) VALUES (NULL, 'javidzn', '', 'themes/default/assets/img/default_pfp.webp', 'themes/default/assets/img/default-cover.webp', 'jadine20@bemen3.cat', '1', '1', current_timestamp(), '0000-00-00 00:00:00.000000', 'Javier', 'Diaz', 'JaviDZN', '0.00', '0', '0', '0000-00-00 00:00:00.000000', NULL, NULL, NULL)";
+            //         }
+            //         break;
+
+            //     case 'open':
+            //         # code...
+            //         break;
+
+            //     default:
+            //         # code...
+            //         break;
+            // }
+
         case "post":
             require_once(ROOT . "/functions/db.php");                               //INCLUYENDO FUNCIONES NECESARIAS
             require_once(ROOT . "/functions/userEngine.php");                       //INCLUYENDO FUNCIONES NECESARIAS
@@ -66,7 +126,7 @@ if (isset($param['1'])) {                                                       
             $post_nsfw = $_REQUEST["newPostIsNSFW"];                                //Se almacena el valor en una variable
             $post_free = $_REQUEST["newPostIsPublic"];                              //Se almacena el valor en una variable
             if ($post_nsfw) {
-                $post_nsfw = 1;
+                $post_nsfw = 0;
             } else {
                 $post_nsfw = 0;
             }
@@ -130,7 +190,7 @@ if (isset($param['1'])) {                                                       
                     $stmt = $conn->prepare($sql);
                     $stmt->bindParam(':userid', $id);
                     $stmt->bindParam(':posttext', $post_text);
-                    $stmt->bindParam(':isnsfw', $post_nsfw);
+                    $stmt->bindParam(':isnsfw', $post_nsfw, PDO::PARAM_INT);
                     $stmt->bindParam(':forall', $post_free);
                     $stmt->bindParam(':postimgarray', $post_img_array);
                 } else {                                                            //Si no hay imagenes, se prepara esta
@@ -141,10 +201,12 @@ if (isset($param['1'])) {                                                       
                     $stmt = $conn->prepare($sql);
                     $stmt->bindParam(':userid', $id);
                     $stmt->bindParam(':posttext', $post_text);
-                    $stmt->bindParam(':isnsfw', $post_nsfw);
+                    $stmt->bindParam(':isnsfw', $post_nsfw, PDO::PARAM_INT);
                     $stmt->bindParam(':forall', $post_free);
                 }
                 $res = $stmt->execute();                                            //Se ejecuta la consulta preparada
+                $lastid = $conn->lastInsertId();
+                array_push($response, array('POST_ID' => $lastid));               //Se envia el SQLSTATE al usuario (DEBUG)
                 $err = $stmt->errorCode();                                          //El SQLSTATE code se guarda en $err
                 array_push($response, array('MYSQL STATUS' => $err));               //Se envia el SQLSTATE al usuario (DEBUG)
             } else {                                                                //Si no se provee de contenido valido

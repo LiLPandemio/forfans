@@ -100,7 +100,7 @@ if (isset($post)) {
                 <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:9;">
                     <div style="position:absolute; width:60%;margin-top:10px;margin-left:20%;text-align:center; background-color:var(--bs-dark);opacity: 0.8; border-radius:5px; padding: 10px">
                         <p style="color: white">El contenido esta marcado como inapropiado</p> <br>
-                        <button type="button" onclick="$('#nsfwnotice-post-<?= $post["post_id"] ?>').fadeOut()" class="btn btn-primary">SHOW POST</button>
+                        <button type="button" onclick="$('#nsfwnotice-post-<?= $post['post_id'] ?>').fadeOut()" class="btn btn-primary">SHOW POST</button>
                     </div>
                 </div>
             </div>
