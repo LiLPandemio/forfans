@@ -221,8 +221,14 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
                     }
                     ?>
                     <?php
-                    if ($config["register_mode"] == "invite") {
+                    if ($config["register_mode"] !== "closed") {
                     ?>
+                        <script>
+                            function goInvited() {
+                                let invite = $("#inviteCodeInput").val();
+                                window.location.href = "<?=$config['fullsiteurl']?>invited/"+invite;
+                            }
+                        </script>
                         <div class="card">
                             <div class="card-header" style="cursor: pointer" id="headingTwo" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 <h4 style="margin-bottom: 0;" class="card-title">Having an invite code? Over here sir/miss</h4>
@@ -230,9 +236,9 @@ require(ROOT . "/locale/" . $config['default_lang'] . ".php");
                             <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Your invitation here :)">
+                                        <input type="text" class="form-control" id="inviteCodeInput" placeholder="Your invitation here :)">
                                         <div class="input-group-append">
-                                            <button type="button" class="btn btn-primary">Go!</button>
+                                            <button type="button" class="btn btn-primary" onclick="goInvited()">Go!</button>
                                         </div>
                                     </div>
                                 </div>
