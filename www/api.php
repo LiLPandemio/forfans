@@ -90,28 +90,52 @@ if (isset($param['1'])) {                                                       
             }
             break;
         case 'register':
-            // $r = $_REQUEST;
-            // switch ($config["register_mode"]) { //Se usa un switch ya que hay 3 posibilidades
-            //     case 'closed':
-            //         $response = array("response" => "Registrations are closed.");
-            //         echo json_encode($response);
-            //         break;
+            $response = array();
+            $r = $_REQUEST;
+            switch ($config["register_mode"]) { 
+                case 'closed':
+                    $response = array("response" => "Registrations are closed.");
+                    echo json_encode($response);
+                    break;
 
-            //     case 'invite':
-            //         if (isset($r["invite"], $r["birthdate"], $r["username"], $r["email"], $r["gender_id"], $r["publicname"], $r["rname"], $r["rsurname"], $r["pwd"], $r["rpwd"])) {
-            //             $sql = "INSERT INTO `usuarios` (`id_usuarios`, `username`, `correo`, `profile_picture_rpath`, `cover_picture_rpath`, `contraseña`, `gender_id`, `sexual_orientations_id`, `fecha_de_inicio`, `fecha_de_la_ultima_conexion`, `nombre`, `apellidos`, `displayName`, `balance`, `points`, `aviable_invites`, `cumple`, `invite_used`, `default_theme_variable`, `lang`) VALUES (NULL, 'javidzn', '', 'themes/default/assets/img/default_pfp.webp', 'themes/default/assets/img/default-cover.webp', 'jadine20@bemen3.cat', '1', '1', current_timestamp(), '0000-00-00 00:00:00.000000', 'Javier', 'Diaz', 'JaviDZN', '0.00', '0', '0', '0000-00-00 00:00:00.000000', NULL, NULL, NULL)";
-            //         }
-            //         break;
+                case 'invite':
+                    if (isset($r["invite"], $r["birthdate"], $r["username"], $r["email"], $r["gender_id"], $r["dname"], $r["rname"], $r["rsurname"], $r["pwd"], $r["rpwd"], $r["sexual_orientations_id"])) {
+                        $r["hashword"] = password_hash($r["pwd"], PASSWORD_DEFAULT);
+                        $sql = "INSERT INTO `usuarios` (`id_usuarios`, `username`, `correo`, `profile_picture_rpath`, `cover_picture_rpath`, `contraseña`, `gender_id`, `sexual_orientations_id`, `fecha_de_inicio`, `fecha_de_la_ultima_conexion`, `nombre`, `apellidos`, `displayName`, `balance`, `points`, `aviable_invites`, `cumple`, `invite_used`, `default_theme_variable`, `lang`) VALUES (NULL, :username, :mail, 'themes/default/assets/img/default_pfp.webp', 'themes/default/assets/img/default-cover.webp', :hashword, :gender_id, :sexual_orientations_id, current_timestamp(), '0000-00-00 00:00:00.000000', :rname, :surnames, :dname, '0.00', '0', '0', :birthday, :invite, NULL, NULL);";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bindParam(':username', $r["username"]);
+                        $stmt->bindParam(':mail', $r["email"]);
+                        $stmt->bindParam(':hashword', $r["hashword"]);
+                        $stmt->bindParam(':gender_id', $r["gender_id"]);
+                        $stmt->bindParam(':sexual_orientations_id', $r["sexual_orientations_id"]);
+                        $stmt->bindParam(':rname', $r["rname"]);
+                        $stmt->bindParam(':surnames', $r["rsurname"]);
+                        $stmt->bindParam(':dname', $r["dname"]);
+                        $stmt->bindParam(':birthday', $r["birthday"]);
+                        $iinfo = inviteInfo($r["invite"]);
+                        $iid = $iinfo["invitation_id"];
+                        $stmt->bindParam(':invite', $iid);
+                        $stmt->execute();
+                        $err = $stmt->errorCode();
+                        $errinf = $stmt->errorInfo();
+                        array_push($response, "--DEBUG INFO--");
+                        array_push($response, array('SQLC' => $err));
+                        array_push($response, array('SQLI' => $errinf));
+                        array_push($response, array('PARM' => $r["dname"]));
 
-            //     case 'open':
-            //         # code...
-            //         break;
+                        echo json_encode($response);
+                    }
+                    break;
 
-            //     default:
-            //         # code...
-            //         break;
-            // }
+                case 'open':
+                    # code...
+                    break;
 
+                default:
+                    # code...
+                    break;
+            }
+            break;
         case "post":
             require_once(ROOT . "/functions/db.php");                               //INCLUYENDO FUNCIONES NECESARIAS
             require_once(ROOT . "/functions/userEngine.php");                       //INCLUYENDO FUNCIONES NECESARIAS

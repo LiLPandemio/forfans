@@ -236,7 +236,10 @@ if ($useJournalTheme) {
                                 <div class="form-group">
                                     <label for="username">Nombre de usuario <b>único</b></label>
                                     <input type="text" class="form-control" name="username" id="username" aria-describedby="help_username" placeholder="pedropicapiedra">
-                                    <small id="help_username" class="form-text text-muted"></small>
+                                    <small style="display: none;" id="help_username" class="form-text text-danger">
+                                        Sólo puede tener letras en minuscula, números, puntos y guiones bajos. <br>
+                                        No puede empezar ni acabar con punto (.) ni tener mas de un punto consecutivo.
+                                    </small>
                                 </div>
                             </div>
                             <!-- /USERNAME -->
@@ -246,7 +249,9 @@ if ($useJournalTheme) {
                                 <div class="form-group">
                                     <label for="dname">Tu nombre a mostrar</label>
                                     <input type="text" class="form-control" name="dname" id="dname" aria-describedby="help_dname" placeholder="Pedro">
-                                    <small id="help_dname" class="form-text text-muted"></small>
+                                    <small style="display: none;" id="help_dname" class="form-text text-danger">
+                                        Maximo 18 caracteres, letras A - Z.
+                                    </small>
                                 </div>
                             </div>
                             <!-- /DNAME -->
@@ -266,12 +271,15 @@ if ($useJournalTheme) {
                                         }
                                         ?>
                                     </select>
+                                    <small style="display: none;" id="help_gender_id" class="form-text text-danger">
+                                        El formulario se ha roto! Contacta al desarrollador.
+                                    </small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="gender_id">Soy...</label>
-                                    <select class="form-control" style="line-height: 1.5; height: 100%;" name="sexual_orientation_id" id="sexual_orientation_id">
+                                    <select class="form-control" style="line-height: 1.5; height: 100%;" name="sexual_orientations_id" id="sexual_orientations_id">
                                         <?php
                                         $sexorients = getSexualOrientationsList();
                                         for ($i = 0; $i < count($sexorients); $i++) {
@@ -282,6 +290,9 @@ if ($useJournalTheme) {
                                         }
                                         ?>
                                     </select>
+                                    <small style="display: none;" id="help_sexual_orientations_id" class="form-text text-danger">
+                                        El formulario se ha roto! Contacta al desarrollador.
+                                    </small>
                                 </div>
                             </div>
                         </div>
@@ -293,7 +304,9 @@ if ($useJournalTheme) {
                                 <div class="form-group">
                                     <label for="name">Tu nombre (No será visible a otros)</label>
                                     <input type="text" class="form-control" name="name" id="name" aria-describedby="help_name" placeholder="Pedro">
-                                    <small id="help_name" class="form-text text-muted"></small>
+                                    <small style="display: none;" id="help_name" class="form-text text-danger">
+                                        Entre 2 y 18 caracteres, solo letras mayusculas, minusculas y apostrofes.
+                                    </small>
                                 </div>
                             </div>
                             <!-- /RNAME -->
@@ -301,9 +314,11 @@ if ($useJournalTheme) {
                             <!-- SURNAMES -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="surnames">Tu nombre (No será visible a otros)</label>
+                                    <label for="surnames">Tus apellidos (No será visible a otros)</label>
                                     <input type="text" class="form-control" name="surnames" id="surnames" aria-describedby="help_surnames" placeholder="Sanchez Picapiedras">
-                                    <small id="help_surnames" class="form-text text-muted"></small>
+                                    <small style="display: none;" id="help_surnames" class="form-text text-danger">
+                                        Entre 2 y 200 caracteres, solo letras mayusculas, minusculas y apostrofes.
+                                    </small>
                                 </div>
                             </div>
                             <!-- /SURNAMES -->
@@ -324,20 +339,227 @@ if ($useJournalTheme) {
                         <div class="form-group">
                             <label for="pwd1">Contraseña</label>
                             <input type="password" class="form-control" name="pwd1" id="pwd1" aria-describedby="helpPassword" placeholder="P4s$w0rd">
-                            <small id="helpPassword" class="form-text text-muted"></small>
+                            <small style="display: none;" id="help_pwd1" class="form-text text-danger" style="display: none;">
+                                La contraseña ha de tener mínimo 8 caracteres.
+                            </small>
                         </div>
                         <div class="form-group">
                             <label for="pwd1">Contraseña (repetir)</label>
-                            <input type="password2" class="form-control" name="pwd2" id="pwd2" aria-describedby="helpPassword" placeholder="P4s$w0rd">
-                            <small id="helpPassword2" class="form-text text-muted"></small>
+                            <input type="password" class="form-control" name="pwd2" id="pwd2" aria-describedby="helpPassword" placeholder="P4s$w0rd">
+                            <small style="display: none;" id="help_pwd2" class="form-text text-danger">
+                                La contraseña no coincide
+                            </small>
+                        </div>
+                        <h4 class="card-title">Unos datos mas...</h4>
+                        <div class="form-group">
+                            <label for="mail">Correo electronico</label>
+                            <input class="form-control" name="mail" id="mail" aria-describedby="helpPassword" placeholder="address@example.com">
+                            <small style="display: none;" id="help_mail" class="form-text text-danger">
+                                Introduce una direccion de correo electronico válida.
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="birth">Fecha de nacimiento</label>
+                            <input class="form-control" type="date" name="birth" id="birth" aria-describedby="helpPassword" placeholder="address@example.com">
+                            <small style="display: none;" id="help_birth" class="form-text text-danger">
+                                Introduce tu fecha de nacimiento
+                            </small>
                         </div>
                         <button type="button" onclick="$('#security').fadeOut(200,() => {$('#about').fadeIn(200);updateURL('<?= $config['fullsiteurl']  . $param[0] . '/' . $param[1] . '/about' ?>','About you')})" class="btn btn-secondary">Atrás</button>
-                        <button type="button" onclick="" class="btn btn-primary">Crear cuenta</button>
+                        <button type="button" onclick="validateRegistration()" class="btn btn-primary">Crear cuenta</button>
+                        <small style="display: none;" id="help_submit" class="form-text text-danger">
+                            Hay campos invalidos, vuelve atras y actualiza la informacion.
+                        </small>
                     </div>
 
                 </div>
             </div>
         </div>
+        <script>
+            function setLoading() {
+                console.log("LOADING...")
+            }
+
+            function unsetLoading() {
+                console.log("DONE")
+            }
+
+            function validateUserName(username) {
+                return usernameRegex.test(username);
+            }
+
+            function validateRegistration() {
+                let username = $("#username").val();
+                let mail = $("#mail").val();
+                let dname = $("#dname").val();
+                let gender_id = $("#gender_id").val();
+                let sexual_orientations_id = $("#sexual_orientations_id").val();
+                let name = $("#name").val();
+                let surnames = $("#surnames").val();
+                let pwd1 = $("#pwd1").val();
+                let pwd2 = $("#pwd2").val();
+
+                let isFormValid = true;
+                //validating username
+                usernameRegex = /^([a-z0-9_](?:(?:[a-z0-9_]|(?:\.(?!\.))){0,25}(?:[a-z0-9_]))?)$/
+                if (username.length > 1 && username.length < 25 && usernameRegex.test(username)) {
+                    console.log("Username: VALID")
+                    $("#help_username").hide();
+                } else {
+                    console.log("Username: INVALID")
+                    $("#help_username").show();
+                    isFormValid = false;
+                }
+
+                //validating mail
+                mailRegex = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+                if (mail.length > 1 && mailRegex.test(mail)) {
+                    console.log("Mail: VALID")
+                    $("#help_mail").hide();
+
+                } else {
+                    console.log("Mail: INVALID")
+                    $("#help_mail").show();
+                    isFormValid = false;
+                }
+
+                //validating dname
+                dnameRegex = /^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,18}$/;
+                if (dname.length > 2 && dname.length < 18 && dnameRegex.test(dname)) {
+                    console.log("dname: VALID")
+                    $("#help_dname").hide();
+
+                } else {
+                    console.log("dname: INVALID")
+                    $("#help_dname").show();
+                    isFormValid = false;
+                }
+
+                //validating gender_id
+                if (!isNaN(gender_id)) {
+                    console.log("gender_id: VALID")
+                    $("#help_gender_id").hide();
+
+                } else {
+                    console.log("gender_id: INVALID")
+                    $("#help_gender_id").show();
+                    isFormValid = false;
+                }
+
+                //validating sexual_orientations_id
+                if (!isNaN(sexual_orientations_id)) {
+                    console.log("sexual_orientations_id: VALID")
+                    $("#help_sexual_orientations_id").hide();
+
+                } else {
+                    console.log("sexual_orientations_id: INVALID")
+                    $("#help_sexual_orientations_id").show();
+                    isFormValid = false;
+                }
+
+                //validating name
+                nameRegex = /^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+                if (name.length > 2 && name.length < 18 && nameRegex.test(name)) {
+                    console.log("name: VALID")
+                    $("#help_name").hide();
+
+                } else {
+                    console.log("name: INVALID")
+                    $("#help_name").show();
+                    isFormValid = false;
+                }
+
+                //validating surnames
+                surnamesRegex = /^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+                if (surnames.length > 2 && surnames.length < 18 && surnamesRegex.test(surnames)) {
+                    console.log("surnames: VALID")
+                    $("#help_surnames").hide();
+                } else {
+                    console.log("surnames: INVALID")
+                    $("#help_surnames").show();
+                    isFormValid = false;
+                }
+
+                //validating pwd1
+                if (pwd1.length > 7) {
+                    console.log("pwd1: VALID")
+                    $("#help_pwd1").hide();
+                } else {
+                    console.log("pwd1: INVALID")
+                    $("#help_pwd1").show();
+                    isFormValid = false;
+                }
+
+                //validating pwd2
+                if (pwd2 === pwd1) {
+                    console.log("pwd2: VALID")
+                    $("#help_pwd2").hide();
+                } else {
+                    console.log("pwd2: INVALID")
+                    console.log("pwd2: " + pwd1)
+                    console.log("pwd2: " + pwd2)
+                    $("#help_pwd2").show();
+                    isFormValid = false;
+                }
+                if (isFormValid) {
+                    //Form valid
+                    setLoading();
+                    $("#help_submit").hide();
+
+                    var formData = new FormData()
+                    formData.append("invite", "<?= $param[1] ?>")
+                    formData.append("birthdate", $("#birth").val())
+                    formData.append("username", $("#username").val())
+                    formData.append("email", mail)
+                    console.log("ENVIANDO MAIL ADDR: " + mail);
+                    formData.append("gender_id", $("#gender_id").val())
+                    formData.append("sexual_orientations_id", $("#sexual_orientations_id").val())
+                    formData.append("dname", $("#dname").val())
+                    formData.append("rname", $("#name").val())
+                    formData.append("rsurname", $("#surnames").val())
+                    formData.append("pwd", $("#pwd1").val())
+                    formData.append("rpwd", $("#pwd2").val())
+
+                    $.ajax({
+                            url: "<?= $config["fullsiteurl"] ?>" + "api/register",
+                            type: 'POST',
+
+                            // Form data
+                            data: formData,
+                            contentType: 'multipart/form-data',
+                            // Tell jQuery not to process data or worry about content-type
+                            // You *must* include these options!
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+
+                            // Custom XMLHttpRequest
+                            xhr: function() {
+                                var myXhr = $.ajaxSettings.xhr();
+                                if (myXhr.upload) {
+                                    // For handling the progress of the upload
+                                }
+                                return myXhr;
+                            },
+                        }).done(function(r) {
+                            unsetLoading()
+                            console.log("---------------OK---------------");
+                            console.log(r);
+                        })
+                        .fail(function(status, xhr, error) {
+                            console.log("---------------ER---------------");
+                            console.log(status);
+                            console.log(xhr);
+                            console.log(error);
+                            alert("Something went wrong :(")
+                        })
+
+                } else {
+                    //Invalid
+                    $("#help_submit").show();
+                }
+            }
+        </script>
         <div class="col-sm-3">
         </div>
     </div>

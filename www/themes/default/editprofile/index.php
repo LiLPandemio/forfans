@@ -241,7 +241,7 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
                                                                 <th scope="row"><?= $myInvites[$i]["uses_left"] ?></th>
                                                                 <td><?= $myInvites[$i]["invitation_code"] ?></td>
                                                                 <td>
-                                                                    <button type="button" onclick="navigator.clipboard.writeText('<?php echo $config['fullsiteurl'] . '/invited/' . $myInvites[$i]['invitation_code'] ?>');" class="btn btn-primary">Copy link</button>
+                                                                    <button type="button" onclick="navigator.clipboard.writeText('<?php echo $config['fullsiteurl'] . 'invited/' . $myInvites[$i]['invitation_code'] ?>');" class="btn btn-primary">Copy link</button>
                                                                     <button type="button" class="btn btn-danger">Delete</button>
                                                                 </td>
                                                             </tr>

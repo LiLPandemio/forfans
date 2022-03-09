@@ -134,3 +134,20 @@ function isInviteValid($invite)
         return false;
     }
 }
+
+/**
+ * Devuelve true o false si la invitacion es valida o no respectivamente.
+ */
+function inviteInfo($invite)
+{
+    require(ROOT . "/functions/db.php");                                    //Se importa la base de datos a la funcion
+    $sql = "SELECT * FROM `invitation_codes` WHERE invitation_code = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array($invite));
+    $r = $stmt->fetchAll();
+    if (count($r) > 0) {
+        return $r[0];
+    } else {
+        return false;
+    }
+}
