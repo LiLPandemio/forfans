@@ -2,7 +2,7 @@
 if (isset($_COOKIE['token'])) {
     if ($_COOKIE['token'] !== "") {
         if (checkTokenStatus($_COOKIE['token']) != "INVALID_TOKEN") {
-            redirect("home");
+            redirect("/home");
         }
         else{
             redirect("logout");
