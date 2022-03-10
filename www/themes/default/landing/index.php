@@ -43,11 +43,11 @@ require(ROOT . "/locale/" . $config["default_lang"] . ".php");
                     <div class="col-md-4 mb-5">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h2 class="card-title"><img class="avatar" style="border-radius: 50px; height: 50px; width: 50px; position:relative; top:-2.5px" src="<?php echo $config["fullsiteurl"].$users[$i]["profile_picture_rpath"]?>" alt=""> <?= $u["displayName"] ?></h2>
+                                <h2 class="card-title"><img class="avatar" style="border-radius: 50px; height: 50px; width: 50px; position:relative; top:-2.5px" src="<?php echo $config["fullsiteurl"] . $users[$i]["profile_picture_rpath"] ?>" alt=""> <?= $u["displayName"] ?></h2>
                                 <h2 class="card-subtitle mb-2 text-muted">@<?= $u["username"] ?></h2>
-                                <p class="card-text"><?=$u["bio"]?></p>
+                                <p class="card-text"><?= $u["bio"] ?></p>
                             </div>
-                            <div class="card-footer"><a class="btn btn-primary btn-sm" href="<?php echo $config["fullsiteurl"]."profile/".$u["username"]?>">Ver perfil</a></div>
+                            <div class="card-footer"><a class="btn btn-primary btn-sm" href="<?php echo $config["fullsiteurl"] . "profile/" . $u["username"] ?>">Ver perfil</a></div>
                         </div>
                     </div>
                 <?php } ?>

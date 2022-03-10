@@ -46,14 +46,14 @@ if (isset($_REQUEST['page'])) {                                         //Si se 
         case 'adminpanel':                                      //ADMINPANEL
             echo "Getting adminpanel";                          //Redirige al panel de administracion si hay uno.
             break;                                              //Fin de index.php
-        /**
-         * Paginas del tema: Cargar pagina del tema actuar
-         * Si no hay, cargar perfil de usuario $param[0],
-         * si no hay, 404.
-         */
+            /**
+             * Paginas del tema: Cargar pagina del tema actuar
+             * Si no hay, cargar perfil de usuario $param[0],
+             * si no hay, 404.
+             */
         default:
             if (pageExists($param[0])) {                            //Si la pagina existe
-                
+
                 loadPage($param[0], $config['theme']);      //Carga la pagina
             } else {                                                //Si no existe                
                 switch ($param[0]) {                        //Posibles redirecciones:

@@ -3,12 +3,10 @@ if (isset($_COOKIE['token'])) {
     if ($_COOKIE['token'] !== "") {
         if (checkTokenStatus($_COOKIE['token']) != "INVALID_TOKEN") {
             redirect("/home");
-        }
-        else{
+        } else {
             redirect("logout");
         }
-    }
-    else {
+    } else {
         redirect("logout");
     }
 }
@@ -156,12 +154,12 @@ $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);
                             ?>
                                 alert("LA URL DESDE LA QUE HA ACCEDIDO SE HA DETECTADO COMO MANIPULADA, PORFAVOR, ENVIENOS INFORMACION SOBRE DONDE HA OBTENIDO EL ENLACE. GRACIAS");
                                 window.location.replace("<?= $config["fullsiteurl"] . "contact" ?>");
-                                <?php
+                            <?php
                             }
                         } else {
                             ?>
                             window.location.replace("<?= $config["fullsiteurl"] . "home" ?>");
-                            <?php
+                        <?php
                         }
                         ?>
                     } else {
