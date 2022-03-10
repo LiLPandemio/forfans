@@ -23,7 +23,7 @@ require(ROOT . "/locale/" . $config["default_lang"] . ".php");
     <div class="container px-4 px-lg-5">
         <!-- Heading Row-->
         <div class="row gx-4 gx-lg-5 align-items-center my-5">
-            <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="<?=$config["fullsiteurl"] . "/themes/" . $config["theme"] . "/assets/img/logo-900x400.png"?>" alt="..." /></div>
+            <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="<?= $config["fullsiteurl"] . "/themes/" . $config["theme"] . "/assets/img/logo-900x400.png" ?>" alt="..." /></div>
             <div class="col-lg-5">
                 <h1 class="font-weight-light">ForFans, For creators.</h1>
                 <p>Enjoy and create your favorite content no matter what.</p>
@@ -31,46 +31,36 @@ require(ROOT . "/locale/" . $config["default_lang"] . ".php");
             </div>
         </div>
         <!-- Content Row-->
-        <h1 class="font-weight-light">Meet our creators!</h1>
-        <div class="row gx-4 gx-lg-5">
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h2 class="card-title">LiLPandemio</h2>
-                        <h2 class="card-subtitle mb-2 text-muted">@admin</h2>
-                        <p class="card-text">Mi biografia estará aquí!!!</p>
+        <?php $users = getSuggestedUsers(3);
+        if ($users > 0) {
+        ?>
+            <h1 class="font-weight-light">Meet our creators!</h1>
+            <div class="row gx-4 gx-lg-5">
+                <?php
+                for ($i = 0; $i < count($users); $i++) {
+                    $u = $users[$i];
+                ?>
+                    <div class="col-md-4 mb-5">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="card-title"><img class="avatar" style="border-radius: 50px; height: 50px; width: 50px; position:relative; top:-2.5px" src="<?php echo $config["fullsiteurl"].$users[$i]["profile_picture_rpath"]?>" alt=""> <?= $u["displayName"] ?></h2>
+                                <h2 class="card-subtitle mb-2 text-muted">@<?= $u["username"] ?></h2>
+                                <p class="card-text"><?=$u["bio"]?></p>
+                            </div>
+                            <div class="card-footer"><a class="btn btn-primary btn-sm" href="<?php echo $config["fullsiteurl"]."profile/".$u["username"]?>">Ver perfil</a></div>
+                        </div>
                     </div>
-                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">Ver perfil</a></div>
-                </div>
+                <?php } ?>
             </div>
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h2 class="card-title">LiLPandemio</h2>
-                        <h2 class="card-subtitle mb-2 text-muted">@admin</h2>
-                        <p class="card-text">Mi biografia estará aquí!!!</p>
-                    </div>
-                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">Ver perfil</a></div>
-                </div>
+        <?php
+        }
+        ?>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4 px-lg-5">
+                <p class="m-0 text-center text-white">Copyright &copy; <?= $config["sitename"] ?> 2022</p>
             </div>
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h2 class="card-title">LiLPandemio</h2>
-                        <h2 class="card-subtitle mb-2 text-muted">@admin</h2>
-                        <p class="card-text">Mi biografia estará aquí!!!</p>
-                    </div>
-                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">Ver perfil</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer-->
-    <footer class="py-5 bg-dark">
-        <div class="container px-4 px-lg-5">
-            <p class="m-0 text-center text-white">Copyright &copy; <?= $config["sitename"] ?> 2022</p>
-        </div>
-    </footer>
+        </footer>
 
 
 

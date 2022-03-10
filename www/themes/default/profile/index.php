@@ -1,5 +1,8 @@
 <?php
 require(ROOT . "/config.php");
+$fullpage = $_REQUEST['page'];                                      //La pagina se guarda en $fullpage para dividirla luego en parametros
+$param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);    //$param[n] contiene los parametros siendo N el parametro solicitado.
+
 if (isset($_COOKIE["token"])) {
     $tokenStatus = checkTokenStatus($_COOKIE["token"]);
     if ($tokenStatus !== "INVALID_TOKEN" and $tokenStatus !== "TOKEN_EXPIRED") {
@@ -15,8 +18,6 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
     require_once ROOT . "/functions/userEngine.php";         //IMPORTA LAS FUNCIONES DE AUTENTICACION
     if (checkTokenStatus($token) != "INVALID_TOKEN") {  //Si el estado del token no es invalido
         //Cargar informacion del perfil
-        $fullpage = $_REQUEST['page'];                                      //La pagina se guarda en $fullpage para dividirla luego en parametros
-        $param = preg_split("/\//", $fullpage, -1, PREG_SPLIT_NO_EMPTY);    //$param[n] contiene los parametros siendo N el parametro solicitado.
         if (isset($param[1])) {
             $isMyProfile = false;
             $username = $param[1];
@@ -139,9 +140,21 @@ if (isset($_COOKIE['token'])) {                         //SI EXISTE LA COOKIE CO
         </body>
 <?php
     } else {
-        echo "SESSION ERROR X1";
+        if (isset($param[1])) {
+            $next = $config["fullsiteurl"] . "auth/" . base64_encode(urlencode("next=" . $config["fullsiteurl"] . "profile"));
+        } else {
+            $next = $config["fullsiteurl"] . "auth";
+        }
+        header("Location:" . $next);
     }
 } else {
-    echo "SESSION ERROR X2";
+    if (isset($param[1])) {
+        # code...
+        $next = $config["fullsiteurl"] . "auth/" . base64_encode(urlencode("next=" . $config["fullsiteurl"] . "profile/" . $param[1]));
+    } else {
+        $next = $config["fullsiteurl"] . "auth";
+    }
+
+    header("Location:" . $next);
 }
 ?>
