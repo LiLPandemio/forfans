@@ -43,9 +43,6 @@ if (isset($_REQUEST['page'])) {                                         //Si se 
         case 'webmap':                                          //WEBMAP:
             echo "Getting webmap";                              //Obtiene el webmap para buscadores web. Se pueden evadir en config
             break;                                              //Fin de index.php
-        case 'adminpanel':                                      //ADMINPANEL
-            echo "Getting adminpanel";                          //Redirige al panel de administracion si hay uno.
-            break;                                              //Fin de index.php
             /**
              * Paginas del tema: Cargar pagina del tema actuar
              * Si no hay, cargar perfil de usuario $param[0],
