@@ -24,5 +24,6 @@ function pageExists($page)
 function loadPage($page, $theme = "default")
 {
     require(ROOT . "/themes/$theme/head/index.php");      //Carga el head y las primeras lineas HTML del tema.
+    require(ROOT . "/GLOBAL.php");                               //Carga un archivo que se usara en todas las paginas, util para google analytics y demas.
     require(ROOT . "/themes/$theme/" . $page . "/index.php"); //Carga el archivo principal de la pagina en el tema que se solicitó.
 }

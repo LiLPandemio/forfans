@@ -11,9 +11,6 @@ require_once(ROOT . "/locale/" . $config["default_lang"] . ".php");
 
 <body>
     <br>
-    <?php
-    dbExport();
-    ?>
 </body>
 
 </html>

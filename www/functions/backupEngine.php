@@ -1,5 +1,5 @@
 <?php
-function dbExport($path = ROOT . "/backups/")
+function createBackup($path = ROOT . "/backups/")
 {
     require(ROOT . "/functions/db.php");
     require(ROOT . "/config.php");
