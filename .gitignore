@@ -1,4 +1,4 @@
 www/config.php
 www/upload/pictures/*
 www/upload/videos/*
-www/backups/*
+www/backups/*/**
