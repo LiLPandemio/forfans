@@ -1,18 +1,19 @@
 <?php
-function dbExport($path = ROOT . "/backups/current/")
+function dbExport($path = ROOT . "/backups/")
 {
     require(ROOT . "/functions/db.php");
     require(ROOT . "/config.php");
-    $sqldumpbinfilepath = ROOT . "/backups/tools/mysqldump.exe";
+    $sqldumpbinfilepath = ROOT . "/tools/mysqldump.exe";
 
     $dbpath = $path . "database.sql";
     $fpath = $path . "files.zip";
     $floca = ROOT . "/upload";
     exec("$sqldumpbinfilepath --user={$database["username"]} --password={$database["password"]} --host={$database["hostname"]} {$database["database"]} --result-file={$dbpath}", $output, $rcode);
-    if ($rcode == 1) {
+    if ($rcode == 0) {
         // SQL WAS DUMPED!
         $zip = new ZipArchive;
         if ($zip->open($fpath, ZipArchive::CREATE) === TRUE) {
+            $rootPath = $floca;
             // Add files to the zip file
             // Create recursive directory iterator
             /** @var SplFileInfo[] $files */
@@ -36,6 +37,9 @@ function dbExport($path = ROOT . "/backups/current/")
 
             // All files are added, so close the zip file.
             $zip->close();
+            mkdir($path.date("Y-m-d-hms"));
+            rename($fpath, $path.date("Y-m-d-hms")."/backup.zip");
+            unlink($path."database.sql");
         } else {
             return "FILE_ZIP_ERROR";
         }
