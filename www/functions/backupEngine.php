@@ -37,9 +37,9 @@ function createBackup($path = ROOT . "/backups/")
 
             // All files are added, so close the zip file.
             $zip->close();
-            mkdir($path.date("Y-m-d-hms"));
-            rename($fpath, $path.date("Y-m-d-hms")."/backup.zip");
-            unlink($path."database.sql");
+            mkdir($path . date("Y-m-d-hms"));
+            rename($fpath, $path . date("Y-m-d-hms") . "/backup.zip");
+            unlink($path . "database.sql");
         } else {
             return "FILE_ZIP_ERROR";
         }

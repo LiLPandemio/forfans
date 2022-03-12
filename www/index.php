@@ -6,6 +6,7 @@
 
 $showErrors = true;         //Mostrara o no los errores en la pagina web.
 $disableCache = true;       //Desactivara el cache (Header)
+$healthChecks = true;       //Activa o desactiva la comprobacion de salud del script
 
 //DEBUG - MUESTRA LOS ERRORES EN EL NAVEGADOR
 if ($showErrors) {
@@ -21,6 +22,11 @@ if ($disableCache) {
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
+}
+if ($healthChecks) {
+    //NO CACHE
+    require_once "functions/healthEngine.php";
+    checkHealth();
 }
 
 //Establece el path absoluto a la raiz de la app web de forma dinamica
